@@ -18,7 +18,7 @@ namespace Development.Materia.Controls
     /// </summary>
     [Description("Multiline textbox editor with sizable grip border."),
      ToolboxBitmap(typeof(SizableTextBox), "SizableTextBox.bmp")]
-    public class SizableTextBox  : TextBox
+    public class SizableTextBox  :  WaterMarkedTextBox
     {
 
         #region "constructors"

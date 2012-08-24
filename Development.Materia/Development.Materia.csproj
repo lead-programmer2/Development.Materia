@@ -82,9 +82,7 @@
     <Compile Include="Controls\RequiredFieldMarker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\SizableTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\SizableTextBox.cs" />
     <Compile Include="Controls\WaterMarkedTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
