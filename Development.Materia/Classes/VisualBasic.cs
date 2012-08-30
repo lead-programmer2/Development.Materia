@@ -146,7 +146,14 @@ namespace Development.Materia
         /// <param name="value"></param>
         /// <returns></returns>
         public static bool CBool(object value)
-        { return bool.Parse(value.ToString()); }
+        {
+            if (IsNumeric(value))
+            {
+                if (CLng(value) == 0) return false;
+                else return true;
+            }
+            else return bool.Parse(value.ToString());
+        }
 
         /// <summary>
         /// Works like Visual Basic CDate method.
