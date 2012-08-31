@@ -1677,9 +1677,9 @@ namespace Development.Materia
             T _value = default(T);
 
             try
-            { _value = (T) expression; }
+            { _value = (T)expression; }
             catch { _value = default(T); }
-
+          
             return _value;
         }
 

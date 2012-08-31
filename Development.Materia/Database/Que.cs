@@ -429,7 +429,7 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public static T GetValue<T>(IDbConnection connection, string sql, T defaultvalue)
         {
-            T _value = defaultvalue;
+            object _value = defaultvalue;
 
             QueResult _result = Execute(connection, sql, CommandExecution.ExecuteNonQuery);
             if (_result != null)
@@ -441,8 +441,76 @@ namespace Development.Materia.Database
                         DataTable _table = _result.ResultSet.Tables[0];
                         if (_table.Rows.Count > 0)
                         {
-                            try { _value = (T)_table.Rows[0][0]; }
-                            catch { _value = defaultvalue; }
+                            if (typeof(T).Name == typeof(string).Name ||
+                                typeof(T).Name == typeof(String).Name)
+                            {
+                                try { _value = _table.Rows[0][0].ToString(); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(DateTime).Name)
+                            {
+                                try { _value = VisualBasic.CDate (_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(byte).Name ||
+                                     typeof(T).Name == typeof(Byte).Name)
+                            {
+                                try { _value = byte.Parse(_table.Rows[0][0].ToString()); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(bool).Name ||
+                                     typeof(T).Name == typeof(Boolean).Name)
+                            {
+                                try { _value = VisualBasic.CBool(_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(decimal).Name ||
+                                     typeof(T).Name == typeof(Decimal).Name)
+                            {
+                                try { _value = VisualBasic.CDec(_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(double).Name ||
+                                     typeof(T).Name == typeof(Double).Name)
+                            {
+                                try { _value = VisualBasic.CDbl(_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(float).Name ||
+                                     typeof(T).Name == typeof(Single).Name)
+                            {
+                                try { _value = float.Parse(_table.Rows[0][0].ToString()); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(int).Name ||
+                                     typeof(T).Name == typeof(Int32).Name)
+                            {
+                                try { _value = VisualBasic.CInt(_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(long).Name ||
+                                     typeof(T).Name == typeof(Int64).Name)
+                            {
+                                try { _value = VisualBasic.CLng(_table.Rows[0][0]); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(short).Name ||
+                                     typeof(T).Name == typeof(Int16).Name)
+                            {
+                                try { _value = short.Parse(_table.Rows[0][0].ToString()); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else if (typeof(T).Name == typeof(sbyte).Name ||
+                                     typeof(T).Name == typeof(SByte).Name)
+                            {
+                                try { _value = sbyte.Parse(_table.Rows[0][0].ToString()); }
+                                catch { _value = defaultvalue; }
+                            }
+                            else
+                            {
+                                try { _value = (T)_table.Rows[0][0]; }
+                                catch { _value = defaultvalue; }
+                            }
                         }
                     }
                 }
@@ -451,7 +519,7 @@ namespace Development.Materia.Database
             }
             Materia.RefreshAndManageCurrentProcess();
 
-            return _value;
+            return  (T) _value;
         }
 
         #endregion
