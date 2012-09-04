@@ -381,9 +381,9 @@ namespace Development.Materia.Database
                     if (rw.RowState!= DataRowState.Deleted &&
                         rw.RowState != DataRowState.Detached) _tables.Add(rw["Table"].ToString());
                 }
-            }
 
-            _table.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                _table.Dispose(); Materia.RefreshAndManageCurrentProcess();
+            }
 
             return _tables;
         }
