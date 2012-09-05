@@ -3408,6 +3408,19 @@
             </summary>
             <param name="command">SqlCommand object</param>
         </member>
+        <member name="T:Development.Materia.Database.Dsn">
+            <summary>
+            Class to create a DSN data access programatically.
+            </summary>
+        </member>
+        <member name="M:Development.Materia.Database.Dsn.Create(System.String,System.String)">
+            <summary>
+            Creates the Dsn with the specified database driver and database connection attributes.
+            </summary>
+            <param name="driver"></param>
+            <param name="attributes"></param>
+            <returns>True if DSN has been added, otherwise false.</returns>
+        </member>
         <member name="T:Development.Materia.Net.DownloadInvokations">
             <summary>
             Download event invokation enumerations.
@@ -4099,6 +4112,34 @@
             <summary>
             MySQL query execution and backup functionalities.
             </summary>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.CreateDSN(System.String)">
+            <summary>
+            Creates a DSN connection using the specified database information.
+            </summary>
+            <param name="connectionstring">Database connection string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.CreateDSN(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a DSN connection using the specified database information.
+            </summary>
+            <param name="server">Server hostname or IP address</param>
+            <param name="database">Database catalog name</param>
+            <param name="uid">User Id</param>
+            <param name="pwd">Password</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.CreateDSN(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Creates a DSN connection using the specified database information.
+            </summary>
+            <param name="server">Server hostname or IP address</param>
+            <param name="database">Database catalog name</param>
+            <param name="uid">User Id</param>
+            <param name="pwd">Password</param>
+            <param name="port">Port</param>
+            <returns></returns>
         </member>
         <member name="M:Development.Materia.Database.MySql.Dump(System.String,System.String)">
             <summary>

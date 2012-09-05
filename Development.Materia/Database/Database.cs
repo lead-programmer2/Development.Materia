@@ -1,5 +1,6 @@
 ﻿#region "imports"
 
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -151,7 +152,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
         /// <returns></returns>
-        public static OleDbConnection CreateConnection(string connectionstring)
+        public static IDbConnection CreateConnection(string connectionstring)
         {
             string _server = connectionstring.ConnectionStringValue(ConnectionStringSection.Server);
             string _database = connectionstring.ConnectionStringValue(ConnectionStringSection.Database);
@@ -169,7 +170,8 @@ namespace Development.Materia.Database
                 _connectionstring += "ALLOW USER VARIABLE=TRUE;";
             }
 
-            return new OleDbConnection(_connectionstring);
+            if (Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")) return new OleDbConnection(_connectionstring);
+            else return MySql.CreateDSN(connectionstring);
         }
 
         /// <summary>

@@ -1,10 +1,12 @@
 ﻿#region "imports"
 
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.Odbc;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -46,6 +48,83 @@ namespace Development.Materia.Database
         #endregion
 
         #region "methods"
+
+        /// <summary>
+        /// Creates a DSN connection using the specified database information.
+        /// </summary>
+        /// <param name="connectionstring">Database connection string</param>
+        /// <returns></returns>
+        public static IDbConnection CreateDSN(string connectionstring)
+        {
+            string _server = connectionstring.ConnectionStringValue(ConnectionStringSection.Server);
+            string _database = connectionstring.ConnectionStringValue(ConnectionStringSection.Database);
+            string _uid=  connectionstring.ConnectionStringValue(ConnectionStringSection.UID);
+            string _pwd =  connectionstring.ConnectionStringValue(ConnectionStringSection.PWD);
+            string _port = connectionstring.ConnectionStringValue(ConnectionStringSection.Port);
+            if (String.IsNullOrEmpty(_port)) _port = "3306";
+
+            return CreateDSN(_server, _database, _uid, _pwd, VisualBasic.CInt(_port));
+        }
+
+        /// <summary>
+        /// Creates a DSN connection using the specified database information.
+        /// </summary>
+        /// <param name="server">Server hostname or IP address</param>
+        /// <param name="database">Database catalog name</param>
+        /// <param name="uid">User Id</param>
+        /// <param name="pwd">Password</param>
+        /// <returns></returns>
+        public static IDbConnection CreateDSN(string server, string database, string uid, string pwd)
+        { return CreateDSN(server, database, uid, pwd, 3306);  }
+
+        /// <summary>
+        /// Creates a DSN connection using the specified database information.
+        /// </summary>
+        /// <param name="server">Server hostname or IP address</param>
+        /// <param name="database">Database catalog name</param>
+        /// <param name="uid">User Id</param>
+        /// <param name="pwd">Password</param>
+        /// <param name="port">Port</param>
+        /// <returns></returns>
+        public static IDbConnection CreateDSN(string server, string database, string uid, string pwd, int port)
+        {
+            IDbConnection _connection = null;
+
+            RegistryKey _key = Registry.LocalMachine; 
+            RegistryKey _software = _key.OpenSubKey("SOFTWARE", true); 
+            RegistryKey _odbc = _software.OpenSubKey("ODBC", true); 
+            RegistryKey _ini = _odbc.OpenSubKey("ODBC.INI", true); 
+            RegistryKey _dsn = null;
+
+            if (_ini.GetSubKeyNames().Contains(database)) _dsn = _ini.OpenSubKey(database, true);
+            else _dsn = _ini.CreateSubKey(database);
+
+            if (_dsn != null)
+            {
+                string[] _keys = _dsn.GetSubKeyNames();
+                if (_keys.Contains("DARIVER")) _dsn.DeleteSubKey("DARIVER");
+                _dsn.SetValue("SERVER", server);
+                _dsn.SetValue("DATABASE", database);
+
+                string _driverpath = "";
+
+                if (Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")) _driverpath = "C:\\Windows\\System32";
+                else _driverpath = "C:\\Program Files\\MySQL\\Connector ODBC 3.51\\myodbc3.dll";
+
+                _dsn.SetValue("Driver", _driverpath);
+                _dsn.SetValue("DESCRIPTION", database.ToUpper() + " DSN");
+                _dsn.SetValue("UID", uid);
+                _dsn.SetValue("PWD", pwd);
+                _dsn.SetValue("PORT", port.ToString());
+            }
+  
+            RegistryKey _datasources = _ini.OpenSubKey("ODBC Data Sources", true);
+            _datasources.SetValue(database, "MySQL ODBC 3.51 Driver");
+
+            _connection = new OdbcConnection("DSN=" + database);
+            
+            return _connection;
+        }
 
         /// <summary>
         /// Backup a MySql database using the specified database connection string into the specified file.
@@ -201,7 +280,7 @@ namespace Development.Materia.Database
                     {
                         string _error = ""; Process _process = new Process();
 
-                        OleDbConnection _connection = Database.CreateConnection(connectionstring);
+                        IDbConnection _connection = Database.CreateConnection(connectionstring);
                         QueResult _qresult = Que.Execute(_connection, "SET GLOBAL max_allowed_packet=(1024 * 1024) * " + MaxAllowedPacket.ToString() + ";");
                         _qresult.Dispose(QueResultDisposition.WithAssociatedQue);
 
@@ -338,7 +417,7 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public static List<string> GetTables(string connectionstring)
         {
-            OleDbConnection _connection = Database.CreateConnection(connectionstring);
+            IDbConnection _connection = Database.CreateConnection(connectionstring);
             List<string> _tables = GetTables(_connection);
 
             if (_connection.State == ConnectionState.Open)

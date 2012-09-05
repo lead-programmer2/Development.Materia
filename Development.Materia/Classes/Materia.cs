@@ -1326,7 +1326,7 @@ namespace Development.Materia
         /// <param name="valuemember">Value field name for the binding</param>
         public static void LoadData(this Control control, string connectionstring, string sql, string displaymember, string valuemember)
         {
-            OleDbConnection _connection = Database.Database.CreateConnection(connectionstring);
+            IDbConnection _connection = Database.Database.CreateConnection(connectionstring);
             control.LoadData(_connection, sql, displaymember, valuemember);
 
             if (_connection.State == ConnectionState.Open)
@@ -1430,7 +1430,7 @@ namespace Development.Materia
         /// <param name="sql">Database command statement</param>
         public static DataTable LoadData(this DataTable table, string connectionstring, string sql)
         {
-            OleDbConnection _connection = Database.Database.CreateConnection(connectionstring);
+            IDbConnection _connection = Database.Database.CreateConnection(connectionstring);
             DataTable _table =  table.LoadData(_connection, sql);
 
             if (_connection.State == ConnectionState.Open)
@@ -1474,7 +1474,7 @@ namespace Development.Materia
         /// <param name="sql">Database command statement</param>
         public static DataSet LoadData(this DataSet dataset, string connectionstring, string sql)
         {
-            OleDbConnection _connection = Database.Database.CreateConnection(connectionstring);
+            IDbConnection _connection = Database.Database.CreateConnection(connectionstring);
             DataSet _dataset = dataset.LoadData(_connection, sql);
 
             if (_connection.State == ConnectionState.Open)

@@ -35,7 +35,7 @@ namespace Development.Materia.Database
         /// <param name="sql">Sql command statement</param>
         public GenericDataAdapter(string connectionstring, string sql)
         {
-            OleDbConnection connection = Database.CreateConnection(connectionstring);
+            OleDbConnection connection = (OleDbConnection) Database.CreateConnection(connectionstring);
             IDbCommand command = connection.CreateCommand();
             command.CommandText = sql;
             command.CommandTimeout = 0;

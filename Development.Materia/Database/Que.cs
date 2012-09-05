@@ -1,9 +1,11 @@
 ﻿#region "imports"
 
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Linq;
@@ -126,7 +128,11 @@ namespace Development.Materia.Database
             get { return _connectionstring; }
             set
             {
-                if (_connection == null) _connection = new OleDbConnection();
+                if (_connection == null)
+                {
+                    if (Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")) _connection = new OleDbConnection();
+                    else _connection = new OdbcConnection();
+                }
 
                 if (_connection.GetType().Name == typeof(OleDbConnection).Name)
                 {
@@ -150,10 +156,19 @@ namespace Development.Materia.Database
                     }
                     else
                     {
-                        OleDbConnection tempconnetion = Database.CreateConnection(value);
+                        IDbConnection tempconnetion = Database.CreateConnection(value);
                         _connection.ConnectionString = tempconnetion.ConnectionString;
                         if (tempconnetion.State == ConnectionState.Open) tempconnetion.Close();
                         tempconnetion.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+                else if (_connection.GetType().Name != typeof(OdbcConnection).Name)
+                {
+                    _connectionstring = value;
+                    if (_connection.ConnectionString != _connectionstring)
+                    {
+                        bool _isopen = VisualBasic.CBool(_connection.State == ConnectionState.Open);
+                        if (!_isopen) _connection.ConnectionString = _connectionstring;
                     }
                 }
                 else
@@ -162,11 +177,13 @@ namespace Development.Materia.Database
                     if (!_isopen)
                     {
                         _connectionstring = value;
+
                         if (!WithAllowedVariablesBlock(_connectionstring))
                         {
-                            _connectionstring += (_connectionstring.RLTrim().EndsWith(";") ? "" : ";");
-                            _connectionstring += "ALLOW USER VARIABLES=TRUE;";
+                           _connectionstring += (_connectionstring.RLTrim().EndsWith(";") ? "" : ";");
+                           _connectionstring += "ALLOW USER VARIABLES=TRUE;";
                         }
+                        
                         _connection.ConnectionString = _connectionstring;
                     }
                 }
@@ -226,7 +243,7 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public static IAsyncResult BeginExecution(string connectionstring, string sql, CommandExecution execution)
         {
-            OleDbConnection connection = Database.CreateConnection(connectionstring);
+            IDbConnection connection = Database.CreateConnection(connectionstring);
             return BeginExecution(connection, sql, execution);
         }
 
@@ -337,7 +354,7 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public static QueResult Execute(string connectionstring, string sql, CommandExecution execution)
         {
-            OleDbConnection connection = Database.CreateConnection(connectionstring);
+            IDbConnection connection = Database.CreateConnection(connectionstring);
             return Execute(connection, sql, execution);
         }
 
@@ -392,7 +409,7 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public static T GetValue<T>(string connectionstring, string sql, T defaultvalue)
         {
-            OleDbConnection _connection = Database.CreateConnection(connectionstring);
+            IDbConnection _connection = Database.CreateConnection(connectionstring);
             T _value = GetValue<T>(_connection, sql, defaultvalue);
 
             if (_connection.State == ConnectionState.Open)
@@ -719,7 +736,11 @@ namespace Development.Materia.Database
                             {
                                 if (!Regex.IsMatch(_sql, _gmaxpacketpattern))
                                 {
-                                    if (_transaction == null) _transaction = _connection.BeginTransaction();
+                                    if (_transaction == null)
+                                    {
+                                        try { _transaction = _connection.BeginTransaction(); }
+                                        catch { _transaction = null; }
+                                    }
                                 }
 
                                 try
@@ -744,7 +765,41 @@ namespace Development.Materia.Database
                                             }
                                             catch { }
 
-                                            _adapter.Fill(dt); _rowsaffected += dt.Rows.Count; InitializeTable(dt);
+                                            DataTable _schematable = null;
+
+                                            if (dt != null)
+                                            {
+                                                if (dt.Constraints.Count > 0)
+                                                {
+                                                    _schematable = dt.Clone();
+                                                    dt.Constraints.Clear();
+                                                }
+                                            }
+
+                                            _adapter.Fill(dt); _rowsaffected += dt.Rows.Count;
+
+                                            if (_schematable != null)
+                                            {
+                                                string _pk = "";
+
+                                                foreach (DataColumn _column in _schematable.Columns)
+                                                {
+                                                    if (_column.Unique)
+                                                    {
+                                                        _pk = _column.ColumnName; break;
+                                                    }
+                                                }
+
+                                                if (!String.IsNullOrEmpty(_pk.RLTrim()))
+                                                {
+                                                    try { dt.Constraints.Add("PK", dt.Columns[_pk], true); }
+                                                    catch { dt.Constraints.Clear(); }
+                                                }
+
+                                                _schematable.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                                            }
+
+                                            InitializeTable(dt);
 
                                             if (_resultset == null) _resultset = new DataSet();
                                             _resultset.Tables.Add(dt);
@@ -811,7 +866,41 @@ namespace Development.Materia.Database
                                                     }
                                                     catch { }
 
-                                                    _adapter.Fill(dt); _rowsaffected += dt.Rows.Count; InitializeTable(dt);
+                                                    DataTable _schematable = null;
+
+                                                    if (dt != null)
+                                                    {
+                                                        if (dt.Constraints.Count > 0)
+                                                        {
+                                                            _schematable = dt.Clone();
+                                                            dt.Constraints.Clear();
+                                                        }
+                                                    }
+
+                                                    _adapter.Fill(dt); _rowsaffected += dt.Rows.Count;
+
+                                                    if (_schematable != null)
+                                                    {
+                                                        string _pk = "";
+
+                                                        foreach (DataColumn _column in _schematable.Columns)
+                                                        {
+                                                            if (_column.Unique)
+                                                            {
+                                                                _pk = _column.ColumnName; break;
+                                                            }
+                                                        }
+
+                                                        if (!String.IsNullOrEmpty(_pk.RLTrim()))
+                                                        {
+                                                            try { dt.Constraints.Add("PK", dt.Columns[_pk], true); }
+                                                            catch { dt.Constraints.Clear(); }
+                                                        }
+
+                                                        _schematable.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                                                    }
+
+                                                    InitializeTable(dt);
 
                                                     if (_resultset == null) _resultset = new DataSet();
                                                     _resultset.Tables.Add(dt);
