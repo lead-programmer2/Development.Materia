@@ -168,7 +168,15 @@ namespace Development.Materia.Database
                     if (_connection.ConnectionString != _connectionstring)
                     {
                         bool _isopen = VisualBasic.CBool(_connection.State == ConnectionState.Open);
-                        if (!_isopen) _connection.ConnectionString = _connectionstring;
+                        if (!_isopen)
+                        {
+                            if (!WithAllowedVariablesBlock(_connectionstring))
+                            {
+                                _connectionstring += (_connectionstring.RLTrim().EndsWith(";") ? "" : ";");
+                                _connectionstring += "ALLOW USER VARIABLES=TRUE;";
+                            }
+                            _connection.ConnectionString = _connectionstring;
+                        } 
                     }
                 }
                 else
