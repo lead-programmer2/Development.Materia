@@ -170,7 +170,7 @@ namespace Development.Materia.Database
                 _connectionstring += "ALLOW USER VARIABLE=TRUE;";
             }
 
-            if (Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")) return new OleDbConnection(_connectionstring);
+            if (!Materia.Is64BitApplication()) return new OleDbConnection(_connectionstring);
             else return MySql.CreateDSN(connectionstring);
         }
 

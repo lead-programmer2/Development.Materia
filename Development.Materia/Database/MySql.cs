@@ -108,7 +108,7 @@ namespace Development.Materia.Database
 
                 string _driverpath = "";
 
-                if (Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")) _driverpath = "C:\\Windows\\System32";
+                if (!Materia.Is64BitApplication()) _driverpath = "C:\\Windows\\System32";
                 else _driverpath = "C:\\Program Files\\MySQL\\Connector ODBC 3.51\\myodbc3.dll";
 
                 _dsn.SetValue("Driver", _driverpath);

@@ -1,4 +1,5 @@
 ﻿#region "imports"
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -1253,6 +1254,20 @@ namespace Development.Materia
 
         #endregion
 
+        /// <summary>
+        /// Determines whether the current hosted application is in x64 mode or not.
+        /// </summary>
+        /// <returns></returns>
+        public static bool Is64BitApplication()
+        { return VisualBasic.CBool(IntPtr.Size == 8); }
+
+        /// <summary>
+        /// Determines whether the current hosted operating system is 64 bit or not.
+        /// </summary>
+        /// <returns></returns>
+        public static bool Is64BitOperatingSystem()
+        { return VisualBasic.CBool(!Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")); }
+        
         /// <summary>
         /// Returns whether the specified value is equivalent to NULL or DBNull.Value.
         /// </summary>

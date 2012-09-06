@@ -1849,6 +1849,18 @@
             <param name="methodname">Method name</param>
             <param name="parameters">Method accessing parameters</param>
         </member>
+        <member name="M:Development.Materia.Materia.Is64BitApplication">
+            <summary>
+            Determines whether the current hosted application is in x64 mode or not.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Materia.Is64BitOperatingSystem">
+            <summary>
+            Determines whether the current hosted operating system is 64 bit or not.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.IsNullOrNothing(System.Object)">
             <summary>
             Returns whether the specified value is equivalent to NULL or DBNull.Value.
