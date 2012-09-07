@@ -208,7 +208,6 @@ namespace Development.Materia.Database
                 _delegatetable.Remove(result);
             }
 
-
             return _connected;
         }
 
