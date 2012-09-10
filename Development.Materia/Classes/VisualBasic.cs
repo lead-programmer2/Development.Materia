@@ -389,7 +389,7 @@ namespace Development.Materia
             try
             {
                 RegistryKey _registrysubkey = _machinekey.CreateSubKey(_subkey);
-                if (_subkey != null) _value = _registrysubkey.GetValue(key);
+                if (_registrysubkey != null) _value = _registrysubkey.GetValue(key);
             }
             catch { }
 
