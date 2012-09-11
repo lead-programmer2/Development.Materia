@@ -523,7 +523,6 @@ namespace Development.Materia
                 catch { _isdate = false; }
             }
            
-
             return _isdate;
         }
 
