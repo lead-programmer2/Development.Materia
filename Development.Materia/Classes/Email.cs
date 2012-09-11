@@ -520,6 +520,19 @@ namespace Development.Materia.Net
     public class MailAttachmentCollection : CollectionBase, IDisposable
     {
 
+        #region "constructors"
+
+        /// <summary>
+        /// Creates a new instance of MailAttachmentCollection.
+        /// </summary>
+        /// <param name="email">Parent email object</param>
+        public MailAttachmentCollection(Email email)
+        { _email = email; }
+
+        #endregion
+
+        #region "properties"
+
         /// <summary>
         /// Gets or sets file attachment in the specified index of the collection.
         /// </summary>
@@ -542,12 +555,9 @@ namespace Development.Materia.Net
             get { return _email; }
         }
 
-        /// <summary>
-        /// Creates a new instance of MailAttachmentCollection.
-        /// </summary>
-        /// <param name="email">Parent email object</param>
-        public MailAttachmentCollection(Email email)
-        { _email = email; }
+        #endregion
+
+        #region "methods"
 
         /// <summary>
         /// Adds a file attachment in the collection.
@@ -582,6 +592,8 @@ namespace Development.Materia.Net
         /// <param name="attachment"></param>
         public void Remove(Attachment attachment)
         { List.Remove(attachment); }
+
+        #endregion
 
         #region "IDisposable support"
 
