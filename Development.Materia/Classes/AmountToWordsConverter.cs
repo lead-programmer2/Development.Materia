@@ -21,16 +21,14 @@ namespace Development.Materia
         /// Creates a new instance of AmountToWordsConverter.
         /// </summary>
         public AmountToWordsConverter() : this(0)   
-        {
-        }
+        { }
 
         /// <summary>
         /// Creates a new instance of AmountToWordsConverter.
         /// </summary>
         /// <param name="amounttoconvert">Amount to be converted</param>
         public AmountToWordsConverter(double amounttoconvert) : this(amounttoconvert,"USD")
-        {
-        }
+        { }
 
         /// <summary>
         /// Creates a new instance of AmountToWordsConverter.
@@ -38,9 +36,7 @@ namespace Development.Materia
         /// <param name="amounttoconvert">Amount to be converted</param>
         /// <param name="associatedcurrency">Associated currency</param>
         public AmountToWordsConverter(double amounttoconvert, string associatedcurrency)
-        {
-            Amount = amounttoconvert; Currency = associatedcurrency;
-        }
+        {  Amount = amounttoconvert; Currency = associatedcurrency; }
 
         #endregion
 
@@ -337,9 +333,7 @@ namespace Development.Materia
         /// <param name="amountvalue">Numeric / amount value to convert</param>
         /// <returns></returns>
         public static string AmountToWords(double amountvalue)
-        {
-            return AmountToWords(amountvalue, "");
-        }
+        { return AmountToWords(amountvalue, ""); }
 
         /// <summary>
         /// Returns the english-words representation of the specified numeric value suffixed with the specified currency.
