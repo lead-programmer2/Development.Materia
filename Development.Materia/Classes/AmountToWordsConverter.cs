@@ -16,7 +16,7 @@ namespace Development.Materia
     public class AmountToWordsConverter
     {
 
-        #region "new instance"
+        #region "constructors"
         /// <summary>
         /// Creates a new instance of AmountToWordsConverter.
         /// </summary>
