@@ -1295,6 +1295,29 @@ namespace Development.Materia
             }
         }
 
+        /// <summary>
+        /// Gets number of rows from the specified table with specified row count limits.
+        /// </summary>
+        /// <param name="table">DataTable object to extract the data</param>
+        /// <param name="starting">Starting record count</param>
+        /// <param name="rows"></param>
+        /// <returns></returns>
+        public static DataTable LimitRows(this DataTable table, int starting, int rows)
+        {
+            DataTable _table = null;
+            if (table != null)
+            {
+                try
+                {
+                    int _rows = rows;
+                    if (table.Rows.Count < (starting + rows)) _rows = table.Rows.Count - (table.Rows.Count.WholePartDivision(rows) * rows);
+                    _table = table.AsEnumerable().Skip(starting).Take(_rows).CopyToDataTable(); 
+                }
+                catch { _table = table.Clone(); }
+            }
+            return _table;
+        }
+
         #region "LoadData (Control)"
 
         /// <summary>
