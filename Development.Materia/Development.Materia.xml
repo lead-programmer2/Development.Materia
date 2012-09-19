@@ -894,6 +894,15 @@
             </summary>
             <param name="control">Control whose data source will be populated</param>
         </member>
+        <member name="M:Development.Materia.Materia.LimitRows(System.Data.DataTable,System.Int32,System.Int32)">
+            <summary>
+            Gets number of rows from the specified table with specified row count limits.
+            </summary>
+            <param name="table">DataTable object to extract the data</param>
+            <param name="starting">Starting record count</param>
+            <param name="rows"></param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.LoadData(System.Windows.Forms.Control,System.String,System.String)">
             <summary>
             Loads data into the specified bindable control.
