@@ -5303,6 +5303,20 @@
             <param name="destination">Destination path for the extracted file(s)</param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Archiver.SevenZ(System.String)">
+            <summary>
+            Runs the integrated 7z archiver with the specified command line arguments.
+            </summary>
+            <param name="commandlineargs">Command line arguments</param>
+            <returns>Returns true if operation is successful otherwise false.</returns>
+        </member>
+        <member name="M:Development.Materia.Archiver.WinRar(System.String)">
+            <summary>
+            Runs the integrated WinRar archiver with the specified command line arguments.
+            </summary>
+            <param name="commandlineargs">Command line arguments</param>
+            <returns>Returns true if operation is successful otherwise false.</returns>
+        </member>
         <member name="M:Development.Materia.Archiver.Dispose">
             <summary>
             Dispose off any resources used by the class to free up memory space.
