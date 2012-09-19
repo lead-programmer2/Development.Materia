@@ -476,7 +476,7 @@ namespace Development.Materia
             return _extracted;
         }
 
-        private void ExtractResourceApplications()
+        private static void ExtractResourceApplications()
         {
             RemoveResourceApplications(); string _curdir = Application.StartupPath + "\\Archiving Tools";
 
@@ -528,7 +528,7 @@ namespace Development.Materia
             }
         }
 
-        private void RemoveResourceApplications()
+        private static void RemoveResourceApplications()
         {
             string _curdir = Application.StartupPath + "\\Archiving Tools";
 
@@ -551,6 +551,99 @@ namespace Development.Materia
             }
 
             Materia.RefreshAndManageCurrentProcess();
+        }
+
+        /// <summary>
+        /// Runs the integrated 7z archiver with the specified command line arguments.
+        /// </summary>
+        /// <param name="commandlineargs">Command line arguments</param>
+        /// <returns>Returns true if operation is successful otherwise false.</returns>
+        public static bool SevenZ(string commandlineargs)
+        {
+            bool _succeeded = false; ExtractResourceApplications();
+
+            string _directory = Application.StartupPath + "\\Archiving Tools";
+            string[] _files = new string[] { "7z.exe", "7z.dll", "7zG.exe" };
+
+            bool _runnable = true;
+
+            foreach (string _file in _files)
+            {
+                string _path = _directory + "\\" + _file;
+                _runnable = _runnable && (File.Exists(_path));
+                if (!_runnable) break;
+            }
+
+            if (_runnable)
+            {
+                string _error = "";
+
+                Process _process = new Process();
+                _process.StartInfo.Arguments = commandlineargs;
+                _process.StartInfo.FileName = _directory + "\\7z.exe";
+                _process.StartInfo.CreateNoWindow = true;
+                _process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                _process.StartInfo.RedirectStandardError = true;
+                _process.StartInfo.UseShellExecute = false;
+                _process.Start();
+
+                while (!_process.HasExited) Application.DoEvents();
+
+                if (_process.StandardError != null)
+                {
+                    try { _error = _process.StandardError.ReadToEnd(); }
+                    catch { _error = ""; }
+                }
+                else _error = "";
+
+                _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                _succeeded = String.IsNullOrEmpty(_error.RLTrim());
+            }
+
+            RemoveResourceApplications();
+
+            return _succeeded;
+        }
+
+        /// <summary>
+        /// Runs the integrated WinRar archiver with the specified command line arguments.
+        /// </summary>
+        /// <param name="commandlineargs">Command line arguments</param>
+        /// <returns>Returns true if operation is successful otherwise false.</returns>
+        public static bool WinRar(string commandlineargs)
+        {
+            bool _succeeded = false; ExtractResourceApplications();
+
+            string _path = Application.StartupPath + "\\Archiving Tools\\WinRar.exe";
+            if (File.Exists(_path))
+            {
+                string _error = "";
+
+                Process _process = new Process();
+                _process.StartInfo.Arguments = commandlineargs;
+                _process.StartInfo.FileName = _path;
+                _process.StartInfo.CreateNoWindow = true;
+                _process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                _process.StartInfo.RedirectStandardError = true;
+                _process.StartInfo.UseShellExecute = false;
+                _process.Start();
+
+                while (!_process.HasExited) Application.DoEvents();
+
+                if (_process.StandardError != null)
+                {
+                    try { _error = _process.StandardError.ReadToEnd(); }
+                    catch { _error = ""; }
+                }
+                else _error = "";
+
+                _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                _succeeded = String.IsNullOrEmpty(_error.RLTrim());
+            }
+
+            RemoveResourceApplications();
+
+            return _succeeded;
         }
 
         #endregion
