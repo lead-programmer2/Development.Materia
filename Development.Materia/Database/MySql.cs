@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 #endregion
@@ -487,6 +488,18 @@ namespace Development.Materia.Database
                     try { File.Delete(_path); }
                     catch { }
                 }
+            }
+
+            int _counter = 0;
+
+            while (_counter < 30 &&
+                  (Directory.Exists(_mysqldirectory))
+            {
+                try { Directory .Delete (_mysqldirectory, true); }
+                catch {}
+                Materia.RefreshAndManageCurrentProcess();
+                System.Threading.Thread.Sleep (100); Application.DoEvents();
+                _counter += 1;
             }
 
             Materia.RefreshAndManageCurrentProcess();
