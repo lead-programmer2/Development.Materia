@@ -186,7 +186,7 @@ namespace Development.Materia.Database
                     else _error = "";
 
                     _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
-                    _result = new MySqlResult(filename, _error);
+                    RemoveResourceApplications(); _result = new MySqlResult(filename, _error);
 
                     try { File.Delete(_batfilepath); }
                     catch { }
@@ -310,8 +310,7 @@ namespace Development.Materia.Database
                         else _error = "";
 
                         _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
-                        RemoveResourceApplications();
-                        _result = new MySqlResult(_filename, _error, sql);
+                        RemoveResourceApplications(); _result = new MySqlResult(_filename, _error, sql);
 
                         try { File.Delete(_batfilepath); }
                         catch { }
