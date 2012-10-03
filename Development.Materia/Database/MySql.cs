@@ -310,6 +310,7 @@ namespace Development.Materia.Database
                         else _error = "";
 
                         _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
+                        RemoveResourceApplications();
                         _result = new MySqlResult(_filename, _error, sql);
 
                         try { File.Delete(_batfilepath); }
