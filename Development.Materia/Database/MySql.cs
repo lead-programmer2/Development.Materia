@@ -188,8 +188,17 @@ namespace Development.Materia.Database
                     _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
                     RemoveResourceApplications(); _result = new MySqlResult(filename, _error);
 
-                    try { File.Delete(_batfilepath); }
-                    catch { }
+                    int _counter = 0;
+
+                    while (_counter < 30 &&
+                           File.Exists(_batfilepath))
+                    {
+                        try { File.Delete(_batfilepath); }
+                        catch { }
+                        Materia.RefreshAndManageCurrentProcess();
+                        Thread.Sleep(100); Application.DoEvents();
+                        _counter += 1;
+                    }
                 }
                 else _result = new MySqlResult("", "Can't create executable batch file into default directory : " + Application.StartupPath + ".");
             }
@@ -312,8 +321,30 @@ namespace Development.Materia.Database
                         _process.Dispose(); Materia.RefreshAndManageCurrentProcess();
                         RemoveResourceApplications(); _result = new MySqlResult(_filename, _error, sql);
 
-                        try { File.Delete(_batfilepath); }
-                        catch { }
+                        int _counter = 0;
+
+                        while (_counter < 30 &&
+                               File.Exists(_batfilepath))
+                        {
+                            try { File.Delete(_batfilepath); }
+                            catch { }
+                            Materia.RefreshAndManageCurrentProcess();
+                            Thread.Sleep(100); Application.DoEvents();
+                            _counter += 1;
+                        }
+
+                        _counter = 0;
+
+                        while (_counter < 30 &&
+                             File.Exists(_filename))
+                        {
+                            try { File.Delete(_filename); }
+                            catch { }
+                            Materia.RefreshAndManageCurrentProcess();
+                            Thread.Sleep(100); Application.DoEvents();
+                            _counter += 1;
+                        }
+
                     }
                     else _result = new MySqlResult("", "Can't completely initialize database execution.");
                 }
