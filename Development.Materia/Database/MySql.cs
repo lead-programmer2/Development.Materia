@@ -493,7 +493,7 @@ namespace Development.Materia.Database
             int _counter = 0;
 
             while (_counter < 30 &&
-                  (Directory.Exists(_mysqldirectory))
+                   Directory.Exists(_mysqldirectory))
             {
                 try { Directory .Delete (_mysqldirectory, true); }
                 catch {}
