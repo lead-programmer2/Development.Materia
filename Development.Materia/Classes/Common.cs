@@ -786,6 +786,35 @@ namespace Development.Materia
             return _event;
         }
 
+        private static MethodInfo GetEventInvoker(object owner, string eventname)
+        {
+            MethodInfo _method = null;
+
+            if (owner != null)
+            {
+                Type _currenttype = owner.GetType();
+
+                while (true)
+                {
+                    FieldInfo fieldInfo = _currenttype.GetField(eventname, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+
+                    if (fieldInfo == null)
+                    {
+                        if (_currenttype.BaseType != null)
+                        {
+                            _currenttype = _currenttype.BaseType;  continue;
+                        }
+
+                       return null;
+                    }
+
+                    return ((MulticastDelegate)fieldInfo.GetValue(owner)).Method;
+                }
+            }
+
+            return _method;
+        }
+
         #region "GetMethodValue"
 
         /// <summary>
@@ -1490,6 +1519,19 @@ namespace Development.Materia
                 if (_method != null)
                 {
                     try { _method.Invoke(owner, args); }
+                    catch { }
+                }
+                else
+                {
+                    try
+                    {
+                        _method = GetEventInvoker(owner, eventname);
+                        if (_method != null)
+                        {
+                            try { _method.Invoke(owner, args); }
+                            catch { }
+                        }
+                    }
                     catch { }
                 }
             }
