@@ -1369,7 +1369,7 @@ namespace Development.Materia.Database
 
                         if (!_saveargs.Cancel)
                         {
-                            AcceptAllChanges();
+                            AcceptAllChanges(); _haveupdates = false;
 
                             Form _form = null;
 
