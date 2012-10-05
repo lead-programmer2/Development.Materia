@@ -809,8 +809,21 @@ namespace Development.Materia.Database
 
                                             InitializeTable(dt);
 
-                                            if (_resultset == null) _resultset = new DataSet();
-                                            _resultset.Tables.Add(dt);
+                                            if (_resultset == null)  _resultset = new DataSet();
+                                            if (!_resultset.Tables.Contains(dt.TableName)) _resultset.Tables.Add(dt);
+                                            else
+                                            {
+                                                int _counter = 0;
+
+                                                foreach (DataTable tbl in _resultset.Tables)
+                                                {
+                                                    if (tbl.TableName.ToLower().Contains(dt.TableName)) _counter += 1;
+                                                }
+
+                                                string _tblname = dt.TableName;
+                                                dt.TableName = _tblname + _counter.ToString();
+                                                _resultset.Tables.Add(dt);
+                                            }
                                         }
                                         catch (Exception ex)
                                         {
@@ -911,7 +924,20 @@ namespace Development.Materia.Database
                                                     InitializeTable(dt);
 
                                                     if (_resultset == null) _resultset = new DataSet();
-                                                    _resultset.Tables.Add(dt);
+                                                    if (!_resultset.Tables.Contains(dt.TableName)) _resultset.Tables.Add(dt);
+                                                    else
+                                                    {
+                                                        int _counter = 0;
+
+                                                        foreach (DataTable tbl in _resultset.Tables)
+                                                        {
+                                                            if (tbl.TableName.ToLower().Contains(dt.TableName)) _counter += 1;
+                                                        }
+
+                                                        string _tblname = dt.TableName;
+                                                        dt.TableName = _tblname + _counter.ToString();
+                                                        _resultset.Tables.Add(dt);
+                                                    }
                                                 }
                                                 catch (Exception ex)
                                                 {
