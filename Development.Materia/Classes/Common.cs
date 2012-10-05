@@ -796,9 +796,9 @@ namespace Development.Materia
 
                 while (true)
                 {
-                    FieldInfo fieldInfo = _currenttype.GetField(eventname, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+                    FieldInfo _fieldinfo = _currenttype.GetField(eventname, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
 
-                    if (fieldInfo == null)
+                    if (_fieldinfo == null)
                     {
                         if (_currenttype.BaseType != null)
                         {
@@ -808,7 +808,7 @@ namespace Development.Materia
                        return null;
                     }
 
-                    return ((MulticastDelegate)fieldInfo.GetValue(owner)).Method;
+                    return ((MulticastDelegate)_fieldinfo.GetValue(owner)).Method;
                 }
             }
 
