@@ -1486,7 +1486,7 @@ namespace Development.Materia
             EventInfo _event = GetEvent(owner, eventname);
             if (_event != null)
             {
-                MethodInfo _method = _event.GetRaiseMethod();
+                MethodInfo _method = _event.GetRaiseMethod(true);
                 if (_method != null)
                 {
                     try { _method.Invoke(owner, args); }
