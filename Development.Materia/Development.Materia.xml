@@ -1946,6 +1946,22 @@
             <param name="control">Control to repaint or unpaint</param>
             <param name="repaint">Determines whether to repaint or not</param>
         </member>
+        <member name="M:Development.Materia.Materia.RaiseEvent(System.Object,System.String,System.Object)">
+            <summary>
+            Raises the specified object's event thru the event's name.
+            </summary>
+            <param name="owner">Owner</param>
+            <param name="eventname">Event name</param>
+            <param name="arg">Event argument</param>
+        </member>
+        <member name="M:Development.Materia.Materia.RaiseEvent(System.Object,System.String,System.Object[])">
+            <summary>
+            Raises the specified object's event thru the event's name.
+            </summary>
+            <param name="owner">Owner</param>
+            <param name="eventname">Event name</param>
+            <param name="args">Event arguments</param>
+        </member>
         <member name="M:Development.Materia.Materia.RefreshAndManageCurrentProcess">
             <summary>
             Refreshes and force the release of the entire unmanaged resources of the current application's process.

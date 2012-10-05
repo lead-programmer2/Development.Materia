@@ -1467,6 +1467,36 @@ namespace Development.Materia
         #endregion
 
         /// <summary>
+        /// Raises the specified object's event thru the event's name.
+        /// </summary>
+        /// <param name="owner">Owner</param>
+        /// <param name="eventname">Event name</param>
+        /// <param name="arg">Event argument</param>
+        public static void RaiseEvent(object owner, string eventname, object arg)
+        { RaiseEvent(owner, eventname, new object[] { arg }); }
+
+        /// <summary>
+        /// Raises the specified object's event thru the event's name.
+        /// </summary>
+        /// <param name="owner">Owner</param>
+        /// <param name="eventname">Event name</param>
+        /// <param name="args">Event arguments</param>
+        public static void RaiseEvent(object owner, string eventname, object[] args)
+        {
+            EventInfo _event = GetEvent(owner, eventname);
+            if (_event != null)
+            {
+                MethodInfo _method = _event.GetRaiseMethod();
+                if (_method != null)
+                {
+                    try { _method.Invoke(owner, args); }
+                    catch { }
+                }
+            }
+            RefreshAndManageCurrentProcess();
+        }
+
+        /// <summary>
         /// Refreshes and force the release of the entire unmanaged resources of the current application's process.
         /// </summary>
         public static void RefreshAndManageCurrentProcess()

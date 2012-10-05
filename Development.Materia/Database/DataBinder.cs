@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -3521,12 +3522,8 @@ namespace Development.Materia.Database
             if (_binder == null) return null;
 
             DataBinderLoadingEventArgs _args = new DataBinderLoadingEventArgs(this);
-            if (Materia.MethodExists(_binder, "OnBeforeBindingDataLoad"))
-            {
-                try { Materia.InvokeMethod(_binder, "OnBeforeBindingDataLoad", _args); }
-                catch { }
-            }
-
+            Materia.RaiseEvent(_binder, "BeforeBindingDataLoad", _args);
+         
             if (!_args.Cancel)
             {
                 Func<DataBinderLoadingEventArgs> _delegate = new Func<DataBinderLoadingEventArgs>(LoadBinding);
@@ -3857,12 +3854,7 @@ namespace Development.Materia.Database
                     }
 
                     _binddelegate.EndInvoke(_result);
-
-                    if (Materia.MethodExists(_binder, "OnAfterBindingDataLoad"))
-                    {
-                        try { Materia.InvokeMethod(_binder, "OnAfterBindingDataLoad", _args); }
-                        catch { }
-                    }
+                    Materia.RaiseEvent(_binder, "AfterBindingDataLoad", _args);
                 }
                 else return null;
             }
@@ -4322,24 +4314,14 @@ namespace Development.Materia.Database
             else
             {
                 DataBinderLoadingEventArgs _args = new DataBinderLoadingEventArgs(this);
-                if (Materia.MethodExists(_binder, "OnBeforeBindingDataLoad"))
-                {
-                    try { Materia.InvokeMethod(_binder, "OnBeforeBindingDataLoad", new object[] { _args }); }
-                    catch { }
-                }
+                Materia.RaiseEvent(_binder, "BeforeBindingDataLoad", _args);
 
                 if (!_args.Cancel)
                 {
                     DataBinderLoadingEventArgs _newargs = LoadBinding();
                     if (!_args.Cancel)
                     {
-                        Bind();
-
-                        if (Materia.MethodExists(_binder, "OnAfterBindingDataLoad"))
-                        {
-                            try { Materia.InvokeMethod(_binder, "OnAfterBindingDataLoad", new object[] { _args }); }
-                            catch { }
-                        }
+                        Bind();  Materia.RaiseEvent(_binder, "AfterBindingDataLoad", _args);
                     }
 
                     return _newargs;
