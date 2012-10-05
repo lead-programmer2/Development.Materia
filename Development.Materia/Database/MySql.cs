@@ -443,6 +443,68 @@ namespace Development.Materia.Database
         }
 
         /// <summary>
+        /// Gets the current server's date and time using the specified database connection string.
+        /// </summary>
+        /// <param name="server">Server hostname or IP address</param>
+        /// <param name="database">Database catalog name</param>
+        /// <param name="uid">Database account user id.</param>
+        /// <param name="pwd">Database account password</param>
+        /// <returns></returns>
+        public static DateTime GetServerDateAndTime(string server, string database, string uid, string pwd)
+        {
+            string _connectionstring = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + uid + ";PWD=" + pwd + ";";
+            return GetServerDateAndTime(_connectionstring);
+        }
+
+        /// <summary>
+        /// Gets the current server's date and time using the specified database connection string.
+        /// </summary>
+        /// <param name="connectionstring">Database connection string</param>
+        /// <returns></returns>
+        public static DateTime GetServerDateAndTime(string connectionstring)
+        {
+            IDbConnection _connection = Database.CreateConnection(connectionstring);
+
+            DateTime _datetime = GetServerDateAndTime(_connection);
+            if (_connection != null)
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    try { _connection.Close(); }
+                    catch { }
+                }
+                _connection.Dispose(); _connection = null;
+                Materia.RefreshAndManageCurrentProcess();
+            }
+
+            return _datetime;
+        }
+
+        /// <summary>
+        /// Gets the current server's date and time using the specified database connection.
+        /// </summary>
+        /// <param name="connection">Database connection</param>
+        /// <returns></returns>
+        public static DateTime GetServerDateAndTime(IDbConnection connection)
+        {
+            DateTime _datetime = DateTime.Now;
+
+            if (connection != null)
+            {
+                string _query = "SELECT NOW()";
+                DataTable _table = null; _table = _table.LoadData(connection, _query);
+                if (_table != null)
+                {
+                    if (_table.Rows.Count > 0) _datetime = VisualBasic.CDate(_table.Rows[0][0]);
+                    _table.Dispose(); _table = null;
+                    Materia.RefreshAndManageCurrentProcess();
+                }
+            }
+         
+            return _datetime;
+        }
+
+        /// <summary>
         /// Gets the list of tables in a certain database using the specified database connection string.
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
