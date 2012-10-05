@@ -2925,6 +2925,7 @@ namespace Development.Materia.Database
         public BindedControl Add(object control, string field)
         {
             BindedControl _control = new BindedControl(this, control, field);
+            if (Contains(control)) Remove(control);
             int _index = List.Add(_control); return (BindedControl)List[_index];
         }
 
