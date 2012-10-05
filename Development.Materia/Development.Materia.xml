@@ -4227,6 +4227,30 @@
             <param name="parameter"></param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Database.MySql.GetServerDateAndTime(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the current server's date and time using the specified database connection string.
+            </summary>
+            <param name="server">Server hostname or IP address</param>
+            <param name="database">Database catalog name</param>
+            <param name="uid">Database account user id.</param>
+            <param name="pwd">Database account password</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.GetServerDateAndTime(System.String)">
+            <summary>
+            Gets the current server's date and time using the specified database connection string.
+            </summary>
+            <param name="connectionstring">Database connection string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.GetServerDateAndTime(System.Data.IDbConnection)">
+            <summary>
+            Gets the current server's date and time using the specified database connection.
+            </summary>
+            <param name="connection">Database connection</param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Database.MySql.GetTables(System.String)">
             <summary>
             Gets the list of tables in a certain database using the specified database connection string.
