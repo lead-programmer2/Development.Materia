@@ -4410,13 +4410,13 @@ namespace Development.Materia.Database
                             }
                         }
 
-
                         object[] _values = new object[_table.Columns.Count];
 
                         foreach (DataColumn _column in _table.Columns)
                         {
                             if (!_column.AutoIncrement)
                             {
+                                if (rw != null) _values[_column.Ordinal] = rw[_column.ColumnName];
                                 if (_binder.BindedControls.Contains(_column.ColumnName))
                                 {
                                     object _control = _binder.BindedControls[_column.ColumnName].Control;
