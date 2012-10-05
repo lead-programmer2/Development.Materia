@@ -1525,11 +1525,16 @@ namespace Development.Materia
                 {
                     try
                     {
-                        _method = GetEventInvoker(owner, eventname);
-                        if (_method != null)
+                        FieldInfo _field = owner.GetType().GetField(eventname, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetField);
+                        if (_field != null)
                         {
-                            try { _method.Invoke(owner, args); }
-                            catch { }
+                            MulticastDelegate _multidelegates = (MulticastDelegate)_field.GetValue(owner);
+                            Delegate[] _delegates = _multidelegates.GetInvocationList();
+
+                            foreach (Delegate _delegate in _delegates)
+                            {
+                                _delegate.Method.Invoke(_delegate.Target, args);
+                            }
                         }
                     }
                     catch { }
