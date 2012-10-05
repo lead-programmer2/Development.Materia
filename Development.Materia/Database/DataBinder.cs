@@ -3722,6 +3722,8 @@ namespace Development.Materia.Database
                                             {
                                                 bool _checked = true;
                                                 if (!VisualBasic.IsNumeric(_value)) _checked = false;
+                                                else _checked = VisualBasic.CBool(_value);
+
                                                 Materia.SetPropertyValue(_control, "Checked", _checked);
                                             }
                                             else
