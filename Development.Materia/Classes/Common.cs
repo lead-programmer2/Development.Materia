@@ -1502,7 +1502,7 @@ namespace Development.Materia
         /// <param name="eventname">Event name</param>
         /// <param name="arg">Event argument</param>
         public static void RaiseEvent(object owner, string eventname, object arg)
-        { RaiseEvent(owner, eventname, new object[] { arg }); }
+        { RaiseEvent(owner, eventname, new object[] { owner, arg }); }
 
         /// <summary>
         /// Raises the specified object's event thru the event's name.
