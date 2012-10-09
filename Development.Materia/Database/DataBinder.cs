@@ -749,8 +749,11 @@ namespace Development.Materia.Database
             if (BindedControls.Contains(control))
             {
                 string _field = BindedControls[control].FieldName;
-                if (binding.RequiredFields.Contains(_field) &&
-                    binding.Grid == null) ProduceMarkerLabel(control);
+                if (!String.IsNullOrEmpty(_field.RLTrim()))
+                {
+                    if (binding.RequiredFields.Contains(_field) &&
+                        binding.Grid == null) ProduceMarkerLabel(control);
+                }
             }
         }
 
@@ -785,8 +788,10 @@ namespace Development.Materia.Database
             {
                 if (!DesignMode)
                 {
-                    _parentformisshown = false; Control.CheckForIllegalCrossThreadCalls = false;
-                    _form.ManageOnDispose(); OnParentFormLoad(e);
+                    _parentformisshown = false; 
+                    Control.CheckForIllegalCrossThreadCalls = false;
+                    _form.ManageOnDispose(); InitializeRequiredFields();
+                    InitializeEditableControls(_form); OnParentFormLoad(e);
                 }
             }
         }
@@ -800,8 +805,7 @@ namespace Development.Materia.Database
 
             if (_form != null)
             {
-                _parentformisshown = true; InitializeRequiredFields();
-                InitializeEditableControls(_form); OnParentFormShown(e);
+                _parentformisshown = true; OnParentFormShown(e);
             }
         }
 
@@ -2883,6 +2887,12 @@ namespace Development.Materia.Database
             get { return _binder; }
         }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private Hashtable _controltable = new Hashtable();
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private Hashtable _fieldtable = new Hashtable();
+
         /// <summary>
         /// Gets the binded control information at the specified index of the collection.
         /// </summary>
@@ -2925,9 +2935,16 @@ namespace Development.Materia.Database
         /// <returns></returns>
         public BindedControl Add(object control, string field)
         {
-            BindedControl _control = new BindedControl(this, control, field);
-            if (Contains(control)) Remove(control);
-            int _index = List.Add(_control); return (BindedControl)List[_index];
+            if (!String.IsNullOrEmpty(field.RLTrim()))
+            {
+                BindedControl _control = new BindedControl(this, control, field);
+                if (Contains(control)) Remove(control);
+                int _index = List.Add(_control);
+                if (!_controltable.ContainsKey(control)) _controltable.Add(control, (BindedControl)List[_index]);
+                if (!_fieldtable.ContainsKey(field)) _fieldtable.Add(field, (BindedControl)List[_index]);
+                return (BindedControl)List[_index];
+            }
+            else return null;
         }
 
         /// <summary>
@@ -2944,7 +2961,7 @@ namespace Development.Materia.Database
         /// <param name="control"></param>
         /// <returns></returns>
         public bool Contains(object control)
-        { return VisualBasic.CBool(GetInfoByControl(control) != null); }
+        { return (bool)(GetInfoByControl(control) != null); }
 
         /// <summary>
         /// Returns whether a binded control information with the specified database field name exists within the collection or not.
@@ -2952,19 +2969,13 @@ namespace Development.Materia.Database
         /// <param name="field"></param>
         /// <returns></returns>
         public bool Contains(string field)
-        { return VisualBasic.CBool(GetInfoByName(field) != null); }
+        { return (bool)(GetInfoByName(field) != null); }
 
         private BindedControl GetInfoByControl(object control)
         {
             BindedControl _control = null;
 
-            foreach (BindedControl bc in List)
-            {
-                if (bc.Control == control)
-                {
-                    _control = bc; break;
-                }
-            }
+            if (_controltable.ContainsKey(control)) _control = (BindedControl)_controltable[control]; 
 
             return _control;
         }
@@ -2973,13 +2984,7 @@ namespace Development.Materia.Database
         {
             BindedControl _control = null;
 
-            foreach (BindedControl bc in List)
-            {
-                if (bc.FieldName.ToLower() == name.ToLower())
-                {
-                    _control = bc; break;
-                }
-            }
+            if (_fieldtable.ContainsKey(name)) _control = (BindedControl)_fieldtable[name];
 
             return _control;
         }
@@ -2989,7 +2994,14 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="control"></param>
         public void Remove(BindedControl control)
-        { if (Contains(control)) List.Remove(control); }
+        {
+            if (Contains(control))
+            {
+                if (_controltable.ContainsKey(control.Control)) _controltable.Remove(control.Control);
+                if (_fieldtable.ContainsKey(control.FieldName)) _fieldtable.Remove(control.FieldName);
+                List.Remove(control);
+            }
+        }
 
         /// <summary>
         /// Removes a binded control information with the specified control object from the collection.
@@ -2998,7 +3010,12 @@ namespace Development.Materia.Database
         public void Remove(object control)
         {
             BindedControl _control = GetInfoByControl(control);
-            if (_control != null) List.Remove(_control);
+            if (_control != null)
+            {
+                if (_controltable.ContainsKey(control)) _controltable.Remove(control);
+                if (_fieldtable.ContainsKey(_control.FieldName)) _fieldtable.Remove(_control.FieldName);
+                List.Remove(_control);
+            }
         }
 
         /// <summary>
@@ -3008,7 +3025,12 @@ namespace Development.Materia.Database
         public void Remove(string field)
         {
             BindedControl _control = GetInfoByName(field);
-            if (_control != null) List.Remove(_control);
+            if (_control != null)
+            {
+                if (_fieldtable.ContainsKey(field)) _fieldtable.Remove(field);
+                if (_controltable.ContainsKey(_control.Control)) _controltable.Remove(_control.Control);
+                List.Remove(_control);
+            }
         }
 
         #endregion

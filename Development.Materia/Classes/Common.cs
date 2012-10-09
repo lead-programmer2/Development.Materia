@@ -149,11 +149,8 @@ namespace Development.Materia
         {
             bool _enabled = true;
 
-            if (PropertyExists(owner, "Enabled"))
-            {
-                _enabled = GetPropertyValue<bool>(owner, "Enabled");
-                SetPropertyValue(owner, "Enabled", false);
-            }
+            _enabled = GetPropertyValue<bool>(owner, "Enabled");
+            SetPropertyValue(owner, "Enabled", false);
 
             if (owner.GetType().Name.ToLower().Contains("textboxx"))
             {
@@ -162,15 +159,12 @@ namespace Development.Materia
                     string _name = GetPropertyValue<string>(owner, "Name");
                     if (_name.ToLower().Contains("txtsearch"))
                     {
-                        if (PropertyExists(owner, "ButtonCustom"))
+                        object _buttoncustom = GetProperty(owner, "ButtonCustom", null);
+                        if (_buttoncustom != null)
                         {
-                            object _buttoncustom = GetProperty(owner, "ButtonCustom", null);
-                            if (_buttoncustom != null)
-                            {
-                                if (PropertyExists(_buttoncustom, "Visible")) SetPropertyValue(_buttoncustom, "Visible", true);
-                                if (PropertyExists(_buttoncustom, "Image")) SetPropertyValue(_buttoncustom, "Image", Properties.Resources.ClearTextImage);
-                                if (EventExists(owner, "ButtonCustomClick")) AttachHandler(owner, "ButtonCustomClick", new EventHandler(txtSearchButtonCustomClick));
-                            }
+                            SetPropertyValue(_buttoncustom, "Visible", true);
+                            SetPropertyValue(_buttoncustom, "Image", Properties.Resources.ClearTextImage);
+                            AttachHandler(owner, "ButtonCustomClick", new EventHandler(txtSearchButtonCustomClick));
                         }
                     }
                 }
@@ -183,193 +177,45 @@ namespace Development.Materia
                     else
                     {
                         if (owner.GetType().Name.ToLower().Contains("c1combo") ||
-                owner.GetType().BaseType.Name.ToLower().Contains("c1combo"))
+                            owner.GetType().BaseType.Name.ToLower().Contains("c1combo"))
                         {
-                            if (PropertyExists(owner, "BorderStyle")) SetPropertyValue(owner, "BorderStyle", BorderStyle.FixedSingle);
-                            if (PropertyExists(owner, "AutoDropDown")) SetPropertyValue(owner, "AutoDropDown", true);
-                            if (PropertyExists(owner, "AutoCompletion")) SetPropertyValue(owner, "AutoCompletion", true);
-                            if (PropertyExists(owner, "RowTracking")) SetPropertyValue(owner, "RowTracking", true);
-                            if (PropertyExists(owner, "ScrollTrack")) SetPropertyValue(owner, "ScrollTrack", true);
-                            if (PropertyExists(owner, "ScrollTips")) SetPropertyValue(owner, "ScrollTips", true);
-                            if (PropertyExists(owner, "HeadingStyle"))
+                            SetPropertyValue(owner, "BorderStyle", BorderStyle.FixedSingle);
+                            SetPropertyValue(owner, "AutoDropDown", true);
+                            SetPropertyValue(owner, "AutoCompletion", true);
+                            SetPropertyValue(owner, "RowTracking", true);
+                            SetPropertyValue(owner, "ScrollTrack", true);
+                            SetPropertyValue(owner, "ScrollTips", true);
+                            object _headingstyle = GetProperty(owner, "HeadingStyle", null);
+                            if (_headingstyle != null) SetPropertyValue(_headingstyle, "Font", new Font("Tahoma", 8, FontStyle.Regular));
+                              
+                            object _captionstyle = GetProperty(owner, "CaptionStyle", null);
+                            if (_captionstyle != null) SetPropertyValue(_captionstyle, "Font", new Font("Tahoma", 8, FontStyle.Regular));
+                               
+                            object _style = GetProperty(owner, "Style", null);
+                            if (_style != null)
                             {
-                                object _headingstyle = GetProperty(owner, "HeadingStyle", null);
-                                if (_headingstyle != null)
-                                {
-                                    if (PropertyExists(_headingstyle, "Font")) SetPropertyValue(_headingstyle, "Font", new Font("Tahoma", 8, FontStyle.Regular));
-                                }
+                                SetPropertyValue(_style, "Font", new Font("Tahoma", 8, FontStyle.Regular));
+
+                                object _styleborders = GetProperty(_style, "Borders", null);
+                                if (_styleborders != null) SetPropertyValue(_styleborders, "Color", Color.Black);
                             }
 
-                            if (PropertyExists(owner, "CaptionStyle"))
+                            SetPropertyValue(owner, "MaxDropDownItems", 20);
+                            SetPropertyValue(owner, "CellTips", 2);
+                            SetPropertyValue(owner, "DeadAreaBackColor", Color.White);
+
+                            object _rowdivider = GetProperty(owner, "RowDivider", null);
+                            if (_rowdivider != null)
                             {
-                                object _captionstyle = GetProperty(owner, "CaptionStyle", null);
-                                if (_captionstyle != null)
-                                {
-                                    if (PropertyExists(_captionstyle, "Font")) SetPropertyValue(_captionstyle, "Font", new Font("Tahoma", 8, FontStyle.Regular));
-                                }
+                                SetPropertyValue(_rowdivider, "Color", Color.Gainsboro);
+                                SetPropertyValue(_rowdivider, "Style", 1);
                             }
 
-                            if (PropertyExists(owner, "Style"))
-                            {
-                                object _style = GetProperty(owner, "Style", null);
-                                if (_style != null)
-                                {
-                                    if (PropertyExists(_style, "Font")) SetPropertyValue(_style, "Font", new Font("Tahoma", 8, FontStyle.Regular));
-
-                                    if (PropertyExists(_style, "Borders"))
-                                    {
-                                        object _styleborders = GetProperty(_style, "Borders", null);
-
-                                        if (_styleborders != null)
-                                        {
-                                            if (PropertyExists(_styleborders, "Color")) SetPropertyValue(_styleborders, "Color", Color.Black);
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (PropertyExists(owner, "MaxDropDownItems")) SetPropertyValue(owner, "MaxDropDownItems", 20);
-                            if (PropertyExists(owner, "CellTips")) SetPropertyValue(owner, "CellTips", 2);
-                            if (PropertyExists(owner, "DeadAreaBackColor")) SetPropertyValue(owner, "DeadAreaBackColor", Color.White);
-
-                            if (PropertyExists(owner, "RowDivider"))
-                            {
-                                object _rowdivider = GetProperty(owner, "RowDivider", null);
-                                if (_rowdivider != null)
-                                {
-                                    if (PropertyExists(_rowdivider, "Color")) SetPropertyValue(_rowdivider, "Color", Color.Gainsboro);
-                                    if (PropertyExists(_rowdivider, "Style")) SetPropertyValue(_rowdivider, "Style", 1);
-                                }
-                            }
-
-                            if (PropertyExists(owner, "VisualStyle")) SetPropertyValue(owner, "VisualStyle", 2);
+                            SetPropertyValue(owner, "VisualStyle", 2);
                         }
                         else
                         {
-                            if (owner.GetType().Name.ToLower().Contains("C1FlexGrid".ToLower()) ||
-                                owner.GetType().BaseType.Name.ToLower().Contains("C1FlexGrid".ToLower()))
-                            {
-                                if (MethodExists(owner, "BeginUpdate")) InvokeMethod(owner, "BeginUpdate");
-                                if (PropertyExists(owner, "AutoSearch")) SetPropertyValue(owner, "AutoSearch", 0);
-                                if (PropertyExists(owner, "SelectionMode")) SetPropertyValue(owner, "SelectionMode", 3);
-                                if (PropertyExists(owner, "KeyActionEnter")) SetPropertyValue(owner, "KeyActionEnter", 3);
-                                if (PropertyExists(owner, "KeyActionTab")) SetPropertyValue(owner, "KeyActionTab", 3);
 
-                                if (PropertyExists(owner, "Styles"))
-                                {
-                                    object _styles = GetProperty(owner, "Styles", null);
-                                    if (_styles != null)
-                                    {
-                                        if (PropertyExists(_styles, "EmptyArea"))
-                                        {
-                                            object _emptyarea = GetProperty(_styles, "EmptyArea", null);
-                                            if (_emptyarea != null)
-                                            {
-                                                if (PropertyExists(_emptyarea, "BackColor")) SetPropertyValue(_emptyarea, "BackColor", Color.White);
-                                                if (PropertyExists(_emptyarea, "Border"))
-                                                {
-                                                    object _emptyareaborder = GetProperty(_emptyarea, "Border", null);
-                                                    if (_emptyareaborder != null)
-                                                    {
-                                                        if (PropertyExists(_emptyareaborder, "Color")) SetPropertyValue(_emptyareaborder, "Color", Color.White);
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        if (PropertyExists(_styles, "Normal"))
-                                        {
-                                            object _normal = GetProperty(_styles, "Normal", null);
-                                            if (_normal != null)
-                                            {
-                                                if (PropertyExists(_normal, "Border"))
-                                                {
-                                                    object _normalborder = GetProperty(_normal, "Border", null);
-                                                    if (_normalborder != null)
-                                                    {
-                                                        if (PropertyExists(_normalborder, "Color")) SetPropertyValue(_normalborder, "Color", Color.Gainsboro);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    if (PropertyExists(_styles, "Items"))
-                                    {
-                                        object _styleitems = GetProperty(_styles, "Items", null);
-
-                                        if (_styleitems != null)
-                                        {
-                                            for (int i = 0; i < 10; i++)
-                                            {
-                                                if (MethodExists(_styles, "Contains"))
-                                                {
-                                                    string _stylename = "SubTotal" + i.ToString();
-
-                                                    bool _stylecontains = GetMethodValue<bool>(_styles, "Contains", new object[] { _stylename });
-                                                    if (!_stylecontains)
-                                                    {
-                                                        if (MethodExists(_styles, "Add"))
-                                                        {
-                                                            object _newstyle = GetMethodValue<object>(_styles, "Add", new object[] { _stylename });
-                                                        }
-                                                    }
-
-                                                    object _currentstyle = GetProperty(_styles, "Items", new object[] { _stylename });
-                                                    if (_currentstyle != null)
-                                                    {
-                                                        if (PropertyExists(_currentstyle, "BackColor")) SetPropertyValue(_currentstyle, "BackColor", Color.Transparent);
-                                                        if (PropertyExists(_currentstyle, "Font")) SetPropertyValue(_currentstyle, "Font", new Font("Tahoma", 8, FontStyle.Bold));
-                                                        if (PropertyExists(_currentstyle, "ForeColor")) SetPropertyValue(_currentstyle, "ForeColor", Color.Black);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (PropertyExists(owner, "ClipSeparators")) SetPropertyValue(owner, "ClipSeparators", "|;");
-                                if (PropertyExists(owner, "TabStop")) SetPropertyValue(owner, "TabStop", true);
-                                if (PropertyExists(owner, "VisualStyle")) SetPropertyValue(owner, "VisualStyle", 3);
-
-                                if (PropertyExists(owner, "Tree"))
-                                {
-                                    object _tree = GetProperty(owner, "Tree", null);
-                                    if (_tree != null)
-                                    {
-                                        if (PropertyExists(_tree, "LineStyle")) SetPropertyValue(_tree, "LineStyle", DashStyle.Dot);
-                                        if (PropertyExists(_tree, "LineColor")) SetPropertyValue(_tree, "LineColor", Color.DimGray);
-                                    }
-                                }
-
-                                if (MethodExists(owner, "Clear")) InvokeMethod(owner, "Clear", new object[] { 65535 });
-
-                                if (PropertyExists(owner, "Rows"))
-                                {
-                                    object _rows = GetProperty(owner, "Rows", null);
-                                    if (_rows != null)
-                                    {
-                                        if (PropertyExists(_rows, "Count")) SetPropertyValue(_rows, "Count", 1);
-                                    }
-                                }
-
-                                if (PropertyExists(owner, "Cols"))
-                                {
-                                    object _cols = GetProperty(owner, "Cols", null);
-                                    if (_cols != null)
-                                    {
-                                        if (PropertyExists(_cols, "Fixed")) SetPropertyValue(_cols, "Fixed", 1);
-                                        if (PropertyExists(_cols, "Count")) SetPropertyValue(_cols, "Count", 1);
-                                    }
-                                }
-
-                                if (PropertyExists(owner, "AllowEditing")) SetPropertyValue(owner, "AllowEditing", false);
-                                if (PropertyExists(owner, "AllowDelete")) SetPropertyValue(owner, "AllowDelete", false);
-                                if (PropertyExists(owner, "AllowAddNew")) SetPropertyValue(owner, "AllowAddNew", false);
-                                if (PropertyExists(owner, "ExtendLastCol")) SetPropertyValue(owner, "ExtendLastCol", true);
-
-                                if (MethodExists(owner, "EndUpdate")) InvokeMethod(owner, "EndUpdate");
-                            }
                         }
                     }
                 }
@@ -398,6 +244,89 @@ namespace Development.Materia
                 }
 
                 SetPropertyValue(owner, "DataSource", null);
+            }
+
+            if (owner.GetType().Name.ToLower().Contains("C1FlexGrid".ToLower()) ||
+                owner.GetType().BaseType.Name.ToLower().Contains("C1FlexGrid".ToLower()))
+            {
+                InvokeMethod(owner, "BeginUpdate");
+                SetPropertyValue(owner, "AutoSearch", 0);
+                SetPropertyValue(owner, "SelectionMode", 3);
+                SetPropertyValue(owner, "KeyActionEnter", 3);
+                SetPropertyValue(owner, "KeyActionTab", 3);
+
+                object _styles = GetProperty(owner, "Styles", null);
+                if (_styles != null)
+                {
+                    object _emptyarea = GetProperty(_styles, "EmptyArea", null);
+                    if (_emptyarea != null)
+                    {
+                         SetPropertyValue(_emptyarea, "BackColor", Color.White);
+                         object _emptyareaborder = GetProperty(_emptyarea, "Border", null);
+                         if (_emptyareaborder != null) SetPropertyValue(_emptyareaborder, "Color", Color.White);
+                    }
+
+                    object _normal = GetProperty(_styles, "Normal", null);
+                    if (_normal != null)
+                    {
+                        object _normalborder = GetProperty(_normal, "Border", null);
+                        if (_normalborder != null) SetPropertyValue(_normalborder, "Color", Color.Gainsboro);
+                    }
+
+                    object _styleitems = GetProperty(_styles, "Items", null);
+
+                    if (_styleitems != null)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            string _stylename = "SubTotal" + i.ToString();
+
+                            bool _stylecontains = GetMethodValue<bool>(_styles, "Contains", new object[] { _stylename });
+                            if (!_stylecontains)
+                            {
+                                object _newstyle = GetMethodValue<object>(_styles, "Add", new object[] { _stylename });
+                            }
+
+                            object _currentstyle = GetProperty(_styles, "Items", new object[] { _stylename });
+                            if (_currentstyle != null)
+                            {
+                                SetPropertyValue(_currentstyle, "BackColor", Color.Transparent);
+                                SetPropertyValue(_currentstyle, "Font", new Font("Tahoma", 8, FontStyle.Bold));
+                                SetPropertyValue(_currentstyle, "ForeColor", Color.Black);
+                            }
+                        }
+                    }
+                }
+
+                SetPropertyValue(owner, "ClipSeparators", "|;");
+                SetPropertyValue(owner, "TabStop", true);
+                SetPropertyValue(owner, "VisualStyle", 3);
+
+                object _tree = GetProperty(owner, "Tree", null);
+                if (_tree != null)
+                {
+                    SetPropertyValue(_tree, "LineStyle", DashStyle.Dot);
+                    SetPropertyValue(_tree, "LineColor", Color.DimGray);
+                }
+
+                InvokeMethod(owner, "Clear", new object[] { 65535 });
+
+                object _rows = GetProperty(owner, "Rows", null);
+                if (_rows != null) SetPropertyValue(_rows, "Count", 1);
+
+                object _cols = GetProperty(owner, "Cols", null);
+                if (_cols != null)
+                {
+                    SetPropertyValue(_cols, "Fixed", 1);
+                    SetPropertyValue(_cols, "Count", 1);
+                }
+
+                SetPropertyValue(owner, "AllowEditing", false);
+                SetPropertyValue(owner, "AllowDelete", false);
+                SetPropertyValue(owner, "AllowAddNew", false);
+                SetPropertyValue(owner, "ExtendLastCol", true);
+
+                InvokeMethod(owner, "EndUpdate");
             }
 
             if (PropertyExists(owner, "SelectedIndex"))
@@ -555,20 +484,12 @@ namespace Development.Materia
             EventInfo _event = null;
 
             try
+            { _event = owner.GetType().GetEvent(eventname); }
+            catch (Exception ex) 
             {
-                EventInfo[] _events = owner.GetType().GetEvents();
-                if (_events.Length > 0)
-                {
-                    foreach (EventInfo e in _events)
-                    {
-                        if (e.Name == eventname)
-                        {
-                            _event = e; break;
-                        }
-                    }
-                }
+                if (ex.Message.ToLower().Contains("ambigous")) return true;
+                else _event = null; 
             }
-            catch { _event = null; }
 
             return VisualBasic.CBool(_event != null);
         }
@@ -1378,22 +1299,10 @@ namespace Development.Materia
             MethodInfo _method = null;
 
             try
-            {
-                MemberInfo[] _methods = owner.GetType().GetMethods();
-                if (_methods.Length > 0)
-                {
-                    foreach (MethodInfo m in _methods)
-                    {
-                        if (m.Name == methodname)
-                        {
-                            _method = m; break;
-                        }
-                    }
-                }
-            }
+            { _method = owner.GetType().GetMethod(methodname); }
             catch (Exception ex)
             {
-                if (ex.Message.ToLower().Contains("ambigous")) Debug.Print("Ambigous method : " + owner.GetType().Name + " : " + methodname);
+                if (ex.Message.ToLower().Contains("ambigous")) return true;
                 _method = null; 
             }
 
