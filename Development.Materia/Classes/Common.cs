@@ -1404,22 +1404,12 @@ namespace Development.Materia
 
             try
             {
-                PropertyInfo[] _properties = owner.GetType().GetProperties();
-                if (_properties.Length > 0)
-                {
-                    foreach (PropertyInfo p in _properties)
-                    {
-                        if (p.Name == propertyname)
-                        {
-                            _property = p; break;
-                        }
-                    }
-                }
+                _property = owner.GetType().GetProperty(propertyname);
             }
             catch (Exception ex) 
             {
-                if (ex.Message.ToLower().Contains("ambigous")) Debug.Print("Ambigous property : " + owner.GetType().Name + " : " + propertyname);
-                _property = null; 
+                if (ex.Message.ToLower().Contains("ambigous")) return true;
+                else _property = null; 
             }
 
             return  VisualBasic.CBool(_property != null);
