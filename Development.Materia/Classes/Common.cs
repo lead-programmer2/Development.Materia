@@ -420,7 +420,11 @@ namespace Development.Materia
             {
                 if (_controls.Count > 0)
                 {
-                    foreach (Control control in _controls) ClearContents(control);
+                    for (int i = 0; i <= (_controls.Count - 1); i++)
+                    {
+                        Control control = _controls[i];
+                        ClearContents(control);
+                    }
                 }
                 else Clear(owner);
             }

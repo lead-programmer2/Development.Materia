@@ -688,7 +688,12 @@ namespace Development.Materia.Database
                         }
                         else
                         {
-                            foreach (Control _control in (Control.ControlCollection)_controls) InitializeEditableControls(_control);
+
+                            for (int i = 0; i <= (((Control.ControlCollection)_controls).Count - 1); i++)
+                            {
+                                Control _control = ((Control.ControlCollection)_controls)[i];
+                                InitializeEditableControls(_control);
+                            }
                         }
                     }
                     else
@@ -739,7 +744,11 @@ namespace Development.Materia.Database
 
         private void InitializeRequiredFields(DataBinding binding)
         {
-            foreach (BindedControl bc in BindedControls) InitializeRequiredFields(binding, (Control) bc.Control);
+            for (int i = 0; i <= (BindedControls.Count - 1); i++)
+            {
+                BindedControl bc = BindedControls[i];
+                InitializeRequiredFields(binding, (Control)bc.Control);
+            }
         }
 
         private void InitializeRequiredFields(DataBinding binding, Control control)
