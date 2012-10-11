@@ -2232,10 +2232,20 @@ namespace Development.Materia
         /// <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
         /// <returns></returns>
         public static string ToSqlValidString(this string value, bool datatableexpression)
+        { return value.ToSqlValidString(datatableexpression, true); }
+
+        /// <summary>
+        /// Converts string value to its SQL qualified string representation.
+        /// </summary>
+        /// <param name="value">String value to convert.</param>
+        /// <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
+        /// <param name="trimmed">Determines whether to peform text carriage-return trimming before actual evaluation.</param>
+        /// <returns></returns>
+        public static string ToSqlValidString(this string value, bool datatableexpression, bool trimmed)
         {
             string _value = value;
 
-            if (datatableexpression) _value = value.Trim().Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
+            if (datatableexpression) _value = (trimmed? _value.Trim() : _value).ToString().Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
             else _value = value.Trim().Replace("'", "''").Replace("\\", "\\\\");
             
             return _value;

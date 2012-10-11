@@ -1334,6 +1334,15 @@
             <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Materia.ToSqlValidString(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Converts string value to its SQL qualified string representation.
+            </summary>
+            <param name="value">String value to convert.</param>
+            <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
+            <param name="trimmed">Determines whether to peform text carriage-return trimming before actual evaluation.</param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.ToWords(System.Byte)">
             <summary>
             Returns the english-word representation of the specified value.
