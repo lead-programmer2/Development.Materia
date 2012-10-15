@@ -1803,6 +1803,7 @@ namespace Development.Materia
                             if (!condition)
                             {
                                 if (MethodExists(_highlighter, "SetHighlightColor")) InvokeMethod(_highlighter, "SetHighlightColor", new object[] { control, 1 });
+                                if (MethodExists(_errorprovider, "SetIconPadding")) InvokeMethod(_errorprovider, "SetIconPadding", new object[] { control, 5});
                                 if (MethodExists(_errorprovider, "SetError")) InvokeMethod(_errorprovider, "SetError", new object[] { control, notification });
                                 if (MethodExists(control, "Focus")) InvokeMethod(control, "Focus");
                             }
