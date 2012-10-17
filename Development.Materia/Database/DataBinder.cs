@@ -686,11 +686,36 @@ namespace Development.Materia.Database
                     {
                         if (CanExtend(parent))
                         {
-                            if (Materia.EventExists(parent, "CheckChanged")) Materia.AttachHandler(parent, "CheckChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "SelectedIndexChanged")) Materia.AttachHandler(parent, "SelectedIndexChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "SelectedValueChanged")) Materia.AttachHandler(parent, "SelectedValueChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "ValueChanged")) Materia.AttachHandler(parent, "ValueChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "TextChanged")) Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged));
+                            if (Materia.EventExists(parent, "CheckChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "CheckChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "SelectedIndexChanged"))
+                            {
+                                try
+                                { Materia.AttachHandler(parent, "SelectedIndexChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "SelectedValueChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "SelectedValueChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "ValueChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "ValueChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "TextChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
                         }
                         else
                         {
@@ -706,11 +731,36 @@ namespace Development.Materia.Database
                     {
                         if (CanExtend(parent))
                         {
-                            if (Materia.EventExists(parent, "CheckChanged")) Materia.AttachHandler(parent, "CheckChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "SelectedIndexChanged")) Materia.AttachHandler(parent, "SelectedIndexChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "SelectedValueChanged")) Materia.AttachHandler(parent, "SelectedValueChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "ValueChanged")) Materia.AttachHandler(parent, "ValueChanged", new EventHandler(Editor_ValueChanged));
-                            if (Materia.EventExists(parent, "TextChanged")) Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged));
+                            if (Materia.EventExists(parent, "CheckChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "CheckChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "SelectedIndexChanged"))
+                            {
+                                try
+                                { Materia.AttachHandler(parent, "SelectedIndexChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "SelectedValueChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "SelectedValueChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "ValueChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "ValueChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
+
+                            if (Materia.EventExists(parent, "TextChanged"))
+                            {
+                                try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
+                                catch { }
+                            }
                         }
                         else
                         {
@@ -806,7 +856,9 @@ namespace Development.Materia.Database
                     _parentformisshown = false; 
                     Control.CheckForIllegalCrossThreadCalls = false;
                     _form.ManageOnDispose(); InitializeRequiredFields();
-                    InitializeEditableControls(_form); OnParentFormLoad(e);
+                    try { InitializeEditableControls(_form); }
+                    catch { }
+                    OnParentFormLoad(e);
                 }
             }
         }
