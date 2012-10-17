@@ -2232,7 +2232,7 @@ namespace Development.Materia
         /// <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
         /// <returns></returns>
         public static string ToSqlValidString(this string value, bool datatableexpression)
-        { return value.ToSqlValidString(datatableexpression, false); }
+        { return value.ToSqlValidString(datatableexpression, !datatableexpression); }
 
         /// <summary>
         /// Converts string value to its SQL qualified string representation.
