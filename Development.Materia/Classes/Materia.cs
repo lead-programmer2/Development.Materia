@@ -2246,7 +2246,7 @@ namespace Development.Materia
             string _value = value;
 
             if (datatableexpression) _value = (trimmed? _value.Trim() : _value).ToString().Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
-            else _value = value.Trim().Replace("'", "''").Replace("\\", "\\\\");
+            else _value = (trimmed ? _value.Trim() : _value).ToString().Replace("'", "''").Replace("\\", "\\\\");
             
             return _value;
         }
