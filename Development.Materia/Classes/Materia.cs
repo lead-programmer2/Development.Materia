@@ -2243,10 +2243,10 @@ namespace Development.Materia
         /// <returns></returns>
         public static string ToSqlValidString(this string value, bool datatableexpression, bool trimmed)
         {
-            string _value = value;
+            string _value = (trimmed ? value.Trim() : value);
 
-            if (datatableexpression) _value = (trimmed? _value.Trim() : _value).ToString().Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
-            else _value = (trimmed ? _value.Trim() : _value).ToString().Replace("'", "''").Replace("\\", "\\\\");
+            if (datatableexpression) _value = _value.Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
+            else _value = _value.Replace("'", "''").Replace("\\", "\\\\");
             
             return _value;
         }
