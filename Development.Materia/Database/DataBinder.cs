@@ -459,6 +459,31 @@ namespace Development.Materia.Database
             }
         }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private Icon _valdiatoricon = Properties.Resources.validator;
+
+        /// <summary>
+        /// Gets or sets the icon that will be used by the binder's internal error validator.
+        /// </summary>
+        [Description("Gets or sets the icon that will be used by the binder's internal error validator.")]
+        public Icon ValidatorIcon
+        {
+            get { return _valdiatoricon; }
+            set 
+            { 
+                _valdiatoricon = value;
+                if (!Materia.IsNullOrNothing(value))
+                {
+                    if (_errorprovider != null)
+                    {
+                        _errorprovider.Dispose(); _errorprovider = null;
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                    InitializeErrorProvider();
+                }
+            }
+        }
+
         #endregion
 
         #region "methods"
@@ -782,7 +807,7 @@ namespace Development.Materia.Database
                 if (ContainerControl != null)
                 {
                     _errorprovider = new ErrorProvider(ContainerControl);
-                    _errorprovider.Icon = Properties.Resources.validator;
+                    _errorprovider.Icon = ValidatorIcon;
                     _errorprovider.BlinkRate = 250;
                     _errorprovider.BlinkStyle = ErrorBlinkStyle.BlinkIfDifferentError;
                 }
@@ -2150,7 +2175,7 @@ namespace Development.Materia.Database
 
                                                                                     if (_coleditortable != null)
                                                                                     {
-                                                                                        object _selvalue = _coleditortable.GetValue<object>("CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
+                                                                                        object _selvalue = _coleditortable.GetValue<object>("(CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
                                                                                         if (Materia.IsNullOrNothing(_selvalue)) _notification = "Please specify a value for " + _colcaption + " at row {0}.";
                                                                                     }
                                                                                 }
@@ -2349,7 +2374,7 @@ namespace Development.Materia.Database
 
                                                                                     if (_coleditortable != null)
                                                                                     {
-                                                                                        object _selvalue = _coleditortable.GetValue<object>("CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
+                                                                                        object _selvalue = _coleditortable.GetValue<object>("(CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
                                                                                         if (Materia.IsNullOrNothing(_selvalue)) _notification = "Please specify a value for " + _colcaption + " at row {0}.";
                                                                                     }
                                                                                 }
@@ -2563,7 +2588,7 @@ namespace Development.Materia.Database
 
                                                                                     if (_coleditortable != null)
                                                                                     {
-                                                                                        object _selvalue = _coleditortable.GetValue<object>("CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
+                                                                                        object _selvalue = _coleditortable.GetValue<object>("(CONVERT([" + _displaymember + "], System.String) LIKE '" + _value.ToString().ToSqlValidString(true) + "')", _displaymember);
                                                                                         if (Materia.IsNullOrNothing(_selvalue)) _notification = "Please specify a value for " + _colcaption + " at row {0}.";
                                                                                     }
                                                                                 }

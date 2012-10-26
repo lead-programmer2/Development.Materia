@@ -2388,6 +2388,11 @@
              Gets or sets the component's site.
             </summary>
         </member>
+        <member name="P:Development.Materia.Database.DataBinder.ValidatorIcon">
+            <summary>
+            Gets or sets the icon that will be used by the binder's internal error validator.
+            </summary>
+        </member>
         <member name="T:Development.Materia.Database.DataBinder.DataBinderLoadingEventHandler">
             <summary>
             Handler for DataBinder data-loading events.
