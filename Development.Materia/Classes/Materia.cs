@@ -2071,7 +2071,6 @@ namespace Development.Materia
                 }
             }
 
-
             return _value.Trim();
         }
 
