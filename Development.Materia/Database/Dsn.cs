@@ -17,7 +17,7 @@ namespace Development.Materia.Database
     public class Dsn
     {
 
-        #region "API"
+        #region "api"
 
         [DllImport("odbccp32.dll")]
         private static extern int SQLConfigDataSource(int hwnd, int request, string driver, string attributes);
