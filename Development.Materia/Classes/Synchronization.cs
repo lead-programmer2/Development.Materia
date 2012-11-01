@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -189,9 +190,11 @@ namespace Development.Materia
                     if (_sync != null)
                     {
                         if (_sync.GetType().Name == typeof(IAsyncResult).Name ||
-                            _sync.GetType().Name == typeof(Thread).Name)
+                            _sync.GetType().Name == typeof(Thread).Name ||
+                            _sync.GetType().Name == typeof(AsyncResult).Name) 
                         {
                             if (_sync.GetType().Name == typeof(IAsyncResult).Name) _finished = _finished && ((IAsyncResult)_sync).IsCompleted;
+                            else if (_sync.GetType().Name == typeof(AsyncResult).Name) _finished = _finished && ((AsyncResult)_sync).IsCompleted;
                             else _finished = _finished && !((Thread)_sync).IsAlive;
                         }
                     }
