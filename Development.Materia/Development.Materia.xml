@@ -658,6 +658,23 @@
             <param name="section">Database connection string section.</param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Materia.CreateDataObjectMap(System.Data.IDbConnection,System.String)">
+            <summary>
+            Creates a database object mapping session from a database table using the specified connection.
+            </summary>
+            <param name="connection">Database connection</param>
+            <param name="tablename">Database table name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Materia.CreateDataObjectMap(System.Data.IDbConnection,System.String,System.String)">
+            <summary>
+            Creates a database object mapping session from a database table using the specified connection.
+            </summary>
+            <param name="connection">Database connection</param>
+            <param name="tablename">Database table name.</param>
+            <param name="condition">Database filtering condition.</param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.Decrypt(System.String,System.String)">
             <summary>
             Returns a decrypted string value of the specified string using the specified encryption key as its pattern.
