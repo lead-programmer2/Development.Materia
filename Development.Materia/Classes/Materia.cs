@@ -843,9 +843,7 @@ namespace Development.Materia
         /// <param name="key">Encryption key</param>
         /// <returns></returns>
         public static string Decrypt(this string value, string key)
-        {
-            return value.Decrypt(key, false);
-        }
+        { return value.Decrypt(key, false); }
 
         /// <summary>
         /// Returns a decrypted string value of the specified string using the specified encryption key as its pattern.
@@ -855,9 +853,7 @@ namespace Development.Materia
         /// <param name="usesimpledecryption">Use simple decryption or not</param>
         /// <returns></returns>
         public static string Decrypt(this string value, string key, bool usesimpledecryption)
-        {
-            return Cryptography.Cryptographer.Decrypt(value, key, usesimpledecryption);
-        }
+        {  return Cryptography.Cryptographer.Decrypt(value, key, usesimpledecryption);  }
 
         /// <summary>
         /// Returns the decrypted contents of the file using the supplied encryption key.
@@ -866,9 +862,7 @@ namespace Development.Materia
         /// <param name="key">Encryption key</param>
         /// <returns></returns>
         public static string Decrypt(this FileInfo file, string key)
-        {
-            return file.Decrypt(key, false);
-        }
+        {  return file.Decrypt(key, false); }
 
         /// <summary>
         /// Returns the decrypted contents of the file using the supplied encryption key.
