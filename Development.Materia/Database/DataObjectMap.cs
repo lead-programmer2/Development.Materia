@@ -42,6 +42,15 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="dbconnection">Database connection</param>
         /// <param name="tablename">Database table name</param>
+        /// <param name="fieldnames">Database table fields to include.</param>
+        public DataObjectMap(IDbConnection dbconnection, string tablename, string[] fieldnames) : this(dbconnection, tablename, "", fieldnames)
+        { }
+
+        /// <summary>
+        /// Creates a new instance of DataObjectMap.
+        /// </summary>
+        /// <param name="dbconnection">Database connection</param>
+        /// <param name="tablename">Database table name</param>
         /// <param name="condition">Database table filter conditions</param>
         /// <param name="fieldnames">Database table fields to include.</param>
         public DataObjectMap(IDbConnection dbconnection, string tablename, string condition, string[] fieldnames)
