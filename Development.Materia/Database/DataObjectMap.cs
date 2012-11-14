@@ -157,11 +157,12 @@ namespace Development.Materia.Database
                         {
                             string _filter = "[" + _pk + "] = ";
                             DataColumn _pkcol = _table.Columns[_pk];
+                            object[] _values = null;
 
                             switch (_row.RowState)
                             {
                                 case DataRowState.Added:
-                                      object[] _values = new object[_table.Columns.Count];
+                                     _values = new object[_table.Columns.Count];
                                       foreach (DataColumn _col in _table.Columns)
                                       {
                                           if (!_col.AutoIncrement)
@@ -231,7 +232,7 @@ namespace Development.Materia.Database
                                             }
                                             else
                                             {
-                                                object[] _values = new object[_table.Columns.Count];
+                                                _values  = new object[_table.Columns.Count];
                                                 foreach (DataColumn _col in _table.Columns)
                                                 {
                                                     if (!_col.AutoIncrement)
