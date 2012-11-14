@@ -125,202 +125,117 @@ namespace Development.Materia.Database
             if (_table != null &&
                 table != null)
             {
-                int _rowdiff = _table.Rows.Count - table.Rows.Count;
-                if (_rowdiff > 0) DeleteRows(_rowdiff);
-
-                string _pk = "";
-
-                foreach (DataColumn _column in _table.Columns)
+                DataTable _updates = table.GetChanges();
+                if (_updates != null)
                 {
-                    if (_column.Unique)
+                    foreach (DataRow _row in _updates.Rows)
                     {
-                        _pk = _column.ColumnName; break;
-                    }
-                }
+                        string _pk = "";
 
-                if (String.IsNullOrEmpty(_pk.RLTrim()))
-                {
-                    foreach (DataColumn _column in table.Columns)
-                    {
-                        if (_column.Unique &&
-                            _table.Columns.Contains(_column.ColumnName))
+                        foreach (DataColumn _col in _table.Columns)
                         {
-                            _pk = _column.ColumnName; break;
+                            if (_col.Unique)
+                            {
+                                _pk = _col.ColumnName; break;
+                            }
                         }
-                    }
 
-                    if (String.IsNullOrEmpty(_pk.RLTrim())) _pk = _table.Columns[0].ColumnName;
-                }
+                        if (String.IsNullOrEmpty(_pk.RLTrim())) _pk = _table.Columns[0].ColumnName;
 
-                DataColumn _pkcol = _table.Columns[_pk];
-                int _currentrow = 0;
+                        object _pkvalue = null;
 
-                foreach (DataRow _row in table.Rows)
-                {
-                    object _pkvalue = null;
-
-                    switch (_row.RowState)
-                    {
-                        case DataRowState.Detached:
-                        case DataRowState.Deleted:
+                        if (_row.RowState == DataRowState.Deleted ||
+                            _row.RowState == DataRowState.Detached ||
+                            _row.RowState == DataRowState.Modified)
+                        {
                             try { _pkvalue = _row[_pk, DataRowVersion.Original]; }
                             catch { _pkvalue = null; }
+                        }
+                        else _pkvalue = _row[_pk];
 
-                            if (!Materia.IsNullOrNothing(_pkvalue))
+                        if (!Materia.IsNullOrNothing(_pkvalue))
+                        {
+                            string _filter = "[" + _pk + "] = ";
+                            DataColumn _pkcol = _table.Columns[_pk];
+
+                            switch (_row.RowState)
                             {
-                                string _filter = "[" + _pk + "] = ";
-                                if (_pkcol.DataType.Name == typeof(String).Name ||
-                                    _pkcol.DataType.Name == typeof(string).Name) _filter += "'" + _pkvalue.ToString().ToSqlValidString(true) + "'";
-                                else if (_pkcol.DataType.Name == typeof(DateTime).Name)
-                                {
-                                    if (VisualBasic.IsDate(_pkvalue)) _filter += "#" + VisualBasic.Format(VisualBasic.CDate(_pkvalue), "MM/dd/yyyy hh:mm:ss tt") + "#";
-                                    else _filter = "";
-                                }
-                                else if (_pkcol.DataType.Name == typeof(bool).Name ||
-                                        _pkcol.DataType.Name == typeof(Boolean).Name) 
-                                {
-                                    bool _value = VisualBasic.CBool(_pkvalue);
-                                    _filter += _value.ToString();
-                                }
-                                else if (_pkcol.DataType.Name == typeof(byte).Name ||
-                                         _pkcol.DataType.Name == typeof(Byte).Name ||
-                                         _pkcol.DataType.Name == typeof(decimal).Name ||
-                                         _pkcol.DataType.Name == typeof(Decimal).Name ||
-                                         _pkcol.DataType.Name == typeof(double).Name ||
-                                         _pkcol.DataType.Name == typeof(Double).Name ||
-                                         _pkcol.DataType.Name == typeof(int).Name ||
-                                         _pkcol.DataType.Name == typeof(Int16).Name ||
-                                         _pkcol.DataType.Name == typeof(Int32).Name ||
-                                         _pkcol.DataType.Name == typeof(Int64).Name ||
-                                         _pkcol.DataType.Name == typeof(long).Name ||
-                                         _pkcol.DataType.Name == typeof(short).Name ||
-                                         _pkcol.DataType.Name == typeof(Single).Name ||
-                                         _pkcol.DataType.Name == typeof(sbyte).Name ||
-                                         _pkcol.DataType.Name == typeof(SByte).Name)
-                                {
-                                    if (VisualBasic.IsNumeric(_pkvalue)) _filter += _pkvalue.ToString();
-                                    else _filter = "";
-                                }
-                                else _filter = "";
-
-                                if (!String.IsNullOrEmpty(_filter.RLTrim())) DeleteRow(_filter);
-                            }
-                            break;
-                        case DataRowState.Modified:
-                        case DataRowState.Added:
-                            if (_row.RowState == DataRowState.Modified)
-                            {
-                                 try { _pkvalue = _row[_pk, DataRowVersion.Original]; }
-                                catch { _pkvalue = null; }
-                            }
-                            else _pkvalue = _row[_pk];
-                          
-                             if (!Materia.IsNullOrNothing(_pkvalue))
-                             {
-                                string _filter = "[" + _pk + "] = ";
-                                if (_pkcol.DataType.Name == typeof(String).Name ||
-                                    _pkcol.DataType.Name == typeof(string).Name) _filter += "'" + _pkvalue.ToString().ToSqlValidString(true) + "'";
-                                else if (_pkcol.DataType.Name == typeof(DateTime).Name) 
-                                {
-                                     if (VisualBasic.IsDate(_pkvalue)) _filter += "#" + VisualBasic.Format(VisualBasic.CDate(_pkvalue), "MM/dd/yyyy hh:mm:ss tt") + "#";
-                                     else _filter = "";
-                                }
-                                else if (_pkcol.DataType.Name == typeof(bool).Name ||
-                                         _pkcol.DataType.Name == typeof(Boolean).Name) 
-                                {
-                                     bool _value = VisualBasic.CBool(_pkvalue);
-                                     _filter += _value.ToString();
-                                }
-                                else if (_pkcol.DataType.Name == typeof(byte).Name ||
-                                         _pkcol.DataType.Name == typeof(Byte).Name ||
-                                         _pkcol.DataType.Name == typeof(decimal).Name ||
-                                         _pkcol.DataType.Name == typeof(Decimal).Name ||
-                                         _pkcol.DataType.Name == typeof(double).Name ||
-                                         _pkcol.DataType.Name == typeof(Double).Name ||
-                                         _pkcol.DataType.Name == typeof(int).Name ||
-                                         _pkcol.DataType.Name == typeof(Int16).Name ||
-                                         _pkcol.DataType.Name == typeof(Int32).Name ||
-                                         _pkcol.DataType.Name == typeof(Int64).Name ||
-                                         _pkcol.DataType.Name == typeof(long).Name ||
-                                         _pkcol.DataType.Name == typeof(short).Name ||
-                                         _pkcol.DataType.Name == typeof(Single).Name ||
-                                         _pkcol.DataType.Name == typeof(sbyte).Name ||
-                                         _pkcol.DataType.Name == typeof(SByte).Name)
-                                {
-                                    if (VisualBasic.IsNumeric(_pkvalue)) _filter += _pkvalue.ToString();
-                                    else _filter = "";
-                                }
-                                else _filter = "";
-
-                                if (!String.IsNullOrEmpty(_filter.RLTrim())) 
-                                {
-                                    DataRow[] _rows = Select(_filter);
-                                    if (_rows.Length > 0) 
+                                case DataRowState.Deleted:
+                                case DataRowState.Detached:
+                                case DataRowState.Modified:
+                                    if (_pkcol.DataType.Name == typeof(string).Name ||
+                                        _pkcol.DataType.Name == typeof(String).Name) _filter += "'" + _pkvalue.ToString().ToSqlValidString(true) + "'";
+                                    else if (_pkcol.DataType.Name == typeof(DateTime).Name)
                                     {
-                                        DataRow _actualrow = _rows[0];
-                                        if (_actualrow.RowState != DataRowState.Deleted ||
-                                            _actualrow.RowState != DataRowState.Detached)
+                                        if (VisualBasic.IsDate(_pkvalue)) _filter += "#" + VisualBasic.Format(VisualBasic.CDate(_pkvalue), "MM/dd/yyyy hh:mm:ss tt") + "#";
+                                        else _filter = "";
+                                    }
+                                    else if (_pkcol.DataType.Name == typeof(bool).Name ||
+                                             _pkcol.DataType.Name == typeof(Boolean).Name)
+                                    {
+                                        bool _value = VisualBasic.CBool(_pkvalue);
+                                        _filter += _value.ToString();
+                                    }
+                                    else if (_pkcol.DataType.Name == typeof(byte).Name ||
+                                             _pkcol.DataType.Name == typeof(Byte).Name ||
+                                             _pkcol.DataType.Name == typeof(decimal).Name ||
+                                             _pkcol.DataType.Name == typeof(Decimal).Name ||
+                                             _pkcol.DataType.Name == typeof(double).Name ||
+                                             _pkcol.DataType.Name == typeof(Double).Name ||
+                                             _pkcol.DataType.Name == typeof(int).Name ||
+                                             _pkcol.DataType.Name == typeof(Int16).Name ||
+                                             _pkcol.DataType.Name == typeof(Int32).Name ||
+                                             _pkcol.DataType.Name == typeof(Int64).Name ||
+                                             _pkcol.DataType.Name == typeof(long).Name ||
+                                             _pkcol.DataType.Name == typeof(sbyte).Name ||
+                                             _pkcol.DataType.Name == typeof(SByte).Name ||
+                                             _pkcol.DataType.Name == typeof(short).Name ||
+                                             _pkcol.DataType.Name == typeof(Single).Name)
+                                    {
+                                        if (VisualBasic.IsNumeric(_pkvalue)) _filter += _pkvalue.ToString();
+                                        else _filter = "";
+                                    }
+
+                                    if (!String.IsNullOrEmpty(_filter.RLTrim()))
+                                    {
+                                        if (_row.RowState == DataRowState.Deleted ||
+                                            _row.RowState == DataRowState.Detached) DeleteRow(_filter);
+                                        else
                                         {
-                                            foreach (DataColumn _col in _table.Columns)
+                                            DataRow[] _rows = Select(_filter);
+                                            if (_rows.Length > 0)
                                             {
-                                                if (!_col.AutoIncrement)
+                                                DataRow _actualrow = _rows[0];
+                                                if (_actualrow.RowState != DataRowState.Deleted &&
+                                                    _actualrow.RowState != DataRowState.Detached)
                                                 {
-                                                    if (table.Columns.Contains(_col.ColumnName)) _actualrow[_col.ColumnName] = _row[_col.ColumnName];
+                                                    foreach (DataColumn _col in _table.Columns)
+                                                    {
+                                                        if (!_col.AutoIncrement)
+                                                        {
+                                                            if (table.Columns.Contains(_col.ColumnName)) _actualrow[_col.ColumnName] = _row[_col.ColumnName];
+                                                        }
+                                                    }
                                                 }
+                                            }
+                                            else
+                                            {
+                                                object[] _values = new object[_table.Columns.Count];
+                                                foreach (DataColumn _col in _table.Columns)
+                                                {
+                                                    if (!_col.AutoIncrement)
+                                                    {
+                                                        if (table.Columns.Contains(_col.ColumnName)) _values[_col.Ordinal] = _row[_col.ColumnName];
+                                                    }
+                                                }
+                                                AddRow(_values);
                                             }
                                         }
                                     }
-                                    else
-                                    {
-                                        DataRow _actualrow = null;
-                                        if (_currentrow < _table.Rows.Count) _actualrow = _table.Rows[_currentrow];
-
-                                        while (_actualrow.RowState == DataRowState.Deleted ||
-                                               _actualrow.RowState == DataRowState.Detached) 
-                                         {
-                                            _currentrow += 1;
-                                            if (_currentrow >= _table.Rows.Count) break;
-                                            else _actualrow = _table.Rows[_currentrow];
-                                         }
-
-                                        if (_actualrow != null)
-                                        {
-                                            if (_actualrow.RowState == DataRowState.Deleted ||
-                                                _actualrow.RowState == DataRowState.Detached) _actualrow = null;
-                                        }
-                                        else
-                                        {
-                                           if (_currentrow >= _table.Rows.Count) _actualrow = null;
-                                        }
-                                      
-                                        if (_actualrow != null)
-                                        {
-                                             foreach (DataColumn _col in _table.Columns)
-                                             {
-                                                 if (!_col.AutoIncrement)
-                                                 {
-                                                     if (table.Columns.Contains(_col.ColumnName)) _actualrow[_col.ColumnName] = _row[_col.ColumnName];
-                                                 }
-                                             }
-                                        }
-                                        else
-                                        {
-                                            object[] _values = new object[_table.Columns.Count];
-                                            foreach (DataColumn _col in _table.Columns)
-                                            {
-                                                if (!_col.AutoIncrement)
-                                                {
-                                                    if (table.Columns.Contains(_col.ColumnName)) _values[_col.Ordinal] = _row[_col.ColumnName];
-                                                }
-                                            }
-                                            AddRow(_values);
-                                        }
-                                     }
-                                   }
-                                }
-
-                            break;
-                        default : break;
+                                    break;
+                                default: break;
+                            }
+                        }
                     }
                 }
             }
