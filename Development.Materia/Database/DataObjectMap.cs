@@ -160,6 +160,17 @@ namespace Development.Materia.Database
 
                             switch (_row.RowState)
                             {
+                                case DataRowState.Added:
+                                      object[] _values = new object[_table.Columns.Count];
+                                      foreach (DataColumn _col in _table.Columns)
+                                      {
+                                          if (!_col.AutoIncrement)
+                                          {       
+                                              if (table.Columns.Contains(_col.ColumnName)) _values[_col.Ordinal] = _row[_col.ColumnName];
+                                          }
+                                       }
+                                       AddRow(_values);
+                                       break;
                                 case DataRowState.Deleted:
                                 case DataRowState.Detached:
                                 case DataRowState.Modified:
