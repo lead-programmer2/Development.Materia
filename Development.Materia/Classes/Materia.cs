@@ -832,6 +832,17 @@ namespace Development.Materia
         public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename, string condition)
         { return new Database.DataObjectMap(connection, tablename, condition); }
 
+        /// <summary>
+        /// Creates a database object mapping session from a database table using the specified connection.
+        /// </summary>
+        /// <param name="connection">Database connection</param>
+        /// <param name="tablename">Database table name.</param>
+        /// <param name="condition">Database filtering condition.</param>
+        /// <param name="fieldnames">Database table field names to include.</param>
+        /// <returns></returns>
+        public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename, string condition, string[] fieldnames)
+        { return new Database.DataObjectMap(connection, tablename, condition, fieldnames); }
+
         #endregion
 
         #region "Decrypt"

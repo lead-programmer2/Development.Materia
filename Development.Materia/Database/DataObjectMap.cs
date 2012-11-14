@@ -23,21 +23,42 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of DataObjectMap.
         /// </summary>
-        /// <param name="dbconnection"></param>
-        /// <param name="tablename"></param>
+        /// <param name="dbconnection">Database connection</param>
+        /// <param name="tablename">Database table name</param>
         public DataObjectMap(IDbConnection dbconnection, string tablename) : this(dbconnection, tablename, "")
         { }
 
         /// <summary>
         /// Creates a new instance of DataObjectMap.
         /// </summary>
-        /// <param name="dbconnection"></param>
-        /// <param name="tablename"></param>
-        /// <param name="condition"></param>
-        public DataObjectMap(IDbConnection dbconnection, string tablename, string condition)
+        /// <param name="dbconnection">Database connection</param>
+        /// <param name="tablename">Database table name</param>
+        /// <param name="condition">Database table filter conditions</param>
+        public DataObjectMap(IDbConnection dbconnection, string tablename, string condition) : this(dbconnection, tablename, condition, new string[] { "" })
+        { }
+
+        /// <summary>
+        /// Creates a new instance of DataObjectMap.
+        /// </summary>
+        /// <param name="dbconnection">Database connection</param>
+        /// <param name="tablename">Database table name</param>
+        /// <param name="condition">Database table filter conditions</param>
+        /// <param name="fieldnames">Database table fields to include.</param>
+        public DataObjectMap(IDbConnection dbconnection, string tablename, string condition, string[] fieldnames)
         {
             _connection = dbconnection; _databasetable = tablename;
-            _filtercondition = condition; Refresh();
+            _filtercondition = condition; 
+              if (!Materia.IsNullOrNothing(fieldnames))
+            {
+                if (fieldnames.Length > 0)
+                {
+                    foreach (string _field in fieldnames)
+                    {
+                        if (!String.IsNullOrEmpty(_field.RLTrim())) _fields += (String.IsNullOrEmpty(_fields.RLTrim()) ? "" : ",\n") + "`" + _field + "`";
+                    }
+                }
+            }
+            Refresh();
         }
 
         #endregion
@@ -65,6 +86,9 @@ namespace Development.Materia.Database
         {
             get { return _databasetable; }
         }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private string _fields = "";
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string _filtercondition = "";
@@ -425,7 +449,10 @@ namespace Development.Materia.Database
 
             if (_connection != null)
             {
-                string _query = "SELECT *\n" +
+                string _fieldname = "*";
+                if (!String.IsNullOrEmpty(_fields.RLTrim())) _fieldname = "\n" + _fields;
+
+                string _query = "SELECT " + _fieldname + "\n" +
                                 "FROM\n" +
                                 "`" + _databasetable + "`";
 
