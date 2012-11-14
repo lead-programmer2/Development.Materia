@@ -64,6 +64,7 @@
     <Compile Include="Classes\Downloader.cs" />
     <Compile Include="Classes\EdiFile.cs" />
     <Compile Include="Classes\Email.cs" />
+    <Compile Include="Database\DataObjectMap.cs" />
     <Compile Include="Database\Dsn.cs" />
     <Compile Include="Database\GenericDataAdapter.cs">
       <SubType>Component</SubType>
