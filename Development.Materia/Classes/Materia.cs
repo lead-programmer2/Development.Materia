@@ -1649,7 +1649,10 @@ namespace Development.Materia
                     List<string> _sheets = new List<string>();
                 
                     foreach (DataRow rw in _table.Rows)
-                    { _sheets.Add(rw["TABLE_NAME"].ToString().Replace("$", "")); }
+                    {
+                        string _worksheetname = rw["TABLE_NAME"].ToString();
+                        if (!_worksheetname.RLTrim().ToLower().StartsWith("_xlnm#")) _sheets.Add(_worksheetname.Replace("$", "").Replace("'", ""));
+                    }
 
                     if (_sheets.Count > 0) _sheetnames = _sheets.ToArray();
                 }

@@ -3101,6 +3101,179 @@
             Gets the hash byte value generated for the given key value.
             </summary>
         </member>
+        <member name="T:Development.Materia.Database.DataObjectMap">
+            <summary>
+            ORM-approached class for database table contents updating.
+            </summary>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String)">
+            <summary>
+            Creates a new instance of DataObjectMap.
+            </summary>
+            <param name="dbconnection">Database connection</param>
+            <param name="tablename">Database table name</param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String)">
+            <summary>
+            Creates a new instance of DataObjectMap.
+            </summary>
+            <param name="dbconnection">Database connection</param>
+            <param name="tablename">Database table name</param>
+            <param name="condition">Database table filter conditions</param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String[])">
+            <summary>
+            Creates a new instance of DataObjectMap.
+            </summary>
+            <param name="dbconnection">Database connection</param>
+            <param name="tablename">Database table name</param>
+            <param name="fieldnames">Database table fields to include.</param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String,System.String[])">
+            <summary>
+            Creates a new instance of DataObjectMap.
+            </summary>
+            <param name="dbconnection">Database connection</param>
+            <param name="tablename">Database table name</param>
+            <param name="condition">Database table filter conditions</param>
+            <param name="fieldnames">Database table fields to include.</param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.AddRow">
+            <summary>
+            Adds a new row into the DataObjectMap's table
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.AddRow(System.Object[])">
+            <summary>
+            Adds a new row into the DataObjectMap's table
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.ApplyUpdatesFromTable(System.Data.DataTable)">
+            <summary>
+            Applies table updates from the specified DataTable object into the current DataObjectMap's table.
+            </summary>
+            <param name="table"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.BeginSave">
+            <summary>
+            Asynchronously saves the current DataObjectMap's table updates into the connected database. Call the EndSave method after the synchornization is finish to get the actual sql execution result.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.DeleteAllRows">
+            <summary>
+            Deletes all table rows from the DataObjectMap.
+            </summary>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRow(System.Int32)">
+            <summary>
+            Deletes the table row at the specified index of the DataObjectMap's table.
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRow(System.String)">
+            <summary>
+            Deletes table rows that pass the specified condition from the DataObjectMap.
+            </summary>
+            <param name="condition"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRows(System.Int32)">
+            <summary>
+            Deletes specific number of rows to the current table of the DataObjectMap.
+            </summary>
+            <param name="rows"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.EndSave(System.IAsyncResult)">
+            <summary>
+            Gets the actual sql execution result from an initialized BeginSave method call.
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.GenerateSqlStatement">
+            <summary>
+            Generates sql statement based on the current DataObjectMap's table value updates.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.GenerateSqlStatement(System.String[])">
+            <summary>
+            Generates sql statement based on the current DataObjectMap's table value updates.
+            </summary>
+            <param name="excludedfields">List of table fields to be excluded from the sql statement generation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Refresh">
+            <summary>
+            Retrieves data from the current connected database based on the current specified database table and filter condition.
+            </summary>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.RefreshAsync">
+            <summary>
+            Asynchronously retrieves data from the current connected database based on the current specified database table and filter condition.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Save">
+            <summary>
+            Saves the current DataObjectMap's table updates into the connected database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Select(System.Int32)">
+            <summary>
+            Gets the row at the specified index of the DataObjectMap's table
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Select(System.String)">
+            <summary>
+            Gets rows that pass the specified filter condition from the DataObjectMap's table.
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.ToString">
+            <summary>
+            Gets the current DataObjectMap's database table name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Dispose">
+            <summary>
+            Dispose off any resources used by the class to free up memory space.
+            </summary>
+        </member>
+        <member name="M:Development.Materia.Database.DataObjectMap.Dispose(System.Boolean)">
+            <summary>
+            Dispose off any resources used by the class to free up memory space.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="P:Development.Materia.Database.DataObjectMap.Connection">
+            <summary>
+            Gets the instantiated DataObjectMap's database connection.
+            </summary>
+        </member>
+        <member name="P:Development.Materia.Database.DataObjectMap.DatabaseTable">
+            <summary>
+            Gets the instantiated DataObjectMap's database table.
+            </summary>
+        </member>
+        <member name="P:Development.Materia.Database.DataObjectMap.FilterCondition">
+            <summary>
+            Gets the instantiated DataObjectMap's database filter condition.
+            </summary>
+        </member>
+        <member name="P:Development.Materia.Database.DataObjectMap.Table">
+            <summary>
+            Gets the current contents of the instantiated DataObjectMap.
+            </summary>
+        </member>
         <member name="T:Development.Materia.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -6717,179 +6890,6 @@
             </summary>
             <param name="syncs">Synchronization objects to run</param>
             <param name="progressbar">Synchronization progress bar</param>
-        </member>
-        <member name="T:Development.Materia.Database.DataObjectMap">
-            <summary>
-            ORM-approached class for database table contents updating.
-            </summary>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String)">
-            <summary>
-            Creates a new instance of DataObjectMap.
-            </summary>
-            <param name="dbconnection">Database connection</param>
-            <param name="tablename">Database table name</param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String)">
-            <summary>
-            Creates a new instance of DataObjectMap.
-            </summary>
-            <param name="dbconnection">Database connection</param>
-            <param name="tablename">Database table name</param>
-            <param name="condition">Database table filter conditions</param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String[])">
-            <summary>
-            Creates a new instance of DataObjectMap.
-            </summary>
-            <param name="dbconnection">Database connection</param>
-            <param name="tablename">Database table name</param>
-            <param name="fieldnames">Database table fields to include.</param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.#ctor(System.Data.IDbConnection,System.String,System.String,System.String[])">
-            <summary>
-            Creates a new instance of DataObjectMap.
-            </summary>
-            <param name="dbconnection">Database connection</param>
-            <param name="tablename">Database table name</param>
-            <param name="condition">Database table filter conditions</param>
-            <param name="fieldnames">Database table fields to include.</param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.AddRow">
-            <summary>
-            Adds a new row into the DataObjectMap's table
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.AddRow(System.Object[])">
-            <summary>
-            Adds a new row into the DataObjectMap's table
-            </summary>
-            <param name="values"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.ApplyUpdatesFromTable(System.Data.DataTable)">
-            <summary>
-            Applies table updates from the specified DataTable object into the current DataObjectMap's table.
-            </summary>
-            <param name="table"></param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.BeginSave">
-            <summary>
-            Asynchronously saves the current DataObjectMap's table updates into the connected database. Call the EndSave method after the synchornization is finish to get the actual sql execution result.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.DeleteAllRows">
-            <summary>
-            Deletes all table rows from the DataObjectMap.
-            </summary>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRow(System.Int32)">
-            <summary>
-            Deletes the table row at the specified index of the DataObjectMap's table.
-            </summary>
-            <param name="index"></param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRow(System.String)">
-            <summary>
-            Deletes table rows that pass the specified condition from the DataObjectMap.
-            </summary>
-            <param name="condition"></param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.DeleteRows(System.Int32)">
-            <summary>
-            Deletes specific number of rows to the current table of the DataObjectMap.
-            </summary>
-            <param name="rows"></param>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.EndSave(System.IAsyncResult)">
-            <summary>
-            Gets the actual sql execution result from an initialized BeginSave method call.
-            </summary>
-            <param name="result"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.GenerateSqlStatement">
-            <summary>
-            Generates sql statement based on the current DataObjectMap's table value updates.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.GenerateSqlStatement(System.String[])">
-            <summary>
-            Generates sql statement based on the current DataObjectMap's table value updates.
-            </summary>
-            <param name="excludedfields">List of table fields to be excluded from the sql statement generation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Refresh">
-            <summary>
-            Retrieves data from the current connected database based on the current specified database table and filter condition.
-            </summary>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.RefreshAsync">
-            <summary>
-            Asynchronously retrieves data from the current connected database based on the current specified database table and filter condition.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Save">
-            <summary>
-            Saves the current DataObjectMap's table updates into the connected database.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Select(System.Int32)">
-            <summary>
-            Gets the row at the specified index of the DataObjectMap's table
-            </summary>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Select(System.String)">
-            <summary>
-            Gets rows that pass the specified filter condition from the DataObjectMap's table.
-            </summary>
-            <param name="condition"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.ToString">
-            <summary>
-            Gets the current DataObjectMap's database table name.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Dispose">
-            <summary>
-            Dispose off any resources used by the class to free up memory space.
-            </summary>
-        </member>
-        <member name="M:Development.Materia.Database.DataObjectMap.Dispose(System.Boolean)">
-            <summary>
-            Dispose off any resources used by the class to free up memory space.
-            </summary>
-            <param name="disposing"></param>
-        </member>
-        <member name="P:Development.Materia.Database.DataObjectMap.Connection">
-            <summary>
-            Gets the instantiated DataObjectMap's database connection.
-            </summary>
-        </member>
-        <member name="P:Development.Materia.Database.DataObjectMap.DatabaseTable">
-            <summary>
-            Gets the instantiated DataObjectMap's database table.
-            </summary>
-        </member>
-        <member name="P:Development.Materia.Database.DataObjectMap.FilterCondition">
-            <summary>
-            Gets the instantiated DataObjectMap's database filter condition.
-            </summary>
-        </member>
-        <member name="P:Development.Materia.Database.DataObjectMap.Table">
-            <summary>
-            Gets the current contents of the instantiated DataObjectMap.
-            </summary>
         </member>
     </members>
 </doc>
