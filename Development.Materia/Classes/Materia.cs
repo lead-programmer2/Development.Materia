@@ -2285,7 +2285,7 @@ namespace Development.Materia
         {
             string _value = (trimmed ? value.Trim() : value);
 
-            if (datatableexpression) _value = _value.Replace("'", "''").Replace("\\", "\\\\").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
+            if (datatableexpression) _value = _value.Replace("'", "''").Replace("[", "[[").Replace("]", "]]").Replace("[[", "[[]").Replace("]]", "[]]").Replace("*", "*]").Replace("*", "[*").Replace("%", "%]").Replace("%", "[%");
             else _value = _value.Replace("'", "''").Replace("\\", "\\\\");
             
             return _value;
