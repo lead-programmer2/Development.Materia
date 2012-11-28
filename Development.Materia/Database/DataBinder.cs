@@ -220,6 +220,66 @@ namespace Development.Materia.Database
         }
 
         /// <summary>
+        /// Occurs upon data gathering routines of the binder before the actual data saving events.
+        /// </summary>
+        [Description("Occurs upon data gathering routines of the binder before the actual data saving events.")]
+        public event EventHandler DataGathering;
+
+        /// <summary>
+        /// Raises the DataGathering event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataGathering(EventArgs e)
+        {
+            if (DataGathering != null) DataGathering(this, e);
+        }
+
+        /// <summary>
+        /// Occurs upon data loading routines of the binder.
+        /// </summary>
+        [Description("Occurs upon data loading routines of the binder.")]
+        public event EventHandler DataLoading;
+
+        /// <summary>
+        /// Raises the DataLoading event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataLoading(EventArgs e)
+        {
+            if (DataLoading != null) DataLoading(this, e);
+        }
+
+        /// <summary>
+        /// Occurs upon data savingroutines of the binder.
+        /// </summary>
+        [Description("Occurs upon data savingroutines of the binder.")]
+        public event EventHandler DataSaving;
+
+        /// <summary>
+        /// Raises the DataSaving event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataSaving(EventArgs e)
+        {
+            if (DataSaving != null) DataSaving(this, e);
+        }
+
+        /// <summary>
+        /// Occurs upon data validation routines before the actual data saving events occur.
+        /// </summary>
+        [Description("Occurs upon data validation routines before the actual data saving events occur.")]
+        public event EventHandler DataValidating;
+
+        /// <summary>
+        /// Raises the DataValidating event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataValidating(EventArgs e)
+        {
+            if (DataValidating != null) DataValidating(this, e);
+        }
+
+        /// <summary>
         /// Occurs when the component's hosted form invokes its Load event.
         /// </summary>
         [Description("Occurs when the component's hosted form invokes its Load event.")]
@@ -1156,6 +1216,7 @@ namespace Development.Materia.Database
             while (!_result.IsCompleted &&
                    !CancelRunningProcess)
             {
+                OnDataLoading(new EventArgs());
                 Thread.Sleep(1); Application.DoEvents();
             }
 
@@ -1182,6 +1243,7 @@ namespace Development.Materia.Database
                         while (!_resultdetails.IsCompleted &&
                                !CancelRunningProcess)
                         {
+                            OnDataLoading(new EventArgs());
                             Thread.Sleep(1); Application.DoEvents();
                         }
 
@@ -1283,6 +1345,7 @@ namespace Development.Materia.Database
                 while (!_valuesetresult.IsCompleted &&
                        !CancelRunningProcess)
                 {
+                    OnDataGathering(new EventArgs());
                     Thread.Sleep(1); Application.DoEvents();
                 }
 
@@ -1308,6 +1371,7 @@ namespace Development.Materia.Database
                 while (!_fksetresult.IsCompleted &&
                        !CancelRunningProcess)
                 {
+                    OnDataGathering(new EventArgs());
                     Thread.Sleep(1); Application.DoEvents();
                 }
 
@@ -1333,6 +1397,7 @@ namespace Development.Materia.Database
                 while (!_sqlgetresult.IsCompleted &&
                        !CancelRunningProcess)
                 {
+                    OnDataGathering(new EventArgs());
                     Thread.Sleep(1); Application.DoEvents();
                 }
 
@@ -1370,6 +1435,7 @@ namespace Development.Materia.Database
                     while (!_sqlgetfinalresult.IsCompleted &&
                            !CancelRunningProcess)
                     {
+                        OnDataSaving(new EventArgs());
                         Thread.Sleep(1); Application.DoEvents();
                     }
 
@@ -1412,6 +1478,7 @@ namespace Development.Materia.Database
                     while (!_saveresult.IsCompleted &&
                            !CancelRunningProcess)
                     {
+                        OnDataSaving(new EventArgs());
                         Thread.Sleep(1); Application.DoEvents();
                     }
 
@@ -1450,7 +1517,10 @@ namespace Development.Materia.Database
                             IAsyncResult _updateresult = _updatedelegate.BeginInvoke(null, _updatedelegate);
 
                             while (!_updateresult.IsCompleted)
-                            { Thread.Sleep(1); Application.DoEvents(); }
+                            {
+                                OnDataLoading(new EventArgs());
+                                Thread.Sleep(1); Application.DoEvents(); 
+                            }
 
                             _updatedelegate.EndInvoke(_updateresult);
                         }
@@ -1690,7 +1760,7 @@ namespace Development.Materia.Database
                         OnBeforeControlValidation(_args);
                         _args = null; Materia.RefreshAndManageCurrentProcess();
                         _args = ValidateControls(_control);
-
+                        OnDataValidating(new EventArgs());
                         if (_args != null)
                         {
                             OnAfterControlValidation(_args);
@@ -3671,7 +3741,7 @@ namespace Development.Materia.Database
                         {
                             if (_binder.BindedControls.Contains(_column.ColumnName))
                             {
-                                object _control = _binder.BindedControls[_column.ColumnName].Control;
+                                Control _control = (Control) _binder.BindedControls[_column.ColumnName].Control;
                                 object _value = _table.Rows[0][_column.ColumnName];
 
                                 if (_column.DataType.Name == typeof(string).Name ||
@@ -3806,7 +3876,20 @@ namespace Development.Materia.Database
                                         }
                                         else
                                         {
-                                            if (Materia.PropertyExists(_control, "Value")) Materia.SetPropertyValue(_control, "Value", _value);
+                                            if (Materia.PropertyExists(_control, "Value"))
+                                            {
+                                                Materia.SetPropertyValue(_control, "Value", _value);
+                                                object _currentvalue = Materia.GetPropertyValue(_control, "Value");
+                                                if (!_value.Equals(_currentvalue))
+                                                {
+                                                    if (Materia.PropertyExists(_control, "Text"))
+                                                    {
+                                                        string _text = "";
+                                                        if (VisualBasic.IsNumeric(_value)) _text = _value.ToString();
+                                                        Materia.SetPropertyValue(_control, "Text", _text);
+                                                    }
+                                                }
+                                            }
                                             else
                                             {
                                                 if (Materia.PropertyExists(_control, "Checked"))
@@ -3829,7 +3912,20 @@ namespace Development.Materia.Database
                                     }
                                     else
                                     {
-                                        if (Materia.PropertyExists(_control, "Value")) Materia.SetPropertyValue(_control, "Value", _value);
+                                        if (Materia.PropertyExists(_control, "Value"))
+                                        {
+                                            Materia.SetPropertyValue(_control, "Value", _value);
+                                            object _currentvalue = Materia.GetPropertyValue(_control, "Value");
+                                            if (!_value.Equals(_currentvalue))
+                                            {
+                                                if (Materia.PropertyExists(_control, "Text"))
+                                                {
+                                                    string _text = "";
+                                                    if (VisualBasic.IsNumeric(_value)) _text = _value.ToString();
+                                                    Materia.SetPropertyValue(_control, "Text", _text);
+                                                }
+                                            }
+                                        }
                                         else
                                         {
                                             if (Materia.PropertyExists(_control, "Checked"))

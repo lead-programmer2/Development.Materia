@@ -2266,6 +2266,30 @@
             </summary>
             <param name="e"></param>
         </member>
+        <member name="M:Development.Materia.Database.DataBinder.OnDataGathering(System.EventArgs)">
+            <summary>
+            Raises the DataGathering event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataBinder.OnDataLoading(System.EventArgs)">
+            <summary>
+            Raises the DataLoading event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataBinder.OnDataSaving(System.EventArgs)">
+            <summary>
+            Raises the DataSaving event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Development.Materia.Database.DataBinder.OnDataValidating(System.EventArgs)">
+            <summary>
+            Raises the DataValidating event.
+            </summary>
+            <param name="e"></param>
+        </member>
         <member name="M:Development.Materia.Database.DataBinder.OnParentFormLoad(System.EventArgs)">
             <summary>
             Raises the ParentFormLoad event.
@@ -2362,6 +2386,26 @@
         <member name="E:Development.Materia.Database.DataBinder.BeforeValidation">
             <summary>
             Occurs before entry validation routines to all binded controls takes place.
+            </summary>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinder.DataGathering">
+            <summary>
+            Occurs upon data gathering routines of the binder before the actual data saving events.
+            </summary>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinder.DataLoading">
+            <summary>
+            Occurs upon data loading routines of the binder.
+            </summary>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinder.DataSaving">
+            <summary>
+            Occurs upon data savingroutines of the binder.
+            </summary>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinder.DataValidating">
+            <summary>
+            Occurs upon data validation routines before the actual data saving events occur.
             </summary>
         </member>
         <member name="E:Development.Materia.Database.DataBinder.ParentFormLoad">

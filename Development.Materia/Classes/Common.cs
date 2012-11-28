@@ -1557,57 +1557,72 @@ namespace Development.Materia
                         {
                             if (_property.PropertyType.Name == typeof(string).Name ||
                                 _property.PropertyType.Name == typeof(String).Name) _curvalue = value.ToString();
+                            else if (_property.PropertyType.Name == typeof(Int16).Name)
+                            {
+                                try
+                                { _curvalue = (Int16)value; }
+                                catch  { }
+                            }
                             else if (_property.PropertyType.Name == typeof(byte).Name ||
-                                     _property.PropertyType.Name == typeof(Byte).Name ||
-                                     _property.PropertyType.Name == typeof(Int16).Name)
+                                     _property.PropertyType.Name == typeof(Byte).Name)
                             {
                                 try
                                 { _curvalue = (byte)value; }
-                                catch  { }
+                                catch (Exception ex) { }
                             }
                             else if (_property.PropertyType.Name == typeof(bool).Name ||
                                      _property.PropertyType.Name == typeof(Boolean).Name)
                             {
                                 try
                                 { _curvalue = (bool)value; }
-                                catch  { }
+                                catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(DateTime).Name)
                             {
                                 try
                                 { _curvalue = (DateTime)value; }
-                                catch  { }
+                                catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(decimal).Name ||
                                      _property.PropertyType.Name == typeof(Decimal).Name)
                             {
                                 try
                                 { _curvalue = (decimal)value; }
-                                catch  { }
+                                catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(double).Name ||
                                      _property.PropertyType.Name == typeof(Double).Name)
                             {
                                 try
                                 { _curvalue = (double)value; }
-                                catch  { }
+                                catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(float).Name ||
                                      _property.PropertyType.Name == typeof(Single).Name)
                             {
                                 try
                                 { _curvalue = (float)value; }
-                                catch  { }
+                                catch { }
                             }
-                            else if (_property.PropertyType.Name == typeof(int).Name ||
-                                     _property.PropertyType.Name == typeof(Int32).Name)
+                            else if (_property.PropertyType.Name == typeof(Int32).Name)
+                            {
+                                try
+                                { _curvalue = (Int32)value; }
+                                catch { }
+                            }
+                            else if (_property.PropertyType.Name == typeof(int).Name)
                             {
                                 try
                                 { _curvalue = (int)value; }
-                                catch  { }
+                                catch { }
                             }
-                            else if (_property.PropertyType.Name == typeof(long).Name ||
-                                     _property.PropertyType.Name == typeof(Int64).Name)
+                            else if (_property.PropertyType.Name == typeof(Int64).Name)
+                            {
+                                try
+                                { _curvalue = (Int64)value; }
+                                catch { }
+                            }
+                            else if (_property.PropertyType.Name == typeof(long).Name)
                             {
                                 try
                                 { _curvalue = (long)value; }
@@ -1617,7 +1632,7 @@ namespace Development.Materia
                             {
                                 try
                                 { _curvalue = (short)value; }
-                                catch  { }
+                                catch { }
                             }
                         }
 
@@ -1625,13 +1640,13 @@ namespace Development.Materia
                         {
                             try
                             { _property.SetValue(owner, _curvalue, null); }
-                            catch  { }
+                            catch (Exception ex) { Debug.Print(ex.ToString()); }
                         }
                         else
                         {
                             try
                             { _property.SetValue(owner, _curvalue, parameters); }
-                            catch  { }
+                            catch (Exception ex) { Debug.Print(ex.ToString()); }
                         }
                     }
                 }
