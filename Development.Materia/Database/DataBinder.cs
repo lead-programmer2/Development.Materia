@@ -250,6 +250,21 @@ namespace Development.Materia.Database
         }
 
         /// <summary>
+        /// Occurs before the actual data saving execution.
+        /// </summary>
+        [Description("Occurs before the actual data saving execution.")]
+        public event DataBinderSavingEventHandler DataSaveExecuting;
+
+        /// <summary>
+        /// Raises the DataSaveExecuting event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataSaveExecuting(DataBinderSavingEventArgs e)
+        {
+            if (DataSaveExecuting != null) DataSaveExecuting(this, e);
+        }
+
+        /// <summary>
         /// Occurs upon data savingroutines of the binder.
         /// </summary>
         [Description("Occurs upon data savingroutines of the binder.")]
@@ -630,6 +645,9 @@ namespace Development.Materia.Database
 
             return _extended;
         }
+
+        private void DataBinding_DataLoading(object sender, EventArgs e)
+        { OnDataLoading(e); }
 
         private void EnableBindedFields()
         { EnableBindedFields(true); }
@@ -1238,6 +1256,7 @@ namespace Development.Materia.Database
                 {
                     foreach (DataBinding db in binding.Details)
                     {
+                        db.DataLoading += new EventHandler(DataBinding_DataLoading);
                         IAsyncResult _resultdetails = db.BeginLoad();
 
                         while (!_resultdetails.IsCompleted &&
@@ -1435,7 +1454,7 @@ namespace Development.Materia.Database
                     while (!_sqlgetfinalresult.IsCompleted &&
                            !CancelRunningProcess)
                     {
-                        OnDataSaving(new EventArgs());
+                        OnDataGathering(new EventArgs());
                         Thread.Sleep(1); Application.DoEvents();
                     }
 
@@ -1473,6 +1492,18 @@ namespace Development.Materia.Database
                         Materia.RefreshAndManageCurrentProcess(); _saving = false; return;
                     }
 
+                    _saveargs.CommandText = _sql;
+                    OnDataSaveExecuting(_saveargs);
+
+                    if (_saveargs.Cancel)
+                    {
+                        try { Materia.SetPropertyValue(_button, "Enabled", _enabled); }
+                        catch { }
+
+                        Materia.RefreshAndManageCurrentProcess(); _saving = false; return;
+                    }
+
+                    _sql = _saveargs.CommandText;
                     IAsyncResult _saveresult = Que.BeginExecution(Connection, _sql, CommandExecution.ExecuteNonQuery);
 
                     while (!_saveresult.IsCompleted &&
@@ -3318,11 +3349,12 @@ namespace Development.Materia.Database
         private string _commandtext = "";
 
         /// <summary>
-        /// Gets the current sql statement to be or was executed.
+        /// Gets or sets the current sql statement to be or was executed.
         /// </summary>
         public string CommandText
         {
             get { return _commandtext; }
+            set { _commandtext = value; }
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -3522,6 +3554,21 @@ namespace Development.Materia.Database
         }
 
         #endregion
+
+        /// <summary>
+        /// Occurs upon the actual run of the binding's data loading routines.
+        /// </summary>
+        [Description("Occurs upon the actual run of the binding's data loading routines.")]
+        public event EventHandler DataLoading;
+
+        /// <summary>
+        /// Raises the DataLoading event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnDataLoading(EventArgs e)
+        {
+            if (DataLoading != null) DataLoading(this, e);
+        }
 
         #region "properties"
 
@@ -4051,6 +4098,7 @@ namespace Development.Materia.Database
                     while (!_result.IsCompleted &&
                            !_binder.CancelRunningProcess)
                     {
+                        OnDataLoading(new EventArgs());
                         Thread.Sleep(1); Application.DoEvents();
                     }
 

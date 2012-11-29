@@ -2278,6 +2278,12 @@
             </summary>
             <param name="e"></param>
         </member>
+        <member name="M:Development.Materia.Database.DataBinder.OnDataSaveExecuting(Development.Materia.Database.DataBinderSavingEventArgs)">
+            <summary>
+            Raises the DataSaveExecuting event.
+            </summary>
+            <param name="e"></param>
+        </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataSaving(System.EventArgs)">
             <summary>
             Raises the DataSaving event.
@@ -2396,6 +2402,11 @@
         <member name="E:Development.Materia.Database.DataBinder.DataLoading">
             <summary>
             Occurs upon data loading routines of the binder.
+            </summary>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinder.DataSaveExecuting">
+            <summary>
+            Occurs before the actual data saving execution.
             </summary>
         </member>
         <member name="E:Development.Materia.Database.DataBinder.DataSaving">
@@ -2671,7 +2682,7 @@
         </member>
         <member name="P:Development.Materia.Database.DataBinderSavingEventArgs.CommandText">
             <summary>
-            Gets the current sql statement to be or was executed.
+            Gets or sets the current sql statement to be or was executed.
             </summary>
         </member>
         <member name="P:Development.Materia.Database.DataBinderSavingEventArgs.Error">
@@ -2787,6 +2798,12 @@
             <param name="viewcommandtext">Database command text used to provide customized data binded views specially if records are binded into a grid</param>
             <param name="header">Header database binding information</param>
         </member>
+        <member name="M:Development.Materia.Database.DataBinding.OnDataLoading(System.EventArgs)">
+            <summary>
+            Raises the DataLoading event.
+            </summary>
+            <param name="e"></param>
+        </member>
         <member name="M:Development.Materia.Database.DataBinding.AcceptChanges">
             <summary>
             Accepts all relevant changes and updates into the binded values ans have it finalized.
@@ -2865,6 +2882,11 @@
             Dispose off any resources used by the class to free up memory space.
             </summary>
             <param name="disposing"></param>
+        </member>
+        <member name="E:Development.Materia.Database.DataBinding.DataLoading">
+            <summary>
+            Occurs upon the actual run of the binding's data loading routines.
+            </summary>
         </member>
         <member name="P:Development.Materia.Database.DataBinding.AllowNoValuesInGrid">
             <summary>
