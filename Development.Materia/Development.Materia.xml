@@ -2322,6 +2322,11 @@
             <param name="control"></param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Database.DataBinder.MarkAsUpdated">
+            <summary>
+            Sets the binder to mark itself and the current hosted form as modified.
+            </summary>
+        </member>
         <member name="M:Development.Materia.Database.DataBinder.RaiseSaveButtonClick">
             <summary>
             Raises the event handler attached into the currently assigned object in the SaveButton property.

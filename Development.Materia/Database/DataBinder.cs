@@ -677,25 +677,7 @@ namespace Development.Materia.Database
                 object _enabled = Materia.GetPropertyValue(sender, "Enabled");
                 if (!VisualBasic.CBool(_enabled)) return;
             }
-            if (ContainerControl == null) return;
-            Form _currentform = null;
-
-            try { _currentform = (Form)ContainerControl; }
-            catch { _currentform = null; }
-
-            if (_currentform != null)
-            {
-                if (_sessionstarted)
-                {
-                    for (int i = 0; i <= (BindedControls.Count - 1); i++ )
-                    {
-                        Control _control = (Control) BindedControls[i].Control;
-                        _errorprovider.SetError(_control, "");
-                    }
-
-                    _currentform.MarkAsEdited(); _haveupdates = true;
-                }
-            }
+            MarkAsUpdated();
         }
 
         /// <summary>
@@ -957,6 +939,35 @@ namespace Development.Materia.Database
                 return condition;
             }
             else return true;
+        }
+
+        /// <summary>
+        /// Sets the binder to mark itself and the current hosted form as modified.
+        /// </summary>
+        public void MarkAsUpdated()
+        {
+            if (_parentformisshown)
+            {
+                if (ContainerControl == null) return;
+                Form _currentform = null;
+
+                try { _currentform = (Form)ContainerControl; }
+                catch { _currentform = null; }
+
+                if (_currentform != null)
+                {
+                    if (_sessionstarted)
+                    {
+                        for (int i = 0; i <= (BindedControls.Count - 1); i++)
+                        {
+                            Control _control = (Control)BindedControls[i].Control;
+                            _errorprovider.SetError(_control, "");
+                        }
+
+                        _currentform.MarkAsEdited(); _haveupdates = true;
+                    }
+                }
+            }
         }
 
         private void ParentForm_Load(object sender, EventArgs e)
