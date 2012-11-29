@@ -1568,7 +1568,7 @@ namespace Development.Materia
                             {
                                 try
                                 { _curvalue = (byte)value; }
-                                catch (Exception ex) { }
+                                catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(bool).Name ||
                                      _property.PropertyType.Name == typeof(Boolean).Name)

@@ -1256,8 +1256,7 @@ namespace Development.Materia.Database
                 {
                     foreach (DataBinding db in binding.Details)
                     {
-                        db.DataLoading += new EventHandler(DataBinding_DataLoading);
-                        IAsyncResult _resultdetails = db.BeginLoad();
+                       IAsyncResult _resultdetails = db.BeginLoad();
 
                         while (!_resultdetails.IsCompleted &&
                                !CancelRunningProcess)
@@ -3555,21 +3554,6 @@ namespace Development.Materia.Database
 
         #endregion
 
-        /// <summary>
-        /// Occurs upon the actual run of the binding's data loading routines.
-        /// </summary>
-        [Description("Occurs upon the actual run of the binding's data loading routines.")]
-        public event EventHandler DataLoading;
-
-        /// <summary>
-        /// Raises the DataLoading event.
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnDataLoading(EventArgs e)
-        {
-            if (DataLoading != null) DataLoading(this, e);
-        }
-
         #region "properties"
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -4098,7 +4082,7 @@ namespace Development.Materia.Database
                     while (!_result.IsCompleted &&
                            !_binder.CancelRunningProcess)
                     {
-                        OnDataLoading(new EventArgs());
+                        Materia.RaiseEvent(_binder, "DataLoading", new EventArgs());
                         Thread.Sleep(1); Application.DoEvents();
                     }
 

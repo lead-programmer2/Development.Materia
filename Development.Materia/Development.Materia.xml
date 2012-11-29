@@ -2798,12 +2798,6 @@
             <param name="viewcommandtext">Database command text used to provide customized data binded views specially if records are binded into a grid</param>
             <param name="header">Header database binding information</param>
         </member>
-        <member name="M:Development.Materia.Database.DataBinding.OnDataLoading(System.EventArgs)">
-            <summary>
-            Raises the DataLoading event.
-            </summary>
-            <param name="e"></param>
-        </member>
         <member name="M:Development.Materia.Database.DataBinding.AcceptChanges">
             <summary>
             Accepts all relevant changes and updates into the binded values ans have it finalized.
@@ -2882,11 +2876,6 @@
             Dispose off any resources used by the class to free up memory space.
             </summary>
             <param name="disposing"></param>
-        </member>
-        <member name="E:Development.Materia.Database.DataBinding.DataLoading">
-            <summary>
-            Occurs upon the actual run of the binding's data loading routines.
-            </summary>
         </member>
         <member name="P:Development.Materia.Database.DataBinding.AllowNoValuesInGrid">
             <summary>
