@@ -1245,6 +1245,8 @@ namespace Development.Materia.Database
 
             CancelRunningProcess = false; EnableBindedFields(false); RedrawGrids(false);
             DataBinderLoadingEventArgs _args = ReloadBinding(Binding);
+            if (_args == null) return;
+
             if (!_args.Cancel)
             {
                 RedrawGrids(); EnableBindedFields(); OnAfterDataLoad(new EventArgs());
@@ -1275,6 +1277,8 @@ namespace Development.Materia.Database
             }
 
             DataBinderLoadingEventArgs _args = binding.EndLoad(_result);
+            if (_args == null) return null;
+
             if (!_args.Cancel)
             {
                 if (binding.Details.Count > 0)
