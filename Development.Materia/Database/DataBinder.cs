@@ -814,10 +814,17 @@ namespace Development.Materia.Database
                                 catch { }
                             }
 
-                            if (Materia.EventExists(parent, "TextChanged"))
+                            object _datasource = null;
+
+                            if (Materia.PropertyExists(parent, "DataSource")) _datasource = Materia.GetPropertyValue(parent, "DataSource");
+
+                            if (_datasource == null)
                             {
-                                try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
-                                catch { }
+                                if (Materia.EventExists(parent, "TextChanged"))
+                                {
+                                    try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
+                                    catch { }
+                                }
                             }
                         }
                         else
@@ -859,10 +866,17 @@ namespace Development.Materia.Database
                                 catch { }
                             }
 
-                            if (Materia.EventExists(parent, "TextChanged"))
+                            object _datasource = null;
+
+                            if (Materia.PropertyExists(parent, "DataSource")) _datasource = Materia.GetPropertyValue(parent, "DataSource");
+
+                            if (_datasource == null)
                             {
-                                try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
-                                catch { }
+                                if (Materia.EventExists(parent, "TextChanged"))
+                                {
+                                    try { Materia.AttachHandler(parent, "TextChanged", new EventHandler(Editor_ValueChanged)); }
+                                    catch { }
+                                }
                             }
                         }
                         else
@@ -4076,6 +4090,7 @@ namespace Development.Materia.Database
 
                 if (!_args.Cancel)
                 {
+                    Control.CheckForIllegalCrossThreadCalls = false;
                     Action _binddelegate = new Action(Bind);
                     IAsyncResult _result = _binddelegate.BeginInvoke(null, _binddelegate);
 
