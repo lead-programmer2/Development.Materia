@@ -2115,6 +2115,125 @@ namespace Development.Materia
             return _value.Trim();
         }
 
+        #region "ToSqlDDL"
+
+        /// <summary>
+        /// Creates SQL DDL from the specified DataTable schema.
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static string ToSqlDDL(this DataTable table)
+        {
+            string _ddl = "";
+
+            if (table != null)
+            {
+                string _tablename = table.TableName;
+                if (String.IsNullOrEmpty(_tablename.RLTrim())) _tablename = "table01";
+
+                _ddl += "CREATE TABLE `" + _tablename + "`\n(";
+                string _datatypes = "";
+
+                string _primarykey = ""; bool _autoincrement = false;
+                long _autoincrementseed = 0;
+
+                foreach (DataColumn _column in table.Columns)
+                {
+                    string _datatype = "";
+                    int _datalen = 0;
+
+                    if (_column.Unique)
+                    {
+                        _primarykey = _column.ColumnName; 
+                        _autoincrement = _column.AutoIncrement;
+                        if (_column.AutoIncrement) _autoincrementseed = _column.AutoIncrementSeed;
+                    }
+
+                    if (_column.DataType.Name == typeof(string).Name ||
+                        _column.DataType.Name == typeof(String).Name)
+                    {
+                        _datatype = "varchar";
+                        _datalen = _column.MaxLength;
+                        if (_datalen <= 0) _datalen = 255;
+                        _datatype += "(" + _datalen + ")";
+                    }
+                    else if (_column.DataType.Name == typeof(DateTime).Name) _datatype = "datetime";
+                    else if (_column.DataType.Name == typeof(bool).Name ||
+                             _column.DataType.Name == typeof(Boolean).Name ||
+                             _column.DataType.Name == typeof(sbyte).Name ||
+                             _column.DataType.Name == typeof(SByte).Name ||
+                             _column.DataType.Name == typeof(byte).Name ||
+                             _column.DataType.Name == typeof(Byte).Name) 
+                    {
+                        _datatype = "tinyint(5)";
+                        if (_autoincrement) _datatype += "auto_increment";
+                    }
+                    else if (_column.DataType.Name == typeof(uint).Name ||
+                             _column.DataType.Name == typeof(UInt16).Name ||
+                             _column.DataType.Name == typeof(UInt32).Name ||
+                             _column.DataType.Name == typeof(int).Name ||
+                             _column.DataType.Name == typeof(Int16).Name ||
+                             _column.DataType.Name == typeof(Int32).Name ||
+                             _column.DataType.Name == typeof(short).Name) 
+                    {
+                        _datatype = "int(10)";
+                        if (_autoincrement) _datatype += "auto_increment";
+                    }
+                    else if (_column.DataType.Name == typeof(UInt64).Name ||
+                             _column.DataType.Name == typeof(long).Name ||
+                             _column.DataType.Name == typeof(Int64).Name) 
+                    {
+                        _datatype = "bigint(10)";
+                        if (_autoincrement) _datatype += "auto_increment";
+                    }
+                    else if (_column.DataType.Name == typeof(decimal).Name ||
+                             _column.DataType.Name == typeof(Decimal).Name) _datatype = "decimal(20, 2)";
+                    else if (_column.DataType.Name == typeof(Single).Name ||
+                             _column.DataType.Name == typeof(double).Name ||
+                             _column.DataType.Name == typeof(Double).Name ||
+                             _column.DataType.Name == typeof(float).Name) _datatype = "double(20, 4)";
+                    else _datatype = "longblob";
+
+                    _datatypes += (!String.IsNullOrEmpty(_datatypes.RLTrim()) ? ",\n" : "") + "`" + _column.ColumnName + "` " + _datatype;                   
+                }
+
+                if (!String.IsNullOrEmpty(_primarykey.RLTrim())) _datatypes += ",\nPRIMARY KEY(`" + _primarykey + "`)";
+                _ddl += _datatypes + "\n)ENGINE=InnoDB";
+                if (_autoincrementseed > 1) _ddl += " AUTO_INCREMENT=" + (_autoincrementseed + 1).ToString();
+                _ddl += " DEFAULT CHARSET=latin1;";
+            }
+
+            return _ddl;
+        }
+
+        /// <summary>
+        /// Creates SQL DDL from the specified DataSet schema.
+        /// </summary>
+        /// <param name="dataset"></param>
+        /// <returns></returns>
+        public static string ToSqlDDL(this DataSet dataset)
+        {
+            string _ddl = "";
+
+            if (dataset != null)
+            {
+                if (dataset.Tables.Count > 0)
+                {
+                    foreach (DataTable table in dataset.Tables)
+                    {
+                        string _tableddl = table.ToSqlDDL();
+                        if (!String.IsNullOrEmpty(_tableddl.RLTrim()) &&
+                            !String.IsNullOrEmpty(_ddl.RLTrim())) _ddl += "\n";
+                        _ddl += _tableddl;
+                    }
+                }
+            }
+
+            return _ddl;
+        }
+
+        #endregion
+
         #region "ToSqlValidString"
 
         /// <summary>

@@ -1235,6 +1235,20 @@
             <param name="value">String value to be transformed</param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Materia.ToSqlDDL(System.Data.DataTable)">
+            <summary>
+            Creates SQL DDL from the specified DataTable schema.
+            </summary>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Materia.ToSqlDDL(System.Data.DataSet)">
+            <summary>
+            Creates SQL DDL from the specified DataSet schema.
+            </summary>
+            <param name="dataset"></param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.ToSqlValidString(System.Byte)">
             <summary>
             Converts numeric value at floating point to its SQL qualified string representation.
