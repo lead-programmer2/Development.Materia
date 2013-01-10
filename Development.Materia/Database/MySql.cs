@@ -393,6 +393,80 @@ namespace Development.Materia.Database
         }
 
         /// <summary>
+        /// Returns a DataSet composed of the specified database's table schema and contents using the supplied connection string.
+        /// </summary>
+        /// <param name="connectionstring"></param>
+        /// <returns></returns>
+        public static DataSet GetDataSet(string connectionstring)
+        {
+            IDbConnection _connection = Database.CreateConnection(connectionstring);
+            DataSet _dataset = null;
+
+            if (_connection != null)
+            {
+                _dataset = GetDataSet(_connection);
+
+                if (_connection.State == ConnectionState.Open)
+                {
+                    try { _connection.Close(); }
+                    catch { }
+                }
+
+                _connection.Dispose(); _connection = null;
+                Materia.RefreshAndManageCurrentProcess();
+            }
+
+            return _dataset;
+        }
+
+        /// <summary>
+        /// Returns a DataSet composed of the specified database's table schema and contents.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static DataSet GetDataSet(IDbConnection connection)
+        {
+            DataSet _dataset = null;
+
+            if (connection != null)
+            {
+                _dataset = new DataSet();
+                _dataset.DataSetName = connection.ConnectionString.ConnectionStringValue(ConnectionStringSection.Database);
+
+                string _query = "SELECT\n" +
+                                "`tables`.TABLE_NAME AS `Table`\n" +
+                                "FROM\n" +
+                                "information_schema.`TABLES` AS `tables`\n" +
+                                "WHERE\n" +
+                                "(`tables`.TABLE_SCHEMA = DATABASE()) AND\n" +
+                                "(`tables`.TABLE_COMMENT NOT LIKE 'VIEW')\n" +
+                                "ORDER BY\n" +
+                                "`Table`";
+
+                DataTable _tables = null;
+                _tables = _tables.LoadData(connection, _query);
+
+                if (_tables != null)
+                {
+                    if (_tables.Rows.Count > 0)
+                    {
+                        for (int i = 0; i <= (_tables.Rows.Count - 1); i++)
+                        {
+                            DataTable _table = null;
+                            _table.LoadData(connection, "SELECT * FROM `" + _tables.Rows[i]["Table"].ToString() + "`;");
+                            if (_table != null) _dataset.Tables.Add(_table);
+                        }
+                    }
+
+                    _tables.Dispose(); _tables = null;
+                    Materia.RefreshAndManageCurrentProcess();
+                }
+            }
+
+            return _dataset;
+        }
+
+        /// <summary>
         /// Returns the MySql dump parameter representation of the specified MySqlDumpParameters enumeration.
         /// </summary>
         /// <param name="parameter"></param>

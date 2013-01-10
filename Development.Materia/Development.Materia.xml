@@ -4526,6 +4526,20 @@
             <param name="parameters">Additional MySql parameters</param>
             <returns></returns>
         </member>
+        <member name="M:Development.Materia.Database.MySql.GetDataSet(System.String)">
+            <summary>
+            Returns a DataSet composed of the specified database's table schema and contents using the supplied connection string.
+            </summary>
+            <param name="connectionstring"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Development.Materia.Database.MySql.GetDataSet(System.Data.IDbConnection)">
+            <summary>
+            Returns a DataSet composed of the specified database's table schema and contents.
+            </summary>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Database.MySql.GetParameterValue(Development.Materia.MySqlDumpParameters)">
             <summary>
             Returns the MySql dump parameter representation of the specified MySqlDumpParameters enumeration.
