@@ -453,7 +453,7 @@ namespace Development.Materia.Database
                         for (int i = 0; i <= (_tables.Rows.Count - 1); i++)
                         {
                             DataTable _table = null;
-                            _table.LoadData(connection, "SELECT * FROM `" + _tables.Rows[i]["Table"].ToString() + "`;");
+                            _table =  _table.LoadData(connection, "SELECT * FROM `" + _tables.Rows[i]["Table"].ToString() + "`;");
                             if (_table != null) _dataset.Tables.Add(_table);
                         }
                     }
