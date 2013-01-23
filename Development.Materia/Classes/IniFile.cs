@@ -85,7 +85,7 @@ namespace Development.Materia
         /// <param name="filename">Ini file path</param>
         /// <param name="section">Section in the ini file</param>
         /// <param name="key">Key to get the value from</param>
-        /// <returns></returns>
+        /// <returns>String value assigned in the INI file's key section.</returns>
         public static string GetKeyValue(string filename, string section, string key)
         {
             string _value = "";
@@ -187,11 +187,11 @@ namespace Development.Materia
         /// <summary>
         /// Calls the IniFile class' SetValue function to assign a value in the specified key under the specified section of the specified ini file.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="filename">Ini file's path.</param>
+        /// <param name="section">Ini file section</param>
+        /// <param name="key">Ini file section key</param>
+        /// <param name="value">Key value to assign</param>
+        /// <returns>True if value assignment has been successful otherwise false.</returns>
         public static bool SetKeyValue(string filename, string section, string key, string value)
         {
             bool _set = false;
@@ -209,7 +209,7 @@ namespace Development.Materia
         /// <param name="section">Ini file section</param>
         /// <param name="key">Ini file section key</param>
         /// <param name="value">Key value to assign</param>
-        /// <returns></returns>
+        /// <returns>True if value assignment has been successful otherwise false.</returns>
         public bool SetValue(string section, string key, string value)
         {
             bool _set = false;

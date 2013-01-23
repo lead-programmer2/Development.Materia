@@ -94,11 +94,11 @@ namespace Development.Materia.Cryptography
         #region "static methods"
 
         /// <summary>
-        /// Returns decrypted string value deciphered using the supplied encryption key pattern.
+        /// Gets the decrypted string value deciphered using the supplied encryption key pattern.
         /// </summary>
         /// <param name="value">Value to decrypt</param>
         /// <param name="key">Encryption key pattern string</param>
-        /// <returns></returns>
+        /// <returns>Returns a more readable string value of the specified encrypted text using the specified key pattern.</returns>
         public static string Decrypt(string value, string key)
         {
             return Decrypt(value, key, false);
@@ -110,7 +110,7 @@ namespace Development.Materia.Cryptography
         /// <param name="value">Value to decrypt</param>
         /// <param name="key">Encryption key pattern string</param>
         /// <param name="usesimpledecryption">Use simple decryption or not</param>
-        /// <returns></returns>
+        /// <returns>Returns a more readable string value of the specified encrypted text using the specified key pattern.</returns>
         public static string Decrypt(string value, string key, bool usesimpledecryption)
         {
             if (usesimpledecryption) return SimpleDecrypt(value, key);
@@ -122,7 +122,7 @@ namespace Development.Materia.Cryptography
         /// </summary>
         /// <param name="value">Value to encrypt</param>
         /// <param name="key">Encryption key pattern string</param>
-        /// <returns></returns>
+        /// <returns>Returns a non-human-readable text derived from the specified string value and key pattern.</returns>
         public static string Encrypt(string value, string key)
         {
             return Encrypt(value, key, false);
@@ -134,7 +134,7 @@ namespace Development.Materia.Cryptography
         /// <param name="value">Value to encrypt</param>
         /// <param name="key">Encryption key pattern string</param>
         /// <param name="usesimpleencryption">Use simple encryption or not</param>
-        /// <returns></returns>
+        /// <returns>Returns a non-human-readable text derived from the specified string value and key pattern.</returns>
         public static string Encrypt(string value, string key, bool usesimpleencryption)
         {
             if (usesimpleencryption) return SimpleEncrypt(value, key);

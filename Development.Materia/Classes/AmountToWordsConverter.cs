@@ -303,9 +303,9 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns the english-word representation of the initialized numeric value.
+        /// Converts the initialized numeric value into its english-word representation.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the english-word representation of the initialized numeric value.</returns>
         public override string ToString()
         {
             string _words = "";
@@ -328,19 +328,19 @@ namespace Development.Materia
         #region "static methods"
 
         /// <summary>
-        /// Returns the english-words representation of the specified numeric value.
+        /// Converts the initialized numeric value into its english-word representation.
         /// </summary>
         /// <param name="amountvalue">Numeric / amount value to convert</param>
-        /// <returns></returns>
+        /// <returns>Returns the english-words representation of the specified numeric value.</returns>
         public static string AmountToWords(double amountvalue)
         { return AmountToWords(amountvalue, ""); }
 
         /// <summary>
-        /// Returns the english-words representation of the specified numeric value suffixed with the specified currency.
+        /// Converts the initialized numeric value into its english-word representation suffixed with the specified currency.
         /// </summary>
         /// <param name="amountvalue">Numeric / amount value to convert</param>
         /// <param name="amountcurrency">Suffixing curreny</param>
-        /// <returns></returns>
+        /// <returns>Returns the english-words representation of the specified numeric value suffixed with the specified currency.</returns>
         public static string AmountToWords(double amountvalue, string amountcurrency)
         {
             string _words = "";

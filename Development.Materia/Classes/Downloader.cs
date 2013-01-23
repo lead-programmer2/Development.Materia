@@ -896,10 +896,10 @@ namespace Development.Materia.Net
         { _downloaderworker.ReportProgress((int) DownloadInvokations.EventRaiser, triggeredevent); }
 
         /// <summary>
-        /// Formats the amount of bytes to a more readible notation with binary notation symbols
+        /// Formats the amount of bytes to a more readable notation with binary notation symbols
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
-        /// <returns></returns>
+        /// <returns>The specified value to a more readable string notation.</returns>
         public static string FormatSizeBinary(long size)
         { return FormatSizeBinary(size, 0); }
 
@@ -908,7 +908,7 @@ namespace Development.Materia.Net
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
         /// <param name="decimals">The amount of decimals for the notation</param>
-        /// <returns></returns>
+        /// <returns>The specified value to a more readable string notation.</returns>
         public static string FormatSizeBinary(long size, int decimals)
         {
             string[] _sizes = new string[] { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB" };
@@ -924,7 +924,7 @@ namespace Development.Materia.Net
         /// Formats the amount of bytes to a more readible notation with decimal notation symbols
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
-        /// <returns></returns>
+        /// <returns>The specified value to a more readable string notation.</returns>
         public static string FormatSizeDecimal(long size)
         { return FormatSizeDecimal(size, 0); }
 
@@ -933,7 +933,7 @@ namespace Development.Materia.Net
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
         /// <param name="decimals">The amount of decimals for the notation</param>
-        /// <returns></returns>
+        /// <returns>The specified value to a more readable string notation.</returns>
         public static string FormatSizeDecimal(long size, int decimals)
         {
             string[] _sizes = new string[] { "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
@@ -951,8 +951,8 @@ namespace Development.Materia.Net
         /// <summary>
         ///  Returns the current downloading file progress percentage.
         /// </summary>
-        /// <param name="decimals"></param>
-        /// <returns></returns>
+        /// <param name="decimals">Number of decimals.</param>
+        /// <returns>Download file progress percentage.</returns>
         public double GetCurrentDownloadPercentage(int decimals)
         {
             if (!SupportsProgress) return 0;
@@ -966,8 +966,8 @@ namespace Development.Materia.Net
         /// <summary>
         /// Gets the total download percentage.
         /// </summary>
-        /// <param name="decimals"></param>
-        /// <returns></returns>
+        /// <param name="decimals">Number of decimals.</param>
+        /// <returns>Total download progress percentage.</returns>
         public double GetTotalDownloadPercentage(int decimals)
         {
             if (!SupportsProgress) return 0;
@@ -984,7 +984,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the downloader's busy state.
         /// </summary>
-        /// <param name="busy"></param>
+        /// <param name="busy">Value that determines whether downloader is marked as busy or not.</param>
         protected virtual void SetBusy(bool busy)
         {
             if (IsBusy != busy)
@@ -1009,7 +1009,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the downloader's allocated packet size block.
         /// </summary>
-        /// <param name="packets"></param>
+        /// <param name="packets">Maximum download speed size limit.</param>
         public virtual void SetPacketSize(int packets)
         {
             if (packets > 0) _packetsize = packets;
@@ -1019,7 +1019,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the current downloader's paused state.
         /// </summary>
-        /// <param name="paused"></param>
+        /// <param name="paused">Value that determines whether to mark the downloader as pasued or not.</param>
         protected virtual void SetPaused(bool paused)
         {
             if (IsBusy)
@@ -1323,7 +1323,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Returns the name of the downloaded file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Download name.</returns>
         public override string ToString()
         { return _name; }
 
@@ -1389,7 +1389,7 @@ namespace Development.Materia.Net
         /// Adds a new download file information into the collection.
         /// </summary>
         /// <param name="path">Http or Ftp download path</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Net.DownloadFileInfo object that has been added.</returns>
         public DownloadFileInfo Add(string path)
         { return Add(path, "", ""); }
 
@@ -1399,7 +1399,7 @@ namespace Development.Materia.Net
         /// <param name="path">Http or Ftp download path</param>
         /// <param name="uid">Server authentication User Id</param>
         /// <param name="pwd">Server authentication Password</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Net.DownloadFileInfo object that has been added.</returns>
         public DownloadFileInfo Add(string path, string uid, string pwd)
         { return Add(path, uid, pwd, false); }
 
@@ -1410,7 +1410,7 @@ namespace Development.Materia.Net
         /// <param name="uid">Server authentication User Id</param>
         /// <param name="pwd">Server authentication Password</param>
         /// <param name="deletfileafterdownload">Determines whether to delete download file from the server after successful download process</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Net.DownloadFileInfo object that has been added.</returns>
         public DownloadFileInfo Add(string path, string uid, string pwd, bool deletfileafterdownload)
         {
             NetworkCredential _credential = null;
@@ -1424,7 +1424,7 @@ namespace Development.Materia.Net
         /// </summary>
         /// <param name="path">Http or Ftp download path</param>
         /// <param name="credential">Server authentication credentials</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Net.DownloadFileInfo object that has been added.</returns>
         public DownloadFileInfo Add(string path, NetworkCredential credential)
         { return Add(path, credential, false); }
 
@@ -1434,7 +1434,7 @@ namespace Development.Materia.Net
         /// <param name="path">Http or Ftp download path</param>
         /// <param name="credential">Server authentication credentials</param>
         /// <param name="deletfileafterdownload">Determines whether to delete download file from the server after successful download process</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Net.DownloadFileInfo object that has been added.</returns>
         public DownloadFileInfo Add(string path, NetworkCredential credential, bool deletfileafterdownload)
         {
             DownloadFileInfo _info = new DownloadFileInfo(path, credential, deletfileafterdownload);
@@ -1444,16 +1444,16 @@ namespace Development.Materia.Net
         /// <summary>
         /// Returns whether an specific download file information with the specified name exists within the collection or not.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">Download name.</param>
+        /// <returns>True if collection contains a member with the specified download name otherwise false.</returns>
         public bool Contains(string name)
         { return VisualBasic.CBool(GetDownloadInfoByName(name) != null); }
 
         /// <summary>
         /// Returns whether the specified download information already exists within the collection or not.
         /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
+        /// <param name="info">Development.Materia.Net.DownloadFileInfo to evaluate.</param>
+        /// <returns>True if value exists within the collection otherwise false.</returns>
         public bool Contains(DownloadFileInfo info)
         { return List.Contains(info); }
 
@@ -1476,7 +1476,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Removes a certain download file information with the specified name from the collection.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Download name to remove from the collection.</param>
         public void Remove(string name)
         {
             DownloadFileInfo _info = GetDownloadInfoByName(name);
@@ -1486,7 +1486,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Removes the specified download file information from the collection.
         /// </summary>
-        /// <param name="info"></param>
+        /// <param name="info">Development.Materia.Net.DownloadFileInfo to remove from the collection.</param>
         public void Remove(DownloadFileInfo info)
         {
             if (Contains(info)) List.Remove(info);

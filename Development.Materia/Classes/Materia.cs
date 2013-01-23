@@ -611,7 +611,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this char value, char from, char to)
         {
             return (bool)(value >= from && value <= to);
@@ -623,7 +623,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this byte value, byte from, byte to)
         {
             return (bool)(value >= from && value <= to);
@@ -635,7 +635,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this DateTime value, DateTime from, DateTime to)
         {
             return (bool)(value >= from && value <= to);
@@ -647,7 +647,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this decimal value, decimal from, decimal to)
         {
             return (bool)(value >= from && value <= to);
@@ -659,7 +659,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this double value, double from, double to)
         {
             return (bool)(value >= from && value <= to);
@@ -671,7 +671,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this float value, float from, float to)
         {
             return (bool)(value >= from && value <= to);
@@ -683,7 +683,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this int value, int from, int to)
         {
             return (bool)(value >= from && value <= to);
@@ -695,7 +695,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this long value, long from, long to)
         {
             return (bool)(value >= from && value <= to);
@@ -707,7 +707,7 @@ namespace Development.Materia
         /// <param name="value">Value to be evaluated</param>
         /// <param name="from">Starting range</param>
         /// <param name="to">Ending range</param>
-        /// <returns></returns>
+        /// <returns>True if evaluated value exists between the given value ranges otherwise false.</returns>
         public static bool Between(this short value, short from, short to)
         {
             return (bool)(value >= from && value <= to);
@@ -719,7 +719,7 @@ namespace Development.Materia
         /// Test whether the specified database connection can establish a database connection or not.
         /// </summary>
         /// <param name="connection">Database connection object</param>
-        /// <returns></returns>
+        /// <returns>True if a database connection can be establish using the specified System.Data.IDbConnection object otherwise false.</returns>
         public static bool CanConnect(this IDbConnection connection)
         {
             bool _canconnect = false;
@@ -757,11 +757,11 @@ namespace Development.Materia
         #region "ConnectionStringValue"
 
         /// <summary>
-        /// Returns the connection string assigned value from the specified connection string section.
+        /// Gets the connection string assigned value from the specified connection string section.
         /// </summary>
         /// <param name="connectionstring">Database connection string.</param>
         /// <param name="section">Database connection string section.</param>
-        /// <returns></returns>
+        /// <returns>Value assigned in the specified database connection string section.</returns>
         public static string ConnectionStringValue(this string connectionstring, ConnectionStringSection section)
         {
             string _section = Enum.GetName(typeof(ConnectionStringSection), section);
@@ -773,7 +773,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="connectionstring">Database connection string.</param>
         /// <param name="section">Database connection string section.</param>
-        /// <returns></returns>
+        /// <returns>Value assigned in the specified database connection string section.</returns>
         public static string ConnectionStringValue(this string connectionstring, string section)
         {
             string _value = "";
@@ -818,7 +818,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="connection">Database connection</param>
         /// <param name="tablename">Database table name.</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DatabaseObjectMap object generated from the specified database table.</returns>
         public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename)
         { return new Database.DataObjectMap(connection, tablename); }
 
@@ -828,7 +828,7 @@ namespace Development.Materia
         /// <param name="connection">Database connection</param>
         /// <param name="tablename">Database table name.</param>
         /// <param name="condition">Database filtering condition.</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DatabaseObjectMap object generated from the specified database table.</returns>
         public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename, string condition)
         { return new Database.DataObjectMap(connection, tablename, condition); }
 
@@ -838,7 +838,7 @@ namespace Development.Materia
         /// <param name="connection">Database connection</param>
         /// <param name="tablename">Database table name.</param>
         /// <param name="fieldnames">Database table field names to include.</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DatabaseObjectMap object generated from the specified database table.</returns>
         public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename, string[] fieldnames)
         { return new Database.DataObjectMap(connection, tablename, fieldnames); }
 
@@ -849,7 +849,7 @@ namespace Development.Materia
         /// <param name="tablename">Database table name.</param>
         /// <param name="condition">Database filtering condition.</param>
         /// <param name="fieldnames">Database table field names to include.</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DatabaseObjectMap object generated from the specified database table.</returns>
         public static Database.DataObjectMap CreateDataObjectMap(this IDbConnection connection, string tablename, string condition, string[] fieldnames)
         { return new Database.DataObjectMap(connection, tablename, condition, fieldnames); }
 
@@ -858,30 +858,30 @@ namespace Development.Materia
         #region "Decrypt"
 
         /// <summary>
-        /// Returns a decrypted string value of the specified string using the specified encryption key as its pattern.
+        /// Gets the decrypted string value of the specified string using the specified encryption key as its pattern.
         /// </summary>
         /// <param name="value">Value to decrypt</param>
         /// <param name="key">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>Human-readable string from the specified encrypted text using the supplied key pattern.</returns>
         public static string Decrypt(this string value, string key)
         { return value.Decrypt(key, false); }
 
         /// <summary>
-        /// Returns a decrypted string value of the specified string using the specified encryption key as its pattern.
+        /// Gets the decrypted string value of the specified string using the specified encryption key as its pattern.
         /// </summary>
         /// <param name="value">Value to decrypt</param>
         /// <param name="key">Encryption key</param>
         /// <param name="usesimpledecryption">Use simple decryption or not</param>
-        /// <returns></returns>
+        /// <returns>Human-readable string from the specified encrypted text using the supplied key pattern.</returns>
         public static string Decrypt(this string value, string key, bool usesimpledecryption)
         {  return Cryptography.Cryptographer.Decrypt(value, key, usesimpledecryption);  }
 
         /// <summary>
-        /// Returns the decrypted contents of the file using the supplied encryption key.
+        /// Gets the decrypted contents of the file using the supplied encryption key.
         /// </summary>
         /// <param name="file">File to decrypt</param>
         /// <param name="key">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>Human-readable string from the specified encrypted text using the supplied key pattern.</returns>
         public static string Decrypt(this FileInfo file, string key)
         {  return file.Decrypt(key, false); }
 
@@ -891,7 +891,7 @@ namespace Development.Materia
         /// <param name="file">File to decrypt</param>
         /// <param name="key">Encryption key</param>
         /// <param name="usesimpledecryption">Use simple encryption or not</param>
-        /// <returns></returns>
+        /// <returns>Human-readable string from the specified encrypted text using the supplied key pattern.</returns>
         public static string Decrypt(this FileInfo file, string key, bool usesimpledecryption)
         {
             StringBuilder _decrypted = new StringBuilder();
@@ -917,23 +917,23 @@ namespace Development.Materia
         #region "Encrypt"
 
         /// <summary>
-        /// Returns whether the specified file's contents has been encrypted using the supplied encryption key pattern.
+        /// Gets whether the specified file's contents has been encrypted using the supplied encryption key pattern.
         /// </summary>
         /// <param name="file">File to encrypt</param>
         /// <param name="key">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>True if file encryption has been successful otherwise false.</returns>
         public static bool Encrypt(this FileInfo file, string key)
         {
             return file.Encrypt(key, false);
         }
 
         /// <summary>
-        /// Returns whether the specified file's contents has been encrypted using the supplied encryption key pattern.
+        /// Gets whether the specified file's contents has been encrypted using the supplied encryption key pattern.
         /// </summary>
         /// <param name="file">File to encrypt</param>
         /// <param name="key">Encryption key</param>
         /// <param name="usesimpleencryption">Use simple decryption or not</param>
-        /// <returns></returns>
+        /// <returns>True if file encryption has been successful otherwise false.</returns>
         public static bool Encrypt(this FileInfo file, string key, bool usesimpleencryption)
         {
             bool _encrypted = false;
@@ -956,23 +956,23 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns a  encrypted string value of the specified string using the specified encryption key as its pattern.
+        /// Gets the encrypted string value of the specified string using the specified encryption key as its pattern.
         /// </summary>
         /// <param name="value">Value to encrypt</param>
         /// <param name="key">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>Encrypted string from the specified human-readable text using the supplied key pattern.</returns>
         public static string Encrypt(this string value, string key)
         {
             return value.Encrypt(key, false);
         }
 
         /// <summary>
-        /// Returns a  encrypted string value of the specified string using the specified encryption key as its pattern.
+        /// Gets the encrypted string value of the specified string using the specified encryption key as its pattern.
         /// </summary>
         /// <param name="value">Value to encrypt</param>
         /// <param name="key">Encryption key</param>
         /// <param name="usesimpleencryption">Use simple decryption or not</param>
-        /// <returns></returns>
+        /// <returns>Encrypted string from the specified human-readable text using the supplied key pattern.</returns>
         public static string Encrypt(this string value, string key, bool usesimpleencryption)
         {
             return Cryptography.Cryptographer.Encrypt(value, key, usesimpleencryption);
@@ -990,11 +990,11 @@ namespace Development.Materia
         #region "In"
 
         /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// Determines whether the current numeric value is existing within the list of reference numeric values or not.
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this byte value, params byte[] values)
         {
             bool _exists = false;
@@ -1013,7 +1013,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this char value, params char[] values)
         {
             bool _exists = false;
@@ -1032,7 +1032,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this decimal value, params decimal[] values)
         {
             bool _exists = false;
@@ -1051,7 +1051,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this double value, params double[] values)
         {
             bool _exists = false;
@@ -1070,7 +1070,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this float value, params float[] values)
         {
             bool _exists = false;
@@ -1089,7 +1089,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this int value, params int[] values)
         {
             bool _exists = false;
@@ -1108,7 +1108,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this long value, params long[] values)
         {
             bool _exists = false;
@@ -1127,7 +1127,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this short value, params short[] values)
         {
             bool _exists = false;
@@ -1146,7 +1146,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be evaluated</param>
         /// <param name="values">List of searched values</param>
-        /// <returns></returns>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this string value, params string[] values)
         {
             bool _exists = false;
@@ -1171,7 +1171,7 @@ namespace Development.Materia
         /// <param name="table">DataTable object to get the value from</param>
         /// <param name="filter">DataTable filter expression</param>
         /// <param name="field">Field name from the DataTable's columns</param>
-        /// <returns></returns>
+        /// <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
         public static T GetValue<T>(this DataTable table, string filter, string field)
         { return table.GetValue<T>(filter, field, default(T)); }
 
@@ -1183,7 +1183,7 @@ namespace Development.Materia
         /// <param name="filter">DataTable filter expression</param>
         /// <param name="field">Field name from the DataTable's columns</param>
         /// <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
-        /// <returns></returns>
+        /// <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
         public static T GetValue<T>(this DataTable table, string filter, string field, T defaultvalue)
         { return table.GetValue<T>(filter, "", field, defaultvalue); }
 
@@ -1195,7 +1195,7 @@ namespace Development.Materia
         /// <param name="filter">DataTable filter expression</param>
         /// <param name="sort">DataTable sort expression</param>
         /// <param name="field">Field name from the DataTable's columns</param>
-        /// <returns></returns>
+        /// <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
         public static T GetValue<T>(this DataTable table, string filter, string sort, string field)
         { return table.GetValue<T>(filter, sort, filter, default(T)); }
 
@@ -1208,7 +1208,7 @@ namespace Development.Materia
         /// <param name="sort">DataTable sort expression</param>
         /// <param name="field">Field name from the DataTable's columns</param>
         /// <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
-        /// <returns></returns>
+        /// <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
         public static T GetValue<T>(this DataTable table, string filter, string sort, string field, T defaultvalue)
         {
             T _value = defaultvalue;
@@ -1230,33 +1230,33 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns a value based on the supplied command statement. Gets the value at the first row of the first column of the result set ignoring other values.
+        /// Gets the value at the first row of the first column of the result set ignoring other values.
         /// </summary>
         /// <typeparam name="T">Expected return type</typeparam>
         /// <param name="connection">Database connection</param>
         /// <param name="sql">Sql command statement</param>
-        /// <returns></returns>
+        /// <returns>Value based on the supplied command statement.</returns>
         public static T GetValue<T>(this IDbConnection connection, string sql)
         { return connection.GetValue<T>(sql, default(T)); }
 
         /// <summary>
-        /// Returns a value based on the supplied command statement. Gets the value at the first row of the first column of the result set ignoring other values.
+        /// Gets the value at the first row of the first column of the result set ignoring other values.
         /// </summary>
         /// <typeparam name="T">Expected return type</typeparam>
         /// <param name="connection">Database connection</param>
         /// <param name="sql">Sql command statement</param>
         /// <param name="defaultvalue">Default value in case record retrieval fails or no record has been found</param>
-        /// <returns></returns>
+        /// <returns>Value based on the supplied command statement.</returns>
         public static T GetValue<T>(this IDbConnection connection, string sql, T defaultvalue)
         { return Database.Que.GetValue<T>(connection, sql, defaultvalue); }
 
         #endregion
 
         /// <summary>
-        /// Returns whether the specified string is an email or not.
+        /// Validates whether the specified string is an email or not.
         /// </summary>
         /// <param name="value">String value to be evaluated</param>
-        /// <returns></returns>
+        /// <returns>True if specified value is a valid email address otherwise false.</returns>
         public static bool IsEmail(this string value)
         {
             string _pattern="^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?" +
@@ -1267,10 +1267,10 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns whether the specified string is a IP address.
+        /// Validates whether the specified string is a IP address.
         /// </summary>
         /// <param name="value">String value to be evaluated</param>
-        /// <returns></returns>
+        /// <returns>True if the specified string value is a valid IPv4 IP address otherwise false.</returns>
         public static bool IsIPAddress(this string value)
         {
             string _pattern = "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b";
@@ -1278,10 +1278,10 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns whether the specified string is a valid URL or not.
+        /// Validates whether the specified string is a valid URL or not.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">String value to be evaluated</param>
+        /// <returns>True if the specified string value is a valid URL otherwise false.</returns>
         public static bool IsURL(this string value)
         {
             string _pattern = "((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[.\\!\\/\\\\w]*))?)";
@@ -1338,8 +1338,8 @@ namespace Development.Materia
         /// </summary>
         /// <param name="table">DataTable object to extract the data</param>
         /// <param name="starting">Starting record count</param>
-        /// <param name="rows"></param>
-        /// <returns></returns>
+        /// <param name="rows">Number of maximum rows to retrieve.</param>
+        /// <returns>System.Data.DataTable object paginated.</returns>
         public static DataTable LimitRows(this DataTable table, int starting, int rows)
         {
             DataTable _table = null;
@@ -1489,6 +1489,7 @@ namespace Development.Materia
         /// <param name="table">DataTable object that will be filled by data</param>
         /// <param name="connectionstring">Database connection string</param>
         /// <param name="sql">Database command statement</param>
+        /// <returns>System.Data.DataTable object generated from the database result set. Returns nothing if error has been encountered during result set retrieval.</returns>
         public static DataTable LoadData(this DataTable table, string connectionstring, string sql)
         {
             IDbConnection _connection = Database.Database.CreateConnection(connectionstring);
@@ -1509,6 +1510,7 @@ namespace Development.Materia
         /// <param name="table">DataTable object that will be filled by data</param>
         /// <param name="connection">Database connection</param>
         /// <param name="sql">Database command statement</param>
+        /// <returns>System.Data.DataTable object generated from the database result set. Returns nothing if error has been encountered during result set retrieval.</returns>
         public static DataTable LoadData(this DataTable table, IDbConnection connection, string sql)
         {
             Database.QueResult _result = Database.Que.Execute(connection, sql, CommandExecution.ExecuteNonQuery);
@@ -1533,6 +1535,7 @@ namespace Development.Materia
         /// <param name="dataset">DataSet object that will be filled with data</param>
         /// <param name="connectionstring">Database connection string</param>
         /// <param name="sql">Database command statement</param>
+        /// <returns>System.Data.DataSet object generated from the database result set(s). Returns nothing if error has been encountered during result set retrieval.</returns>
         public static DataSet LoadData(this DataSet dataset, string connectionstring, string sql)
         {
             IDbConnection _connection = Database.Database.CreateConnection(connectionstring);
@@ -1553,6 +1556,7 @@ namespace Development.Materia
         /// <param name="dataset">DataSet object that will be filled with data</param>
         /// <param name="connection">Database connection</param>
         /// <param name="sql">Database command statement</param>
+        /// <returns>System.Data.DataSet object generated from the database result set(s). Returns nothing if error has been encountered during result set retrieval.</returns>
         public static DataSet LoadData(this DataSet dataset, IDbConnection connection, string sql)
         {
             Database.QueResult _result = Database.Que.Execute(connection, sql, CommandExecution.ExecuteNonQuery);
@@ -1590,11 +1594,9 @@ namespace Development.Materia
         /// </summary>
         /// <param name="table">DataTable object to be filled by data</param>
         /// <param name="filename">Excel filename</param>
-        /// <returns></returns>
+        /// <returns>System.Data.DataTable retrieved from the specified Microsoft Excel document. Returns nothing if error has been encountered during data retrieval.</returns>
         public static DataTable LoadExcel(this DataTable table, string filename)
-        {
-            return table.LoadExcel(filename, "");
-        }
+        { return table.LoadExcel(filename, ""); }
 
         /// <summary>
         ///  Loads an excel sheet from the specified file into the specified DataTable object.
@@ -1602,7 +1604,7 @@ namespace Development.Materia
         /// <param name="table">DataTable object to be filled by data</param>
         /// <param name="filename">Excel filename</param>
         /// <param name="sheetname">Excel spreadsheet</param>
-        /// <returns></returns>
+        /// <returns>System.Data.DataTable retrieved from the specified Microsoft Excel document. Returns nothing if error has been encountered during data retrieval.</returns>
         public static DataTable LoadExcel(this DataTable table, string filename, string sheetname)
         {
             DataTable _table = null; DataSet _dataset = null;
@@ -1632,7 +1634,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="dataset">DataSet object to be filled by data</param>
         /// <param name="filename">Excel filename</param>
-        /// <returns></returns>
+        /// <returns>System.Data.DataSet retrieved from the specified Microsoft Excel document. Returns nothing if error has been encountered during data retrieval.</returns>
         public static DataSet LoadExcel(this DataSet dataset, string filename)
         {
             string _connectionstring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties=\"Excel 12.0;HDR=YES\";";
@@ -1679,7 +1681,7 @@ namespace Development.Materia
         /// <param name="dataset">DataSet object to be filled by data</param>
         /// <param name="filename">Excel filename</param>
         /// <param name="sheetnames">Excel spreadsheets</param>
-        /// <returns></returns>
+        /// <returns>System.Data.DataSet retrieved from the specified Microsoft Excel document. Returns nothing if error has been encountered during data retrieval.</returns>
         public static DataSet LoadExcel(this DataSet dataset, string filename, string[] sheetnames)
         {
             string _connectionstring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties=\"Excel 12.0;HDR=YES\";";
@@ -1719,7 +1721,7 @@ namespace Development.Materia
         /// <summary>
         /// Places a '*' character at the rightmost side of the specified form's caption indicating a value inside a form has been changed.
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="form">Form to place a '*' character indicating a value field has been modified.</param>
         public static void MarkAsEdited(this Form form)
         {
             if (form != null)
@@ -1735,7 +1737,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="file">MySQL database dump file</param>
         /// <param name="connectionstring">MySql database connection string</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult object that corresponds the MySql application execution's result information.</returns>
         public static Database.MySqlResult MySqlExec(this FileInfo file, string connectionstring)
         { return file.MySqlExec(connectionstring, null); }
 
@@ -1745,7 +1747,7 @@ namespace Development.Materia
         /// <param name="file">MySQL database dump file</param>
         /// <param name="connectionstring">MySql database connection string</param>
         /// <param name="parameters">Additional MySql parameters</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult object that corresponds the MySql application execution's result information.</returns>
         public static Database.MySqlResult MySqlExec(this FileInfo file, string connectionstring, Database.MySqlParameterCollection parameters)
         { return Database.MySql.Execute(connectionstring, file, parameters); }
 
@@ -1755,15 +1757,15 @@ namespace Development.Materia
         /// Returns the specified file's contents.
         /// </summary>
         /// <param name="file">File to read to contents from</param>
-        /// <returns></returns>
+        /// <returns>Contents of the specified file. Returns an empty string if error has been encountered during file-reading process.</returns>
         public static string Read(this FileInfo file)
         { return ReadFile(file); }
 
         /// <summary>
         /// Creates an exact replica (schema and contents) of the specified DataTable object.
         /// </summary>
-        /// <param name="table"></param>
-        /// <returns></returns>
+        /// <param name="table">Table to create a replica from.</param>
+        /// <returns>System.Data.DataTable object with the exact schema and contents as the specified table.</returns>
         public static DataTable Replicate(this DataTable table)
         {
             DataTable _table = null;
@@ -1787,7 +1789,7 @@ namespace Development.Materia
         /// <param name="image">Image to resize</param>
         /// <param name="width">Assigned width</param>
         /// <param name="height">Assigned height</param>
-        /// <returns></returns>
+        /// <returns>Same as the specified System.Drawing.Image but ported into the supplied dimension.</returns>
         public static Image ResizeImage(this Image image, int width, int height)
         { return image.ResizeImage(new Size(width,height)); }
 
@@ -1796,7 +1798,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="image">Image to resize</param>
         /// <param name="size">Size information</param>
-        /// <returns></returns>
+        /// <returns>Same as the specified System.Drawing.Image but ported into the supplied dimension.</returns>
         public static Image ResizeImage(this Image image, Size size)
         {
             Image _image = null;
@@ -1827,7 +1829,7 @@ namespace Development.Materia
         /// Returns a complete space trimmed representation of the specified value (combination of RTrim and String.Trim() functions).
         /// </summary>
         /// <param name="value">String value to be truncated</param>
-        /// <returns></returns>
+        /// <returns>Complete white-space trimmed value.</returns>
         public static string RLTrim(this string value)
         { return value.TrimStart().TrimEnd().Trim(); }
 
@@ -1838,7 +1840,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="table">DataTable object to be exported</param>
         /// <param name="filename">Export path</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds to the derived Microsoft Excel file from the specified table. Returns nothing when an error has been encountered during data transformation process.</returns>
         public static FileInfo SaveExcel(this DataTable table, string filename)
         {
             FileInfo _file = null;
@@ -1859,7 +1861,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="dataset">DataSet object to be exported</param>
         /// <param name="filename">Export path</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds to the derived Microsoft Excel file from the specified data set. Returns nothing when an error has been encountered during data transformation process.</returns>
         public static FileInfo SaveExcel(this DataSet dataset, string filename)
         {
             FileInfo _file = null;
@@ -1904,8 +1906,8 @@ namespace Development.Materia
         /// <summary>
         /// Converts the specified file into its corresponding byte array representation.
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
+        /// <param name="file">System.IO.FileInfo object to convert.</param>
+        /// <returns>Byte array representation of the specified file object. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static byte[] ToByteArray(this FileInfo file)
         {
             return FileObjectToByteArray(file);
@@ -1914,8 +1916,8 @@ namespace Development.Materia
         /// <summary>
         /// Converts the specified image into its corresponding byte array representation.
         /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
+        /// <param name="image">System.Drawing.Image object to convert.</param>
+        /// <returns>Byte array representation of the specified image. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static byte[] ToByteArray(this Image image)
         {
             return ImageToByteArray(image);
@@ -1925,7 +1927,7 @@ namespace Development.Materia
         /// Converts the specified hexadecimal string into uts corresponding byte array representation.
         /// </summary>
         /// <param name="hex">Hexadecimal string to convert</param>
-        /// <returns></returns>
+        /// <returns>Byte array representation of the specified hexadecimal string. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static byte[] ToByteArray(this string hex)
         {
             return HexadecimalStringToByteArray(hex);
@@ -1936,8 +1938,8 @@ namespace Development.Materia
         /// <summary>
         /// Converts the specified DataTable object into a serializable table.
         /// </summary>
-        /// <param name="table"></param>
-        /// <returns></returns>
+        /// <param name="table">System.Data.DataTable object to convert.</param>
+        /// <returns>System.Data.DataTable that can be serialized; basically non-convertible fields (blob fields) were removed.</returns>
         public static DataTable ToExportableTable(this DataTable table)
         {
             DataTable _newtable = null;
@@ -2011,7 +2013,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="bytes">Byte array to convert</param>
         /// <param name="extension">File extension</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo the associates the file object representation of the specified byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static FileInfo ToFileObject(this byte[] bytes, string extension)
         {  return bytes.ToFileObject(extension, Environment.CurrentDirectory); }
 
@@ -2021,7 +2023,7 @@ namespace Development.Materia
         /// <param name="bytes">Byte array to convert</param>
         /// <param name="extension">File extension</param>
         /// <param name="outputdirectory">Output directory for the exported file</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo the associates the file object representation of the specified byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static FileInfo ToFileObject(this byte[] bytes, string extension, string outputdirectory)
         { return ByteArrayToFileObject(bytes, extension, outputdirectory); }
 
@@ -2033,7 +2035,7 @@ namespace Development.Materia
         /// Returns the hexadecimal string representation of the specified byte array.
         /// </summary>
         /// <param name="bytes">Byte array to convert</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified byte array. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static string ToHexadecimalString(this byte[] bytes)
         { return ByteArrayToHexaDecimalString(bytes);  }
 
@@ -2041,7 +2043,7 @@ namespace Development.Materia
         /// Returns the hexadecimal string representation of the specified file.
         /// </summary>
         /// <param name="file">File to convert</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified file object. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static string ToHexadecimalString(this FileInfo file)
         { return FileObjectToHexaDecimalString(file);  }
 
@@ -2049,7 +2051,7 @@ namespace Development.Materia
         /// Returns the hexadecimal string representation of the specified image.
         /// </summary>
         /// <param name="image">Image to convert</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified image. Returns nothing if an error has been encountered during the convertion process.</returns>
         public static string ToHexadecimalString(this Image image)
         { return ImageToHexaDecimalString(image); }
 
@@ -2059,7 +2061,7 @@ namespace Development.Materia
         /// Returns the image representation of the specified byte array.
         /// </summary>
         /// <param name="bytes">Byte array to convert</param>
-        /// <returns></returns>
+        /// <returns>System.Drawing.Image representation of the specified byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static Image ToImage(this byte[] bytes)
         { return ByteArrayToImage(bytes); }
 
@@ -2067,7 +2069,7 @@ namespace Development.Materia
         /// Returns the proper case (first letter capitalized and small caps for the preceeding letters) representation of the specified string.
         /// </summary>
         /// <param name="value">String value to be transformed</param>
-        /// <returns></returns>
+        /// <returns>Proper-cased form of the specified string value.</returns>
         public static string ToProper(this string value)
         {
             string _value = "";
@@ -2120,8 +2122,8 @@ namespace Development.Materia
         /// <summary>
         /// Creates SQL DDL from the specified DataTable schema.
         /// </summary>
-        /// <param name="table"></param>
-        /// <returns></returns>
+        /// <param name="table">System.Data.DataTable object to evaluate.</param>
+        /// <returns>SQL DDL derived from the specified System.Data.DataTable.</returns>
         public static string ToSqlDDL(this DataTable table)
         {
             string _ddl = "";
@@ -2209,8 +2211,8 @@ namespace Development.Materia
         /// <summary>
         /// Creates SQL DDL from the specified DataSet schema.
         /// </summary>
-        /// <param name="dataset"></param>
-        /// <returns></returns>
+        /// <param name="dataset">System.Data.DataSet object to evaluate.</param>
+        /// <returns>SQL DDL derived from the specified System.Data.DataSet.</returns>
         public static string ToSqlDDL(this DataSet dataset)
         {
             string _ddl = "";
@@ -2240,7 +2242,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this byte value)
         { return value.ToSqlValidString(2); }
 
@@ -2249,7 +2251,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this byte value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 
@@ -2257,7 +2259,7 @@ namespace Development.Materia
         /// Converts date value to its SQL qualified date-string representation.
         /// </summary>
         /// <param name="value">Date value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this DateTime value)
         { return value.ToSqlValidString(false); }
 
@@ -2266,7 +2268,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Date value to convert.</param>
         /// <param name="withhours">Determines if output string shall represent the time together with the date.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this DateTime value, bool withhours)
         {
             string _format = "yyyy-MM-dd";
@@ -2278,7 +2280,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this decimal value)
         { return value.ToSqlValidString(2); }
 
@@ -2295,7 +2297,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this double value)
         { return value.ToSqlValidString(2); }
 
@@ -2303,7 +2305,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this float value)
         { return value.ToSqlValidString(2); }
 
@@ -2312,7 +2314,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this float value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 
@@ -2320,7 +2322,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this int value)
         { return value.ToSqlValidString(2); }
 
@@ -2329,7 +2331,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this int value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 
@@ -2338,7 +2340,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this double value, int decimalplaces)
         { return VisualBasic.Format(value, "F" + decimalplaces.ToString()); }
 
@@ -2346,7 +2348,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this long value)
         { return value.ToSqlValidString(2); }
 
@@ -2355,7 +2357,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this long value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 
@@ -2363,7 +2365,7 @@ namespace Development.Materia
         /// Converts numeric value at floating point to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this short value)
         { return value.ToSqlValidString(2); }
 
@@ -2372,7 +2374,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this short value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 
@@ -2380,7 +2382,7 @@ namespace Development.Materia
         /// Converts string value to its SQL qualified string representation.
         /// </summary>
         /// <param name="value">String value to convert.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this string value)
         { return value.ToSqlValidString(false); }
 
@@ -2389,7 +2391,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">String value to convert.</param>
         /// <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this string value, bool datatableexpression)
         { return value.ToSqlValidString(datatableexpression, !datatableexpression); }
 
@@ -2399,7 +2401,7 @@ namespace Development.Materia
         /// <param name="value">String value to convert.</param>
         /// <param name="datatableexpression">Determines if output will be used as a DataTable / DataColumn expression qualified string.</param>
         /// <param name="trimmed">Determines whether to peform text carriage-return trimming before actual evaluation.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this string value, bool datatableexpression, bool trimmed)
         {
             string _value = (trimmed ? value.Trim() : value);
@@ -2418,7 +2420,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this byte value)
         { return value.ToWords(""); }
 
@@ -2427,7 +2429,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this byte value, string currency)
         { return ((double)value).ToWords(currency); }
 
@@ -2435,7 +2437,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this decimal value)
         {  return value.ToWords(""); }
 
@@ -2444,7 +2446,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this decimal value, string currency)
         { return ((double)value).ToWords(currency); }
 
@@ -2452,7 +2454,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this double value)
         { return value.ToWords("");  }
 
@@ -2461,7 +2463,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this double value, string currency)
         { return AmountToWordsConverter.AmountToWords(value, currency);  }
 
@@ -2469,7 +2471,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this float value)
         {  return value.ToWords("");  }
 
@@ -2478,7 +2480,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this float value, string currency)
         { return ((double)value).ToWords(currency);  }
 
@@ -2486,7 +2488,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this int value)
         {  return value.ToWords(""); }
 
@@ -2495,7 +2497,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this int value, string currency)
         {  return ((double)value).ToWords(currency); }
 
@@ -2503,7 +2505,7 @@ namespace Development.Materia
         /// Returns the english-word representation of the specified value.
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this short value)
         {  return value.ToWords("");  }
 
@@ -2512,7 +2514,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="currency">Suffixing currency.</param>
-        /// <returns></returns>
+        /// <returns>English-word representation of the specified numeric value.</returns>
         public static string ToWords(this short value, string currency)
         {  return ((double)value).ToWords(currency);  }
 
@@ -2557,54 +2559,54 @@ namespace Development.Materia
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this byte value, int divisor)
         { return WholePartDivision((double)value, divisor); }
 
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this float value, int divisor)
         { return WholePartDivision((double)value, divisor);  }
 
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this int value, int divisor)
         { return WholePartDivision((double)value, divisor); }
 
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this long value, int divisor)
         { return WholePartDivision((double)value, divisor); }
 
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this decimal value, int divisor)
         { return WholePartDivision((double)value, divisor);  }
 
         /// <summary>
         /// Gets the whole part of a division mathematical operation using the specified divisor.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
+        /// <param name="value">Dividend</param>
+        /// <param name="divisor">Divisor</param>
+        /// <returns>Whole part value from division operation.</returns>
         public static int WholePartDivision(this double value, int divisor)
         {
             double _remainder = value % divisor;
@@ -2621,7 +2623,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="file">Path</param>
         /// <param name="contents">Value to be written</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the written file's information. Returns nothing if error has been encountered during file-writing process.</returns>
         public static bool Write(this FileInfo file, string contents)
         { return file.Write(contents, false); }
 
@@ -2631,7 +2633,7 @@ namespace Development.Materia
         /// <param name="file">Path</param>
         /// <param name="contents">Value to be written</param>
         /// <param name="append">Determines whether to overwrite existing file contents or not</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the written file's information. Returns nothing if error has been encountered during file-writing process.</returns>
         public static bool Write(this FileInfo file, string contents, bool append)
         { return VisualBasic.CBool( ((FileInfo) WriteToFile(file.FullName, contents, append))!=null); }
 

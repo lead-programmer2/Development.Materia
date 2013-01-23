@@ -149,7 +149,7 @@ namespace Development.Materia
         /// <summary>
         /// Writes the current associated data source object into the specified excel path and returns the file's information if data exportation is successful.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that associates the written excel file derived from the current source table. Returns nothing if error has been encountered during file-writing process.</returns>
         public FileInfo Write()
         {
             FileInfo _file = null;

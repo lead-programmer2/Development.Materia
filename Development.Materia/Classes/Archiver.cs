@@ -134,7 +134,7 @@ namespace Development.Materia
         /// <summary>
         /// Perform file / directory compression.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         public FileInfo Archive()
         {
             FileInfo _file = null; bool _pathexists = false; _archivedpath = "";
@@ -299,7 +299,7 @@ namespace Development.Materia
         ///  Performs file compression using selected archiving tool, file(s) will just be copied into the archive file.
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
-        /// <returns></returns>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         public static FileInfo CompressAdd(string path)
         { return CompressAdd(path, ArchivingToolEnum.SevenZip); }
 
@@ -308,7 +308,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
         /// <param name="archivingtool">Archiving tool to use</param>
-        /// <returns></returns>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         public static FileInfo CompressAdd(string path, ArchivingToolEnum archivingtool)
         {
             FileInfo _file = null;
@@ -333,7 +333,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
         /// <param name="archivingtool">Archiving tool to use</param>
-        /// <returns></returns>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         public static FileInfo CompressInsert(string path, ArchivingToolEnum archivingtool)
         {
             FileInfo _file = null;
@@ -349,7 +349,7 @@ namespace Development.Materia
         ///  Performs file extraction from a compressed file into the specified destination folder using the selected archiving tool.
         /// </summary>
         /// <param name="filename">Compressed file's filename</param>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public static bool Decompress(string filename)
         { return Decompress(filename, ArchivingToolEnum.SevenZip); }
 
@@ -358,7 +358,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="filename">Compressed file's filename</param>
         /// <param name="destination">Destination path for the extracted file(s)</param>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public static bool Decompress(string filename, string destination)
         { return Decompress(filename, destination, ArchivingToolEnum.SevenZip); }
 
@@ -367,7 +367,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="filename">Compressed file's filename</param>
         /// <param name="archivingtool">Archiving tool to use</param>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public static bool Decompress(string filename, ArchivingToolEnum archivingtool)
         {
             string _directory = System.IO.Path.GetDirectoryName(filename);
@@ -381,7 +381,7 @@ namespace Development.Materia
         /// <param name="filename">Compressed file's filename</param>
         /// <param name="destination">Destination path for the extracted file(s)</param>
         /// <param name="archivingtool">Archiving tool to use</param>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public static bool Decompress(string filename, string destination, ArchivingToolEnum archivingtool)
         {
             bool _decompressed = false;
@@ -396,7 +396,7 @@ namespace Development.Materia
         /// <summary>
         /// Performs archive extraction using the chosen archiving tool.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public bool Extract()
         {
             string _directory = System.IO.Path.GetDirectoryName(_path);
@@ -408,7 +408,7 @@ namespace Development.Materia
         /// Performs archive extraction using the chosen archiving tool.
         /// </summary>
         /// <param name="destination">Destination path for the extracted file(s)</param>
-        /// <returns></returns>
+        /// <returns>A boolean value that determines whether file extraction was successful or not.</returns>
         public bool Extract(string destination)
         {
             bool _extracted = false; string _error = ""; ExtractResourceApplications();

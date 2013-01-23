@@ -49,7 +49,7 @@ namespace Development.Materia
         /// Converts the given byte array to its hexadecimal string representation.
         /// </summary>
         /// <param name="bytes">Array of byte to be interpreted.</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified byte array object.</returns>
         public static string ByteArrayToHexaDecimalString(byte[] bytes)
         {
             StringBuilder _hex = new StringBuilder();   
@@ -72,7 +72,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="bytes">Array of byte to be interpreted.</param>
         /// <param name="outputextension">Output file extension.</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that contains the information of the converted byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static FileInfo ByteArrayToFileObject(byte[] bytes, string outputextension)
         {
             return ByteArrayToFileObject(bytes, outputextension, Environment.CurrentDirectory);
@@ -84,7 +84,7 @@ namespace Development.Materia
         /// <param name="bytes">Array of byte to be interpreted.</param>
         /// <param name="outputextension">Output file extension.</param>
         /// <param name="outputdirectory">The output directory for the specified file.</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that contains the information of the converted byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static FileInfo ByteArrayToFileObject(byte[] bytes, string outputextension, string outputdirectory)
         {
             FileInfo _file = null;
@@ -117,7 +117,7 @@ namespace Development.Materia
         /// Converts the given blob byte array to its image representation.
         /// </summary>
         /// <param name="bytes">Array of byte to be interpreted.</param>
-        /// <returns></returns>
+        /// <returns>System.Drawing.Image object converted from the specified byte array. Returns nothing if error has been encountered during convertion process.</returns>
         public static Image ByteArrayToImage(byte[] bytes)
         {
             Image _image = null;
@@ -478,11 +478,11 @@ namespace Development.Materia
         #endregion
 
         /// <summary>
-        /// Returns whether a certain event exists within an object's members or not.
+        /// Validates whether a certain event exists within an object's members or not.
         /// </summary>
         /// <param name="owner">Object to evaluate</param>
         /// <param name="eventname">Event name</param>
-        /// <returns></returns>
+        /// <returns>True if event / member exists otherwise false.</returns>
         public static bool EventExists(object owner, string eventname)
         {
             EventInfo _event = null;
@@ -504,7 +504,7 @@ namespace Development.Materia
         /// Converts the file (in the given path) to its byte array representation.
         /// </summary>
         /// <param name="filename">File's full path.</param>
-        /// <returns></returns>
+        /// <returns>Byte array representation of the specified file object. Returns nothing if error has been encountered during convertion process.</returns>
         public static byte[] FileObjectToByteArray(string filename)
         {
             return FileObjectToByteArray(new FileInfo(filename));
@@ -514,7 +514,7 @@ namespace Development.Materia
         /// Converts the file to its byte array representation.
         /// </summary>
         /// <param name="file">File to convert</param>
-        /// <returns></returns>
+        /// <returns>Byte array representation of the specified file object. Returns nothing if error has been encountered during convertion process.</returns>
         public static byte[] FileObjectToByteArray(FileInfo file)
         {
             byte[] _bytes = null;
@@ -549,7 +549,7 @@ namespace Development.Materia
         /// Converts the file (in the given path) to its hexadecimal string representation.
         /// </summary>
         /// <param name="filename">File's full path.</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified file object. Returns an empty string if error has been encountered during convertion process.</returns>
         public static string FileObjectToHexaDecimalString(string filename)
         {
             return FileObjectToHexaDecimalString(new FileInfo(filename));
@@ -559,7 +559,7 @@ namespace Development.Materia
         /// Converts the file to its hexadecimal string representation.
         /// </summary>
         /// <param name="file">File to convert</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified file object. Returns an empty string if error has been encountered during convertion process.</returns>
         public static string FileObjectToHexaDecimalString(FileInfo file)
         {
             StringBuilder _hex = new StringBuilder();
@@ -630,9 +630,9 @@ namespace Development.Materia
         #endregion
 
         /// <summary>
-        /// Returns the current workstation's IP address.
+        /// Gets the current workstation's IP address.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns IPv4 IP Address of the current workstation.</returns>
         public static string GetCurrentIPAddress()
         {
             string _ipaddress = "";
@@ -658,8 +658,8 @@ namespace Development.Materia
         /// <summary>
         /// Gets a default value based on the specified data type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">Output and evaluated data type</typeparam>
+        /// <returns>Suggested default value for the specified type.</returns>
         public static T GetDefaultValueByType<T>()
         {
             Type _type = typeof(T);
@@ -669,8 +669,8 @@ namespace Development.Materia
         /// <summary>
         /// Gets a default value based on the specified data type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">Output and evaluated data type</param>
+        /// <returns>Suggested default value for the specified type.</returns>
         public static object GetDefaultValueByType(Type type)
         {
             object _value = null;
@@ -707,9 +707,9 @@ namespace Development.Materia
         /// <summary>
         /// Gets the event with the specified name from the specified owning object.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="eventname"></param>
-        /// <returns></returns>
+        /// <param name="owner">Object to evaluate that owns the specified event member.</param>
+        /// <param name="eventname">Name of the event.</param>
+        /// <returns>System.Reflection.EventInfo that associates the event member of the evaluated owner. Returns nothing if event is not existing in the owner's members.</returns>
         public static EventInfo GetEvent(object owner, string eventname)
         {
             EventInfo _event = null;
@@ -880,7 +880,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns nothing if property is not existing within the owner's members.</returns>
         public static object GetPropertyValue(object owner, string propertyname)
         { return GetPropertyValue<object>(owner, propertyname); }
 
@@ -890,7 +890,7 @@ namespace Development.Materia
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
         /// <param name="parameter">Property accessibility parameter</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns nothing if property is not existing within the owner's members.</returns>
         public static object GetPropertyValue(object owner, string propertyname, object parameter)
         { return GetPropertyValue<object>(owner, propertyname, new object[] { parameter }, null); }
 
@@ -899,52 +899,52 @@ namespace Development.Materia
         /// </summary>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
-        /// <param name="parameters">Property accessibility parameter</param>
-        /// <returns></returns>
+        /// <param name="parameters">Property accessibility parameters</param>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns nothing if property is not existing within the owner's members.</returns>
         public static object GetPropertyValue(object owner, string propertyname, object[] parameters)
         { return GetPropertyValue<object>(owner, propertyname, parameters); }
 
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string propertyname)
         {  return GetPropertyValue<T>(owner, propertyname, null); }
 
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
         /// <param name="defaultvalue">Default value to return when function evaluates no value</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string propertyname, T defaultvalue)
         { return GetPropertyValue<T>(owner, propertyname, null, defaultvalue); }
 
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
         /// <param name="parameters">Property accessibility parameters</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string propertyname, object[] parameters)
         { return GetPropertyValue<T>(owner, propertyname, parameters, GetDefaultValueByType<T>()); }
 
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertyname">Property name</param>
         /// <param name="parameters">Property accessibility parameters</param>
         /// <param name="defaultvalue">Default value to return when function evaluates no value</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string propertyname, object[] parameters, T defaultvalue)
         {
             T _value = defaultvalue;
@@ -962,21 +962,21 @@ namespace Development.Materia
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertynames">Property names</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string[] propertynames)
         { return GetPropertyValue<T>(owner, propertynames, null); }
 
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertynames">Property names</param>
         /// <param name="parameters">Property accessibility parameters</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string[] propertynames, object[] parameters)
         {
             T _defaultvalue = GetDefaultValueByType<T>();
@@ -986,12 +986,12 @@ namespace Development.Materia
         /// <summary>
         /// Returns the value of a certain object's property based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Return type of the specified property.</typeparam>
         /// <param name="owner">Property owner</param>
         /// <param name="propertynames">Property names</param>
         /// <param name="parameters">Property accessibility parameters</param>
         /// <param name="defaultvalue">Default value to return when function evaluates no value</param>
-        /// <returns></returns>
+        /// <returns>Object that corresponds the current value of the specified property of the evaluated owner. Returns suggested type default value if property is not existing within the owner's members.</returns>
         public static T GetPropertyValue<T>(object owner, string[] propertynames, object[] parameters, T defaultvalue)
         {
             T _value = defaultvalue;
@@ -1066,7 +1066,7 @@ namespace Development.Materia
         /// Converts the specified hexadecimal string into its byte array representation.
         /// </summary>
         /// <param name="hex">Hexadecimal string to be interpreted</param>
-        /// <returns></returns>
+        /// <returns>Byte array representation of the specified hexadecimal string. Returns nothing if error has been encountered during convertion process.</returns>
         public static byte[] HexadecimalStringToByteArray(string hex)
         {
             int _len = hex.Length;
@@ -1091,7 +1091,7 @@ namespace Development.Materia
         /// Converts the specified image to its bytes array representation.
         /// </summary>
         /// <param name="image">Image object to be interpreted</param>
-        /// <returns></returns>
+        /// <returns>Byte array representation of the specified System.Drawing.Image object. Returns nothing if error has been encountered during the convertion process.</returns>
         public static byte[] ImageToByteArray(Image image)
         {
             byte[] _bytes = null;
@@ -1118,7 +1118,7 @@ namespace Development.Materia
         /// Converts the given image to its hexadecimal string representation
         /// </summary>
         /// <param name="image">Image object to be interpreted</param>
-        /// <returns></returns>
+        /// <returns>Hexadecimal string representation of the specified System.Drawing.Image object. Returns a blank string if error has been encountered during convertion process.</returns>
         public static string ImageToHexaDecimalString(Image image)
         {
             StringBuilder _hex = new StringBuilder();
@@ -1219,22 +1219,22 @@ namespace Development.Materia
         /// <summary>
         /// Determines whether the current hosted application is in x64 mode or not.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if current application was built as x64 application or it inherits an x64 environment otherwise false.</returns>
         public static bool Is64BitApplication()
         { return VisualBasic.CBool(IntPtr.Size == 8); }
 
         /// <summary>
         /// Determines whether the current hosted operating system is 64 bit or not.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the current residing operating system is in 64 bit environment otherwise false.</returns>
         public static bool Is64BitOperatingSystem()
         { return VisualBasic.CBool(!Registry.LocalMachine.OpenSubKey("Hardware\\Description\\System\\CentralProcessor\\0").GetValue("Identifier").ToString().Contains("x86")); }
         
         /// <summary>
-        /// Returns whether the specified value is equivalent to NULL or DBNull.Value.
+        /// Validates whether the specified value is equivalent to NULL or DBNull.Value.
         /// </summary>
         /// <param name="value">Value to evaluate</param>
-        /// <returns></returns>
+        /// <returns>True if value is equivalent to NULL (Nothing) or DBNull.Value otherwise false.</returns>
         public static bool IsNullOrNothing(object value)
         { return (value == null) || (value == DBNull.Value); }
 
@@ -1293,11 +1293,11 @@ namespace Development.Materia
         #endregion
 
         /// <summary>
-        /// Returns whether a certain method exists within an object's members or not.
+        /// Validates whether a certain method exists within an object's members or not.
         /// </summary>
         /// <param name="owner">Object to evaluate</param>
         /// <param name="methodname">Method name to find</param>
-        /// <returns></returns>
+        /// <returns>True if a method with the specified name exists within the owner's members otherwise false.</returns>
         public static bool MethodExists(object owner, string methodname)
         {
             MethodInfo _method = null;
@@ -1318,7 +1318,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="owner">Object to evaluate</param>
         /// <param name="propertyname">Property name to find.</param>
-        /// <returns></returns>
+        /// <returns>True if a property with the specified name exists within the owner's members otherwise false.</returns>
         public static bool PropertyExists(object owner, string propertyname)
         {
             PropertyInfo _property = null;
@@ -1340,7 +1340,7 @@ namespace Development.Materia
         /// Reads file contents from the specified file.
         /// </summary>
         /// <param name="filename">Path of the file to read the contents from</param>
-        /// <returns></returns>
+        /// <returns>Contents of the specified file. Returns an empty string if error has been encountered during file-reading process.</returns>
         public static string ReadFile(string filename)
         {
             return ReadFile(new FileInfo(filename));
@@ -1350,7 +1350,7 @@ namespace Development.Materia
         /// Reads file contents from the specified file.
         /// </summary>
         /// <param name="file">File to read the contents from</param>
-        /// <returns></returns>
+        /// <returns>Contents of the specified file. Returns an empty string if error has been encountered during file-reading process.</returns>
         public static string ReadFile(FileInfo file)
         {
             StringBuilder _contents = new StringBuilder();
@@ -1380,7 +1380,7 @@ namespace Development.Materia
         /// <summary>
         /// Repaints; basically invokes the EndUpdate method of the specified object.
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="control">Control to repaint.</param>
         public static void Redraw(Control control)
         { Redraw(control, true); }
 
@@ -1660,19 +1660,19 @@ namespace Development.Materia
         /// <summary>
         /// Parses the specified value to return its corresponding type-safe representation.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Output data type.</typeparam>
         /// <param name="value">Value to evaluate</param>
-        /// <returns></returns>
+        /// <returns>Suggested default value for the specified evaluated object if it is currently not type-safe.</returns>
         public static T ToSafeValue<T>(T value)
         { return ToSafeValue<T>(value, GetDefaultValueByType<T>()); }
 
         /// <summary>
         /// Parses the specified value to return its corresponding type-safe representation.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Output data type.</typeparam>
         /// <param name="value">Value to evaluate</param>
         /// <param name="defaultvalue">Default value to return just in case it is unsafe</param>
-        /// <returns></returns>
+        /// <returns>Suggested default value for the specified evaluated object if it is currently not type-safe.</returns>
         public static T ToSafeValue<T>(T value, T defaultvalue)
         {
             T _value = defaultvalue;
@@ -1685,9 +1685,9 @@ namespace Development.Materia
         /// <summary>
         /// Works like TryCast function but this time supports assigned value types (ea. Integer, Decimal, Date and etc.).
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Output data type</typeparam>
         /// <param name="expression">Expression to convert</param>
-        /// <returns></returns>
+        /// <returns>The specified value represented into the specified output data type. Returns suggested value for the specified data type if error has been encountered during convertion process.</returns>
         public static T TryChangeType<T>(object expression)
         {
             T _value = default(T);
@@ -1704,84 +1704,84 @@ namespace Development.Materia
         /// <summary>
         /// Encapsulates an array of object with the data type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="arg"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Output data type for array.</typeparam>
+        /// <param name="arg">Value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static T[] Tuple<T>(T arg)
         { return new T[] { arg }; }
 
         /// <summary>
-        /// Encapsulates an array of object with two data types.
+        /// Encapsulates an array of object with various data types.
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <returns></returns>
+        /// <typeparam name="T1">Output data type for 1st element of the array.</typeparam>
+        /// <typeparam name="T2">Output data type for 2nd element of the array.</typeparam>
+        /// <param name="arg1">1st value to be encapsulated in the array.</param>
+        /// <param name="arg2">2nd value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static object[] Tuple<T1, T2>(T1 arg1, T2 arg2)
         { return new object[] { arg1, arg2 }; }
 
         /// <summary>
-        /// Encapsulates an array of object with three data types.
+        /// Encapsulates an array of object with various data types.
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <returns></returns>
+        /// <typeparam name="T1">Output data type for 1st element of the array.</typeparam>
+        /// <typeparam name="T2">Output data type for 2nd element of the array.</typeparam>
+        /// <typeparam name="T3">Output data type for 3rd element of the array.</typeparam>
+        /// <param name="arg1">1st value to be encapsulated in the array.</param>
+        /// <param name="arg2">2nd value to be encapsulated in the array.</param>
+        /// <param name="arg3">3rd value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static object[] Tuple<T1, T2, T3>(T1 arg1, T2 arg2, T3 arg3)
         { return new object[] { arg1, arg2, arg3 }; }
 
         /// <summary>
-        /// Encapsulates an array of object with three data types.
+        /// Encapsulates an array of object with various data types.
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <param name="arg4"></param>
-        /// <returns></returns>
+        /// <typeparam name="T1">Output data type for 1st element of the array.</typeparam>
+        /// <typeparam name="T2">Output data type for 2nd element of the array.</typeparam>
+        /// <typeparam name="T3">Output data type for 3rd element of the array.</typeparam>
+        /// <typeparam name="T4">Output data type for 4th element of the array.</typeparam>
+        /// <param name="arg1">1st value to be encapsulated in the array.</param>
+        /// <param name="arg2">2nd value to be encapsulated in the array.</param>
+        /// <param name="arg3">3rd value to be encapsulated in the array.</param>
+        /// <param name="arg4">4th value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static object[] Tuple<T1, T2, T3, T4>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         { return new object[] { arg1, arg2, arg3, arg4 }; }
 
         /// <summary>
-        /// Encapsulates an array of object with three data types.
+        /// Encapsulates an array of object with various data types.
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <param name="arg4"></param>
-        /// <param name="arg5"></param>
-        /// <returns></returns>
+        /// <typeparam name="T1">Output data type for 1st element of the array.</typeparam>
+        /// <typeparam name="T2">Output data type for 2nd element of the array.</typeparam>
+        /// <typeparam name="T3">Output data type for 3rd element of the array.</typeparam>
+        /// <typeparam name="T4">Output data type for 4th element of the array.</typeparam>
+        /// <typeparam name="T5">Output data type for 5th element of the array.</typeparam>
+        /// <param name="arg1">1st value to be encapsulated in the array.</param>
+        /// <param name="arg2">2nd value to be encapsulated in the array.</param>
+        /// <param name="arg3">3rd value to be encapsulated in the array.</param>
+        /// <param name="arg4">4th value to be encapsulated in the array.</param>
+        /// <param name="arg5">5th value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static object[] Tuple<T1, T2, T3, T4, T5>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         { return new object[] { arg1, arg2, arg3, arg4, arg5 }; }
 
         /// <summary>
-        /// Encapsulates an array of object with three data types.
+        /// Encapsulates an array of object with various data types.
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <param name="arg1"></param>
-        /// <param name="arg2"></param>
-        /// <param name="arg3"></param>
-        /// <param name="arg4"></param>
-        /// <param name="arg5"></param>
-        /// <param name="arg6"></param>
-        /// <returns></returns>
+        /// <typeparam name="T1">Output data type for 1st element of the array.</typeparam>
+        /// <typeparam name="T2">Output data type for 2nd element of the array.</typeparam>
+        /// <typeparam name="T3">Output data type for 3rd element of the array.</typeparam>
+        /// <typeparam name="T4">Output data type for 4th element of the array.</typeparam>
+        /// <typeparam name="T5">Output data type for 5th element of the array.</typeparam>
+        /// <typeparam name="T6">Output data type for 6th element of the array.</typeparam>
+        /// <param name="arg1">1st value to be encapsulated in the array.</param>
+        /// <param name="arg2">2nd value to be encapsulated in the array.</param>
+        /// <param name="arg3">3rd value to be encapsulated in the array.</param>
+        /// <param name="arg4">4th value to be encapsulated in the array.</param>
+        /// <param name="arg5">5th value to be encapsulated in the array.</param>
+        /// <param name="arg6">6th value to be encapsulated in the array.</param>
+        /// <returns>One-dimensional array containing the specified value(s).</returns>
         public static object[] Tuple<T1, T2, T3, T4, T5, T6>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6)
         { return new object[] { arg1, arg2, arg3, arg4, arg5, arg6 }; }
 
@@ -1794,7 +1794,7 @@ namespace Development.Materia
         /// <param name="control">Control to place a notifier with</param>
         /// <param name="condition">The true part of the satisfying condition to evaluate</param>
         /// <param name="notification">Notification message to be shown</param>
-        /// <returns></returns>
+        /// <returns>True if condition has been met otherwise false.</returns>
         public static bool Valid(object validator, Control control, bool condition, string notification)
         {
            if (validator != null &&
@@ -1837,7 +1837,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="filename">File path</param>
         /// <param name="contents">Value to be written</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds to the written file's information. Returns nothing if error has been encountered during file-writing process.</returns>
         public static FileInfo WriteToFile(string filename, string contents)
         { return WriteToFile(filename, contents, false);  }
 
@@ -1847,7 +1847,7 @@ namespace Development.Materia
         /// <param name="filename">File path</param>
         /// <param name="contents">Value to be written</param>
         /// <param name="append">Determines whether to overwrite the existing file's contents of not</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds to the written file's information. Returns nothing if error has been encountered during file-writing process.</returns>
         public static FileInfo WriteToFile(string filename, string contents, bool append)
         {
             FileInfo _file = null;

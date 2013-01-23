@@ -158,19 +158,19 @@ namespace Development.Materia
         }
 
         /// <summary>
-        /// Returns the decrypted file's contents using the supplied encryption key.
+        /// Gets the decrypted file's contents using the supplied encryption key.
         /// </summary>
         /// <param name="filename">File to decrypt</param>
-        /// <returns></returns>
+        /// <returns>Decrypted file's contents. Returns an empty string if decryption process fails.</returns>
         public static string DecryptFromFile(string filename)
         { return DecryptFromFile(filename, "X-X!V''Q"); }
 
         /// <summary>
-        /// Returns the decrypted file's contents using the supplied encryption key.
+        /// Gets the decrypted file's contents using the supplied encryption key.
         /// </summary>
         /// <param name="filename">File to decrypt</param>
         /// <param name="encryptionkey">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>Decrypted file's contents. Returns an empty string if decryption process fails.</returns>
         public static string DecryptFromFile(string filename, string encryptionkey)
         {
             StringBuilder _decrypted = new StringBuilder();
@@ -207,7 +207,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="filename">File path to put in the encrypted contents</param>
         /// <param name="contents">File contents to encrypt</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, string contents)
         { return EncryptToFile(filename, contents, "X-X!V''Q"); }
 
@@ -217,7 +217,7 @@ namespace Development.Materia
         /// <param name="filename">File path to put in the encrypted contents</param>
         /// <param name="contents">File contents to encrypt</param>
         /// <param name="encryptionkey">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, string contents, string encryptionkey)
         {
             FileInfo _file = null;
@@ -235,7 +235,7 @@ namespace Development.Materia
         /// <param name="connectionstring">Database connection string</param>
         /// <param name="sql">Database command statement</param>
         /// <param name="encryptionkey">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, string connectionstring, string sql, string encryptionkey)
         { return EncryptToFile(filename, Database.Database.CreateConnection(connectionstring), sql, encryptionkey); }
 
@@ -245,7 +245,7 @@ namespace Development.Materia
         /// <param name="filename">File path to put in the encrypted contents</param>
         /// <param name="connection">Database connection object</param>
         /// <param name="sql">Database command statement</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, IDbConnection connection, string sql)
         { return EncryptToFile(filename, connection, sql, "X-X!V''Q"); }
 
@@ -256,7 +256,7 @@ namespace Development.Materia
         /// <param name="connection">Database connection object</param>
         /// <param name="sql">Database command statement</param>
         /// <param name="encryptionkey">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, IDbConnection connection, string sql, string encryptionkey)
         {
             FileInfo _file = null;
@@ -272,7 +272,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="filename">File path to put in the encrypted contents</param>
         /// <param name="table">DataTable object to encrypt</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, DataTable table)
         { return EncryptToFile(filename, table, "X-X!V''Q"); }
 
@@ -282,7 +282,7 @@ namespace Development.Materia
         /// <param name="filename">File path to put in the encrypted contents</param>
         /// <param name="table">DataTable object to encrypt</param>
         /// <param name="encryptionkey">Encryption key</param>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the encrypted file's information. Returns nothing if encryption process fails.</returns>
         public static FileInfo EncryptToFile(string filename, DataTable table, string encryptionkey)
         {
             FileInfo _file = null;
@@ -317,7 +317,7 @@ namespace Development.Materia
         /// <summary>
         /// Writes the encrypted file initialized contents into the specified file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IO.FileInfo object that corresponds the written file's information. Returns nothing if error has been encountered during file-writing process.</returns>
         public FileInfo Write()
         {
             FileInfo _file = null;

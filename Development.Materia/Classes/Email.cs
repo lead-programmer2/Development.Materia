@@ -380,7 +380,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Send method and run it asynchronously. Must call the EndSend method once IAsynResult is finish.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from an invoked Send method asynchronization.</returns>
         public IAsyncResult BeginSend()
         {
             Action _delegate = new Action(Send);
@@ -392,7 +392,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Finalized the BeginSend call using its produced IAsynResult interface.
         /// </summary>
-        /// <param name="result"></param>
+        /// <param name="result">System.IAsyncResult generated from an BeginSend method.</param>
         public void EndSend(IAsyncResult result)
         {
             if (_delegatetable.ContainsKey(result))
@@ -562,16 +562,16 @@ namespace Development.Materia.Net
         /// <summary>
         /// Adds a file attachment in the collection.
         /// </summary>
-        /// <param name="attachment"></param>
-        /// <returns></returns>
+        /// <param name="attachment">Email attachment</param>
+        /// <returns>Index of the mail attachment in the collection.</returns>
         public int Add(Attachment attachment)
         { return List.Add(attachment); }
 
         /// <summary>
         /// Adds a file attachment in the collection.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
+        /// <param name="filename">Path of the email attachment.</param>
+        /// <returns>System.Net.Mail.Attachment object that corresponds to the newly added mail attachment in the collection.</returns>
         public Attachment Add(string filename)
         {
             Attachment _attachment = new Attachment(filename);
@@ -581,15 +581,15 @@ namespace Development.Materia.Net
         /// <summary>
         ///  Validates whether the specified file is currently existing within the collection.
         /// </summary>
-        /// <param name="attachment"></param>
-        /// <returns></returns>
+        /// <param name="attachment">System.Net.Mail.Attachment object to evaluate.</param>
+        /// <returns>True if mail attachment exists within the collection otherwise false.</returns>
         public bool Contains(Attachment attachment)
         { return List.Contains(attachment); }
 
         /// <summary>
         /// Removes the specified email attachment within the collection.
         /// </summary>
-        /// <param name="attachment"></param>
+        /// <param name="attachment">System.Net.Mail.Attachment object to remove.</param>
         public void Remove(Attachment attachment)
         { List.Remove(attachment); }
 
