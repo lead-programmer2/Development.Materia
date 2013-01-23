@@ -19,33 +19,33 @@ namespace Development.Materia
     /// <summary>
     /// Encapsulates a method that has 5 parameters and does not return any value.
     /// </summary>
-    /// <typeparam name="T1"></typeparam>
-    /// <typeparam name="T2"></typeparam>
-    /// <typeparam name="T3"></typeparam>
-    /// <typeparam name="T4"></typeparam>
-    /// <typeparam name="T5"></typeparam>
-    /// <param name="arg1"></param>
-    /// <param name="arg2"></param>
-    /// <param name="arg3"></param>
-    /// <param name="arg4"></param>
-    /// <param name="arg5"></param>
+    /// <typeparam name="T1">1st parameter's value type.</typeparam>
+    /// <typeparam name="T2">2nd parameter's value type.</typeparam>
+    /// <typeparam name="T3">3rd parameter's value type.</typeparam>
+    /// <typeparam name="T4">4th parameter's value type.</typeparam>
+    /// <typeparam name="T5">5th parameter's value type.</typeparam>
+    /// <param name="arg1">Invoked method's 1st parameter value.</param>
+    /// <param name="arg2">Invoked method's 2nd parameter value.</param>
+    /// <param name="arg3">Invoked method's 3rd parameter value.</param>
+    /// <param name="arg4">Invoked method's 4th parameter value.</param>
+    /// <param name="arg5">Invoked method's 5th parameter value.</param>
     public delegate void Action<T1, T2, T3, T4, T5>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
 
     /// <summary>
     /// Encapsulates a method that has 6 parameters and does not return any value.
     /// </summary>
-    /// <typeparam name="T1"></typeparam>
-    /// <typeparam name="T2"></typeparam>
-    /// <typeparam name="T3"></typeparam>
-    /// <typeparam name="T4"></typeparam>
-    /// <typeparam name="T5"></typeparam>
-    /// <typeparam name="T6"></typeparam>
-    /// <param name="arg1"></param>
-    /// <param name="arg2"></param>
-    /// <param name="arg3"></param>
-    /// <param name="arg4"></param>
-    /// <param name="arg5"></param>
-    /// <param name="arg6"></param>
+    /// <typeparam name="T1">1st parameter's value type.</typeparam>
+    /// <typeparam name="T2">2nd parameter's value type.</typeparam>
+    /// <typeparam name="T3">3rd parameter's value type.</typeparam>
+    /// <typeparam name="T4">4th parameter's value type.</typeparam>
+    /// <typeparam name="T5">5th parameter's value type.</typeparam>
+    /// <typeparam name="T6">6th parameter's value type.</typeparam>
+    /// <param name="arg1">Invoked method's 1st parameter value.</param>
+    /// <param name="arg2">Invoked method's 2nd parameter value.</param>
+    /// <param name="arg3">Invoked method's 3rd parameter value.</param>
+    /// <param name="arg4">Invoked method's 4th parameter value.</param>
+    /// <param name="arg5">Invoked method's 5th parameter value.</param>
+    /// <param name="arg6">Invoked method's 6th parameter value.</param>
     public delegate void Action<T1, T2, T3, T4, T5, T6>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6);
 
     #endregion
@@ -55,36 +55,36 @@ namespace Development.Materia
     /// <summary>
     ///  Encapsulates a method that has 5 parameters and returns a value of the type specified by the TResult parameter.
     /// </summary>
-    /// <typeparam name="T1"></typeparam>
-    /// <typeparam name="T2"></typeparam>
-    /// <typeparam name="T3"></typeparam>
-    /// <typeparam name="T4"></typeparam>
-    /// <typeparam name="T5"></typeparam>
-    /// <typeparam name="TResult"></typeparam>
-    /// <param name="arg1"></param>
-    /// <param name="arg2"></param>
-    /// <param name="arg3"></param>
-    /// <param name="arg4"></param>
-    /// <param name="arg5"></param>
+    /// <typeparam name="T1">1st parameter's value type.</typeparam>
+    /// <typeparam name="T2">2nd parameter's value type.</typeparam>
+    /// <typeparam name="T3">3rd parameter's value type.</typeparam>
+    /// <typeparam name="T4">4th parameter's value type.</typeparam>
+    /// <typeparam name="T5">5th parameter's value type.</typeparam>
+    /// <typeparam name="TResult">Invoking method's return value type.</typeparam>
+    /// <param name="arg1">Invoked method's 1st parameter value.</param>
+    /// <param name="arg2">Invoked method's 2nd parameter value.</param>
+    /// <param name="arg3">Invoked method's 3rd parameter value.</param>
+    /// <param name="arg4">Invoked method's 4th parameter value.</param>
+    /// <param name="arg5">Invoked method's 5th parameter value.</param>
     /// <returns></returns>
     public delegate TResult Func<T1, T2, T3, T4, T5, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
 
     /// <summary>
     /// Encapsulates a method that has 6 parameters and returns a value of the type specified by the TResult parameter.
     /// </summary>
-    /// <typeparam name="T1"></typeparam>
-    /// <typeparam name="T2"></typeparam>
-    /// <typeparam name="T3"></typeparam>
-    /// <typeparam name="T4"></typeparam>
-    /// <typeparam name="T5"></typeparam>
-    /// <typeparam name="T6"></typeparam>
-    /// <typeparam name="TResult"></typeparam>
-    /// <param name="arg1"></param>
-    /// <param name="arg2"></param>
-    /// <param name="arg3"></param>
-    /// <param name="arg4"></param>
-    /// <param name="arg5"></param>
-    /// <param name="arg6"></param>
+    /// <typeparam name="T1">1st parameter's value type.</typeparam>
+    /// <typeparam name="T2">2nd parameter's value type.</typeparam>
+    /// <typeparam name="T3">3rd parameter's value type.</typeparam>
+    /// <typeparam name="T4">4th parameter's value type.</typeparam>
+    /// <typeparam name="T5">5th parameter's value type.</typeparam>
+    /// <typeparam name="T6">6th parameter's value type.</typeparam>
+    /// <typeparam name="TResult">Invoking method's return value type.</typeparam>
+    /// <param name="arg1">Invoked method's 1st parameter value.</param>
+    /// <param name="arg2">Invoked method's 2nd parameter value.</param>
+    /// <param name="arg3">Invoked method's 3rd parameter value.</param>
+    /// <param name="arg4">Invoked method's 4th parameter value.</param>
+    /// <param name="arg5">Invoked method's 5th parameter value.</param>
+    /// <param name="arg6">Invoked method's 6th parameter value.</param>
     /// <returns></returns>
     public delegate TResult Func<T1, T2, T3, T4, T5, T6, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6);
 

@@ -143,8 +143,8 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic CBool method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert.</param>
+        /// <returns>System.Boolean representation of the specified expression.</returns>
         public static bool CBool(object value)
         {
             if (IsNumeric(value))
@@ -158,58 +158,58 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic CDate method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert.</param>
+        /// <returns>System.Date representation of the specified expression.</returns>
         public static DateTime CDate(object value)
         { return DateTime.Parse(value.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic CDec method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert.</param>
+        /// <returns>System.Decimal representation of the specified expression.</returns>
         public static decimal CDec(object value)
         { return decimal.Parse(value.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic CDbl method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert.</param>
+        /// <returns>System.Double representation of the specified expression.</returns>
         public static double CDbl(object value)
         { return double.Parse(value.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic CInt method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert</param>
+        /// <returns>System.Integer representation of the specified expression.</returns>
         public static int CInt(object value)
         { return int.Parse(value.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic Chr method.
         /// </summary>
-        /// <param name="ascii"></param>
-        /// <returns></returns>
+        /// <param name="ascii">ASCII code to convert</param>
+        /// <returns>System.Char representation of the specified ASCII code.</returns>
         public static char Chr(int ascii)
         { return Convert.ToChar(ascii); }
 
         /// <summary>
         /// Works like Visual Basic CLng method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Expression to convert.</param>
+        /// <returns>System.Long representation of the specified expression.</returns>
         public static long CLng(object value)
         { return long.Parse(value.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic DateDiff method.
         /// </summary>
-        /// <param name="interval"></param>
-        /// <param name="date1"></param>
-        /// <param name="date2"></param>
-        /// <returns></returns>
+        /// <param name="interval">Date interval</param>
+        /// <param name="date1">1st Date value</param>
+        /// <param name="date2">2nd Date value</param>
+        /// <returns>Duration of the two dates from each other in the specified date interval.</returns>
         public static long DateDiff(DateInterval interval, DateTime date1, DateTime date2)
         {
             long _value = 0;
@@ -250,9 +250,9 @@ namespace Development.Materia
         /// <summary>
         /// Works like built-in Visual Basic DeleteSetting method.
         /// </summary>
-        /// <param name="application"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
+        /// <param name="application">Application name.</param>
+        /// <param name="section">Registry section.</param>
+        /// <param name="key">Registry key</param>
         public static void DeleteSetting(string application, string section, string key)
         {
             RegistryKey _machinekey = Registry.LocalMachine;
@@ -271,7 +271,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Value to be formatted.</param>
         /// <param name="format">Format pattern.</param>
-        /// <returns></returns>
+        /// <returns>String formatted based on the specified value and pattern.</returns>
         public static string Format(object value, string format)
         {
             string _formatted = "";
@@ -364,21 +364,21 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic GetSetting method.
         /// </summary>
-        /// <param name="application"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="application">Application name.</param>
+        /// <param name="section">Registry section.</param>
+        /// <param name="key">Registry key.</param>
+        /// <returns>Value of the specified registry key.</returns>
         public static object GetSetting(string application, string section, string key)
         { return GetSetting(application, section, key, null); }
 
         /// <summary>
         /// Works like Visual Basic GetSetting method.
         /// </summary>
-        /// <param name="application"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <param name="defaultvalue"></param>
-        /// <returns></returns>
+        /// <param name="application">Application name.</param>
+        /// <param name="section">Registry section.</param>
+        /// <param name="key">Registry key.</param>
+        /// <param name="defaultvalue">Default value to return if registry key is not existing.</param>
+        /// <returns>Value of the specified registry key.</returns>
         public static object GetSetting(string application, string section, string key, object defaultvalue)
         {
             object _value = defaultvalue;
@@ -405,50 +405,50 @@ namespace Development.Materia
         /// <summary>
         /// Mimics Visual Basic InputBox method.
         /// </summary>
-        /// <param name="prompt"></param>
-        /// <returns></returns>
+        /// <param name="prompt">Dialog notification message.</param>
+        /// <returns>User-input value.</returns>
         public static string InputBox(string prompt)
         { return InputBox(prompt, Application.ProductName); }
 
         /// <summary>
         /// Mimics Visual Basic InputBox method.
         /// </summary>
-        /// <param name="prompt"></param>
-        /// <param name="title"></param>
-        /// <returns></returns>
+        /// <param name="prompt">Dialog notification message.</param>
+        /// <param name="title">Dialog title.</param>
+        /// <returns>User-input value.</returns>
         public static string InputBox(string prompt, string title)
         { return InputBox(prompt, title, ""); }
 
         /// <summary>
         /// Mimics Visual Basic InputBox method.
         /// </summary>
-        /// <param name="prompt"></param>
-        /// <param name="title"></param>
-        /// <param name="defaultresponse"></param>
-        /// <returns></returns>
+        /// <param name="prompt">Dialog notification message.</param>
+        /// <param name="title">Dialog title.</param>
+        /// <param name="defaultresponse">Dialog's default return value if user does not enter any.</param>
+        /// <returns>User-input value.</returns>
         public static string InputBox(string prompt, string title, string defaultresponse)
         { return InputBox(prompt, title, defaultresponse, 0); }
 
         /// <summary>
         /// Mimics Visual Basic InputBox method.
         /// </summary>
-        /// <param name="prompt"></param>
-        /// <param name="title"></param>
-        /// <param name="defaultresponse"></param>
-        /// <param name="x"></param>
-        /// <returns></returns>
+        /// <param name="prompt">Dialog notification message.</param>
+        /// <param name="title">Dialog title.</param>
+        /// <param name="defaultresponse">Dialog's default return value if user does not enter any.</param>
+        /// <param name="x">Position of the dialog horizontally.</param>
+        /// <returns>User-input value.</returns>
         public static string InputBox(string prompt, string title, string defaultresponse, int x)
         { return InputBox(prompt, title, defaultresponse, x, 0); }
 
         /// <summary>
         /// Mimics Visual Basic InputBox method.
         /// </summary>
-        /// <param name="prompt"></param>
-        /// <param name="title"></param>
-        /// <param name="defaultresponse"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="prompt">Dialog notification message.</param>
+        /// <param name="title">Dialog title.</param>
+        /// <param name="defaultresponse">Dialog's default return value if user does not enter any.</param>
+        /// <param name="x">Position of the dialog horizontally.</param>
+        /// <param name="y">Position of the dialog vertically.</param>
+        /// <returns>User-input value.</returns>
         public static string InputBox(string prompt, string title, string defaultresponse, int x, int y)
         {
             string _value = "";
@@ -508,8 +508,8 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic IsDate method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Value to evaluate.</param>
+        /// <returns>True if value is a valid date otherwise false.</returns>
         public static bool IsDate(object value)
         {
             bool _isdate = false;
@@ -529,8 +529,8 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic IsArray method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Value to evaluate.</param>
+        /// <returns>True if value is an array otherwise false.</returns>
         public static bool IsArray(object value)
         {
             bool _isarray = false;
@@ -547,8 +547,8 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic IsDBNull method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Value to evaluate.</param>
+        /// <returns>True if value is equivalent to DBNull.Value otherwise false.</returns>
         public static bool IsDBNull(object value)
         {
             if (value != null) return VisualBasic.CBool(value == DBNull.Value);
@@ -558,8 +558,8 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic IsNumeric method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Value to evaluate.</param>
+        /// <returns>True if value is a number otherwise false.</returns>
         public static bool IsNumeric(object value)
         {
             bool _isnumeric = false;
@@ -581,17 +581,17 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic MonthName method.
         /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
+        /// <param name="month">Month number in the calendar</param>
+        /// <returns>Month name</returns>
         public static string MonthName(int month)
         { return MonthName(month, false); }
 
         /// <summary>
         /// Works like Visual Basic MonthName method.
         /// </summary>
-        /// <param name="month"></param>
-        /// <param name="abbreviate"></param>
-        /// <returns></returns>
+        /// <param name="month">Month number in the calendar</param>
+        /// <param name="abbreviate">A value that determines whether to abbreviate the output or not.</param>
+        /// <returns>Month name</returns>
         public static string MonthName(int month, bool abbreviate)
         {
             string[] _months = { "January", "February", "March", "April", "May",
@@ -613,10 +613,10 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic SaveSetting method.
         /// </summary>
-        /// <param name="application"></param>
-        /// <param name="section"></param>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="application">Application name.</param>
+        /// <param name="section">Registry section.</param>
+        /// <param name="key">Registry key.</param>
+        /// <param name="value">Value to store in the registry.</param>
         public static void SaveSetting(string application, string section, string key, object value)
         {
             RegistryKey _machinekey = Registry.LocalMachine;
@@ -636,27 +636,27 @@ namespace Development.Materia
         /// <summary>
         ///  Works like Visual Basic WeekDayname method.
         /// </summary>
-        /// <param name="day"></param>
-        /// <returns></returns>
+        /// <param name="day">Day of the week.</param>
+        /// <returns>Week day name</returns>
         public static string WeekDayName(int day)
         { return WeekDayName(day, false); }
 
         /// <summary>
         /// Works like Visual Basic WeekDayname method.
         /// </summary>
-        /// <param name="day"></param>
-        /// <param name="abbreviate"></param>
-        /// <returns></returns>
+        /// <param name="day">Day of the week.</param>
+        /// <param name="abbreviate">A value that determines whether to abbreviate the output or not.</param>
+        /// <returns>Week day name</returns>
         public static string WeekDayName(int day, bool abbreviate)
         { return WeekDayName(day, abbreviate, FirstDayOfWeek.Sunday); }
 
         /// <summary>
         /// Works like Visual Basic WeekDayname method.
         /// </summary>
-        /// <param name="day"></param>
-        /// <param name="abbreviate"></param>
-        /// <param name="firstdayofweek"></param>
-        /// <returns></returns>
+        /// <param name="day">Day of the week.</param>
+        /// <param name="abbreviate">A value that determines whether to abbreviate the output or not.</param>
+        /// <param name="firstdayofweek">A value to determines to what day the week should start.</param>
+        /// <returns>Week day name</returns>
         public static string WeekDayName(int day, bool abbreviate, FirstDayOfWeek firstdayofweek)
         {
             string[] _days = { "Sunday", "Monday", "Tuesday", "Wednesday",

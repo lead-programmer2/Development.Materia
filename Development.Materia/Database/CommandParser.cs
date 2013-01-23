@@ -474,30 +474,30 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new command statement into the collection.
         /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL statement</param>
+        /// <returns>Index of the SQL statement in the collection.</returns>
         public int Add(string sql)
         { return List.Add(sql); }
 
         /// <summary>
-        ///  Returns whether the specified sql command statement already exists in the collection or not.
+        ///  Validates whether the specified sql command statement already exists in the collection or not.
         /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL statement to evaluate</param>
+        /// <returns>True if the specified SQL statement already exists within the collection otherwise false.</returns>
         public bool Contains(string sql)
         { return List.Contains(sql); }
 
         /// <summary>
         /// Removes the specified command statement from the collection.
         /// </summary>
-        /// <param name="sql"></param>
+        /// <param name="sql">SQL statement to remove.</param>
         public void Remove(string sql)
         { List.Remove(sql); }
 
         /// <summary>
-        /// 
+        /// Gets the SQL strings stored in the collection.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SQL strings stored in the collection.</returns>
         public override string ToString()
         {
             string _tostring = "";

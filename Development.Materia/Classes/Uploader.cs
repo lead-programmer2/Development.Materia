@@ -671,7 +671,7 @@ namespace Development.Materia.Net
         /// Formats the amount of bytes to a more readible notation with binary notation symbols
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
-        /// <returns></returns>
+        /// <returns>Readable notation for the specied value.</returns>
         public static string FormatSizeBinary(long size)
         { return FormatSizeBinary(size, 0); }
 
@@ -680,7 +680,7 @@ namespace Development.Materia.Net
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
         /// <param name="decimals">The amount of decimals for the notation</param>
-        /// <returns></returns>
+        /// <returns>Readable notation for the specied value.</returns>
         public static string FormatSizeBinary(long size, int decimals)
         {
             string[] _sizes = new string[] { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB" };
@@ -696,7 +696,7 @@ namespace Development.Materia.Net
         /// Formats the amount of bytes to a more readible notation with decimal notation symbols
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
-        /// <returns></returns>
+        /// <returns>Readable notation for the specied value.</returns>
         public static string FormatSizeDecimal(long size)
         { return FormatSizeDecimal(size, 0); }
 
@@ -705,7 +705,7 @@ namespace Development.Materia.Net
         /// </summary>
         /// <param name="size">The raw amount of bytes</param>
         /// <param name="decimals">The amount of decimals for the notation</param>
-        /// <returns></returns>
+        /// <returns>Readable notation for the specied value.</returns>
         public static string FormatSizeDecimal(long size, int decimals)
         {
             string[] _sizes = new string[] { "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
@@ -718,10 +718,10 @@ namespace Development.Materia.Net
         }
 
         /// <summary>
-        ///  Returns the current uploading file progress percentage.
+        ///  Gets the current uploading file progress percentage.
         /// </summary>
-        /// <param name="decimals"></param>
-        /// <returns></returns>
+        /// <param name="decimals">Number of decimals</param>
+        /// <returns>Uploading file progress percentage</returns>
         public double GetCurrentUploadPercentage(int decimals)
         {
             if (!SupportsProgress) return 0;
@@ -735,8 +735,8 @@ namespace Development.Materia.Net
         /// <summary>
         /// Gets the total upload percentage.
         /// </summary>
-        /// <param name="decimals"></param>
-        /// <returns></returns>
+        /// <param name="decimals">Number of decimals</param>
+        /// <returns>Total upload progress percentage.</returns>
         public double GetTotalUploadPercentage(int decimals)
         {
             if (!SupportsProgress) return 0;
@@ -753,7 +753,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the uploader's busy state.
         /// </summary>
-        /// <param name="busy"></param>
+        /// <param name="busy">A value that determines whether the Uploader is currently busy or not.</param>
         protected virtual void SetBusy(bool busy)
         {
             if (IsBusy != busy)
@@ -778,7 +778,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the uploader's allocated packet size block.
         /// </summary>
-        /// <param name="packets"></param>
+        /// <param name="packets">Maximum upload-speed limit.</param>
         public virtual void SetPacketSize(int packets)
         {
             if (packets > 0) _packetsize = packets;
@@ -788,7 +788,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Sets the current uploader's paused state.
         /// </summary>
-        /// <param name="paused"></param>
+        /// <param name="paused">A value that determines whether the Uploader is marked as paused or not.</param>
         protected virtual void SetPaused(bool paused)
         {
             if (IsBusy)
@@ -1079,7 +1079,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Gets the name of the uploaded file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Upload file's name.</returns>
         public override string ToString()
         {
             return _name;
@@ -1147,7 +1147,7 @@ namespace Development.Materia.Net
         /// Adds a new upload file information into the collection.
         /// </summary>
         /// <param name="path">Local file path</param>
-        /// <returns></returns>
+        /// <returns>Newly added Development.Materia.Net.UploadFileInfo.</returns>
         public UploadFileInfo Add(string path)
         {
             UploadFileInfo _upload = new UploadFileInfo(path);
@@ -1158,23 +1158,23 @@ namespace Development.Materia.Net
         /// Adds a new upload file information into the collection.
         /// </summary>
         /// <param name="upload">Upload file information</param>
-        /// <returns></returns>
+        /// <returns>Index of the added Development.Materia.Net.UploadFileInfo in the collection.</returns>
         public int Add(UploadFileInfo upload)
         { return List.Add(upload); }
 
         /// <summary>
-        /// Returns whether an specific upload file information with the specified name exists within the collection or not.
+        /// Validates whether an specific upload file information with the specified name exists within the collection or not.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">Upload file name.</param>
+        /// <returns>True if a Development.Materia.Net.UploadFileInfo with the specified name already exists within the collecton otherwise false.</returns>
         public bool Contains(string name)
         { return VisualBasic.CBool(GetUploadInfoByName(name) != null); }
 
         /// <summary>
         /// Returns whether the specified upload information already exists within the collection or not.
         /// </summary>
-        /// <param name="upload"></param>
-        /// <returns></returns>
+        /// <param name="upload">Development.Materia.Net.UploadFileInfo to evaluate.</param>
+        /// <returns>True if the specified Development.Materia.Net.UploadFileInfo aready exists within the collection otherwise false.</returns>
         public bool Contains(UploadFileInfo upload)
         { return List.Contains(upload); }
 
@@ -1196,7 +1196,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Removes a certain upload file information with the specified name from the collection.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Upload file name.</param>
         public void Remove(string name)
         {
             UploadFileInfo _upload = GetUploadInfoByName(name);
@@ -1206,7 +1206,7 @@ namespace Development.Materia.Net
         /// <summary>
         ///  Removes the specified upload file information from the collection.
         /// </summary>
-        /// <param name="upload"></param>
+        /// <param name="upload">Development.Materia.Net.UploadFileInfo to remove.</param>
         public void Remove(UploadFileInfo upload)
         {
             if (Contains(upload)) List.Remove(upload);

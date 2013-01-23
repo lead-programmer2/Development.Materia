@@ -78,8 +78,8 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Validates if evaluated control is supported by RequiredFieldMarker.
         /// </summary>
-        /// <param name="extendee"></param>
-        /// <returns></returns>
+        /// <param name="extendee">Object to evaluate.</param>
+        /// <returns>True if the specified object is supported otherwise false.</returns>
         public bool CanExtend(object extendee) 
         {
             bool _canextend = false;
@@ -116,16 +116,16 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Returns whether the specified control is marked as required using the RequiredFieldMarker.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evaluate.</param>
+        /// <returns>True if the control is already marked as required field otherwise false.</returns>
         public static bool ControlIsRequired(Control control)
         { return _globalmarker.IsRequired(control); }
 
         /// <summary>
         /// Gets required field indicator's presence for this control.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evaluate.</param>
+        /// <returns>True if the specified control is already marked as a required field otherwise false.</returns>
         [Description("Indicates required field indicator's presence for this control.")]
         public bool GetRequired(Control control)
         {
@@ -140,8 +140,8 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Gets required field indicator's fill color.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evaluate.</param>
+        /// <returns>Control's attached required field indicator's color.</returns>
         [Description("Indicates required field indicator's fill color."),
          DefaultValue(typeof(Color), "OrangeRed")]
         public Color GetRequiredIndicatorColor(Control control)
@@ -173,8 +173,8 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Gets whether control was marked as required or not.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evalulate.</param>
+        /// <returns>True if control is already marked as a required field otherwise false.</returns>
         public bool IsRequired(Control control)
         {
             bool _isrequired = false;
@@ -425,7 +425,7 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Sets and attaches each of the specified controls with a rquired field indicator.
         /// </summary>
-        /// <param name="controls"></param>
+        /// <param name="controls">Controls to mark as required fields.</param>
         public static void SetAsRequired(params Control[] controls)
         {
             if (controls != null)
@@ -470,8 +470,8 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Sets required field indicator's presence for this control.
         /// </summary>
-        /// <param name="control"></param>
-        /// <param name="required"></param>
+        /// <param name="control">Control to set or unset as a required field.</param>
+        /// <param name="required">A value that determines whether the control is a required field or not.</param>
         [Description("Indicates required field indicator's presence for this control."),
          DefaultValue(typeof(bool), "False")]
         public void SetRequired(Control control, bool required)
@@ -508,8 +508,8 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Sets required field indicator's fill color.
         /// </summary>
-        /// <param name="control"></param>
-        /// <param name="color"></param>
+        /// <param name="control">Control to evaluate.</param>
+        /// <param name="color">Required field indicator marker's color.</param>
         [Description("Indicates required field indicator's fill color."),
          DefaultValue(typeof(Color), "OrangeRed")]
         public void SetRequiredIndicatorColor(Control control, Color color)
@@ -574,7 +574,7 @@ namespace Development.Materia.Controls
         /// Updates 'required' marked control just in case there is a repainting of the marked control and
         /// the indicator attached to it needs to be repositioned and redrawn also.
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="control">Control to be updated and redrawn.</param>
         public void UpdateIndicators(Control control)
         {
             if (control != null)

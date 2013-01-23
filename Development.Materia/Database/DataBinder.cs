@@ -601,8 +601,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns whether the specified object is supported by the DataBinder or not.
         /// </summary>
-        /// <param name="extendee"></param>
-        /// <returns></returns>
+        /// <param name="extendee">Object to evaluate</param>
+        /// <returns>True if object is supported otherwise false.</returns>
         public bool CanExtend(object extendee)
         {
             bool _extended = false;
@@ -683,8 +683,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Determines the binded database field name into the specified control.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evaluate</param>
+        /// <returns>Binded database field name associated into the control.</returns>
         [Description("Determines the binded database field name into the specified control.")]
         public string GetFieldName(Control control)
         {
@@ -3028,9 +3028,9 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of BindedControl.
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="control"></param>
-        /// <param name="field"></param>
+        /// <param name="parent">Parent collection.</param>
+        /// <param name="control">Binded control</param>
+        /// <param name="field">Binded database field name.</param>
         public BindedControl(BindedControlCollection parent, object control, string field)
         {
             _parent = parent; _control = control; _fieldname = field;
@@ -3089,7 +3089,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of BindedControlCollection.
         /// </summary>
-        /// <param name="binder"></param>
+        /// <param name="binder">Development.Materia.Database.DataBinder parent control.</param>
         public BindedControlCollection(DataBinder binder)
         { _binder = binder; }
 
@@ -3153,7 +3153,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="control">Binded control object</param>
         /// <param name="field">Database field name to bind into the control</param>
-        /// <returns></returns>
+        /// <returns>Newly added Development.Materia.Database.BindedControl</returns>
         public BindedControl Add(object control, string field)
         {
             if (!String.IsNullOrEmpty(field.RLTrim()))
@@ -3171,24 +3171,24 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns whether the specified binded control information already exists within the collection or not.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Development.Materia.Database.BindedControl to evaluate.</param>
+        /// <returns>True if the specified Development.Materia.Database.BindedControl already exists within the collection otherwise false.</returns>
         public bool Contains(BindedControl control)
         { return List.Contains(control); }
 
         /// <summary>
         /// Returns whether a binded control information with the specified control object exists within the collection or not.
         /// </summary>
-        /// <param name="control"></param>
-        /// <returns></returns>
+        /// <param name="control">Control to evaluate.</param>
+        /// <returns>True if an existing Development.Materia.Database.BindedControl with the specified control already exists within the collection otherwise false.</returns>
         public bool Contains(object control)
         { return (bool)(GetInfoByControl(control) != null); }
 
         /// <summary>
         /// Returns whether a binded control information with the specified database field name exists within the collection or not.
         /// </summary>
-        /// <param name="field"></param>
-        /// <returns></returns>
+        /// <param name="field">Binded database field name</param>
+        /// <returns>True if an existing Development.Materia.Database.BindedControl with the specified database field name already exists within the collection otherwise false.</returns>
         public bool Contains(string field)
         { return (bool)(GetInfoByName(field) != null); }
 
@@ -3213,7 +3213,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes the specified binded control information from the collection.
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="control">Development.Materia.Database.BindedControl to remove</param>
         public void Remove(BindedControl control)
         {
             if (Contains(control))
@@ -3227,7 +3227,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes a binded control information with the specified control object from the collection.
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="control">Control of an existing Development.Materia.Database.BindedControl to remove.</param>
         public void Remove(object control)
         {
             BindedControl _control = GetInfoByControl(control);
@@ -3242,7 +3242,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes a binded control information with the specified database field name from the collection.
         /// </summary>
-        /// <param name="field"></param>
+        /// <param name="field">Binded database field name of an existing Development.Materia.Database.BindedControl to remove.</param>
         public void Remove(string field)
         {
             BindedControl _control = GetInfoByName(field);
@@ -3334,23 +3334,23 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of DataBinderSavingEventArgs.
         /// </summary>
-        /// <param name="sql"></param>
+        /// <param name="sql">SQL statement</param>
         public DataBinderSavingEventArgs(string sql) : this(sql, "")
         { }
 
         /// <summary>
         /// Creates a new instance of DataBinderSavingEventArgs.
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="rowsaffected"></param>
+        /// <param name="sql">SQL statement</param>
+        /// <param name="rowsaffected">Affected number of rows.</param>
         public DataBinderSavingEventArgs(string sql, int rowsaffected) : this(sql, "")
         { _rowsaffected = rowsaffected; _saved = true; }
 
         /// <summary>
         /// Creates a new instance of DataBinderSavingEventArgs.
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="error"></param>
+        /// <param name="sql">SQL statement</param>
+        /// <param name="error">Exception message</param>
         public DataBinderSavingEventArgs(string sql, string error)
         {
             _cancel = !String.IsNullOrEmpty(error.RLTrim()); _commandtext = sql;
@@ -3451,15 +3451,15 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of DataBinderValidationEventArgs.
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="control">Current associated control.</param>
         public DataBinderValidationEventArgs(object control) : this(control, true)
         { }
 
         /// <summary>
         /// Creates a new instance of DataBinderValidationEventArgs.
         /// </summary>
-        /// <param name="control"></param>
-        /// <param name="valid"></param>
+        /// <param name="control">Current associated control.</param>
+        /// <param name="valid">A value that determines whether control's value is valid or not.</param>
         public DataBinderValidationEventArgs(object control, bool valid)
         { _control = control; _valid = valid; _cancel = (!valid); }
 
@@ -3760,7 +3760,7 @@ namespace Development.Materia.Database
         /// <summary>
         ///  Asynchronously loads the data binding information and returns an argument relative to its data loading execution. Call the EndLoad(IAsyncResult) to get synchronization result argument after synchronization is complete.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from the DataBinding loading asynchornization.</returns>
         public IAsyncResult BeginLoad()
         {
             if (_binder == null) return null;
@@ -4092,8 +4092,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Finalizes data loading and returns the result argument based on the specified synchronization called by a BeginLoad function.
         /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
+        /// <param name="result">System.IAsyncResult generated from a BeginLoad method call</param>
+        /// <returns>Development.Materia.Database.DataBinderLoadingEventArgs generated from the DataBinding loading routines.</returns>
         public DataBinderLoadingEventArgs EndLoad(IAsyncResult result)
         {
             DataBinderLoadingEventArgs _args = null;
@@ -4188,14 +4188,14 @@ namespace Development.Materia.Database
         /// <summary>
         /// Gets the current base table of the current data binding information.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Base data source.</returns>
         public DataTable GetBaseTable()
         { return _basetable; }
 
         /// <summary>
         /// Returns the sql statement associated with the updates applied into the current DataBinding.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SQL statement generated from the changes applied to the current data bindings.</returns>
         public string GetSqlStatement()
         {
             QueryGenerator _sqlgenerator = new QueryGenerator(_basetable);
@@ -4384,7 +4384,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns the sql command statements generated from the current binding table's changes.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SQL statements generated to the current data bindings and it's child data bindings.</returns>
         public string GetUpdateStatements()
         {
             StringBuilder _sql = new StringBuilder();
@@ -4581,7 +4581,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Loads the data binding information and returns an argument relative to its data loading execution.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DataBinderLoadingEventArgs generated from the data binding's loading routines.</returns>
         public DataBinderLoadingEventArgs Load()
         {
             if (_binder == null) return null;
@@ -5347,7 +5347,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns the DataBinding's given name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Development.Matwria.Database.DataBinding's name.</returns>
         public override string ToString()
         {  return _name; }
 
@@ -5568,7 +5568,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of DataBindingCollection.
         /// </summary>
-        /// <param name="header"></param>
+        /// <param name="header">Development.Materia.Database.DataBinding header</param>
         public DataBindingCollection(DataBinding header)
         { _header = header; }
 
@@ -5614,7 +5614,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new detail binding information into the collection.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Newly added detail Development.Materia.Database.DataBinding.</returns>
         public DataBinding Add()
         { return Add(""); }
 
@@ -5622,7 +5622,7 @@ namespace Development.Materia.Database
         /// Adds a new detail binding information into the collection.
         /// </summary>
         /// <param name="sql">Raw database command text used to deploy automated database record updates</param>
-        /// <returns></returns>
+        /// <returns>Newly added detail Development.Materia.Database.DataBinding.</returns>
         public DataBinding Add(string sql)
         { return Add(sql, ""); }
 
@@ -5631,7 +5631,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="basecommandtext">Raw database command text used to deploy automated database record updates</param>
         /// <param name="viewcommandtext">Command text used to provide customized data binded views specially if records are binded into a grid</param>
-        /// <returns></returns>
+        /// <returns>Newly added detail Development.Materia.Database.DataBinding.</returns>
         public DataBinding Add(string basecommandtext, string viewcommandtext)
         {
             DataBinding _binding = new DataBinding(_header.Binder, basecommandtext, viewcommandtext, _header);
@@ -5641,16 +5641,16 @@ namespace Development.Materia.Database
         /// <summary>
         ///  Returns whether the specified binding information already exists within the collection.
         /// </summary>
-        /// <param name="binding"></param>
-        /// <returns></returns>
+        /// <param name="binding">Development.Materia.Database.DataBinding to evaluate</param>
+        /// <returns>True if the specified Development.Materia.Database.DataBinding already exists within the collection otherwise false.</returns>
         public bool Contains(DataBinding binding)
         { return List.Contains(binding); }
 
         /// <summary>
         /// Returns whether a certain binding information with the specified name exists within the collection or not.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">Development.Materia.Database.DataBinding name to evaluate.</param>
+        /// <returns>True if the specified Development.Materia.Database.DataBinding with the specified name already exists within the collection or not.</returns>
         public bool Contains(string name)
         { return VisualBasic.CBool(GetBindingByName(name) != null); }
 
@@ -5672,7 +5672,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes the specified binding information from the collection.
         /// </summary>
-        /// <param name="binding"></param>
+        /// <param name="binding">Development.Materia.Database.DataBinding to remove</param>
         public void Remove(DataBinding binding)
         {
             if (Contains(binding)) List.Remove(binding);
@@ -5681,7 +5681,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes a certain binding information with the specified name from the collection.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of Development.Materia.Database.DataBinding to remove.</param>
         public void Remove(string name)
         {
             DataBinding _binding = GetBindingByName(name);
@@ -5689,9 +5689,9 @@ namespace Development.Materia.Database
         }
 
         /// <summary>
-        /// Returns the underlying binding names inside the collection.
+        /// Gets the underlying binding names inside the collection.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Underlying binding names inside the collection</returns>
         public override string ToString()
         {
             string _tostring = "";
@@ -5811,16 +5811,16 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new database required field into the collection.
         /// </summary>
-        /// <param name="field"></param>
-        /// <returns></returns>
+        /// <param name="field">Database field name</param>
+        /// <returns>Index of the newly added field name within the collection.</returns>
         public int Add(string field)
         { Remove(field); return List.Add(field); }
 
         /// <summary>
         /// Adds database required fields into the collection.
         /// </summary>
-        /// <param name="fields"></param>
-        /// <returns></returns>
+        /// <param name="fields">Database field names.</param>
+        /// <returns>Indexes of the newly added field names within the collection.</returns>
         public List<int> Add(string[] fields)
         {
             List<int> _list = new List<int>();
@@ -5834,15 +5834,15 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns whether the specified field name already exists within the collection.
         /// </summary>
-        /// <param name="field"></param>
-        /// <returns></returns>
+        /// <param name="field">Database field name to evaluate.</param>
+        /// <returns>True if the specified databbase field name already exists within the collection otherwise false.</returns>
         public bool Contains(string field)
         { return List.Contains(field); }
 
         /// <summary>
         /// Removes the specified field name from the collection.
         /// </summary>
-        /// <param name="field"></param>
+        /// <param name="field">Database field name to remove.</param>
         public void Remove(string field)
         {
             if (Contains(field)) List.Remove(field);

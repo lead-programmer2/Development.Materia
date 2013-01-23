@@ -88,7 +88,7 @@ namespace Development.Materia.Database
         /// Returns a asynchronization of the CanConnect function. Result can then be returned by calling EndTryConnect after the asynchronization is completed.
         /// </summary>
         /// <param name="connectionstring">Database connection string.</param>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from the CanConnect asynchronization.</returns>
         public static IAsyncResult BeginTryConnect(string connectionstring)
         {
             Func<string, bool> _delegate = new Func<string, bool>(CanConnect);
@@ -104,7 +104,7 @@ namespace Development.Materia.Database
         /// Returns a asynchronization of the CanConnect function. Result can then be returned by calling EndTryConnect after the asynchronization is completed.
         /// </summary>
         /// <param name="connection">Database connection object.</param>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from the CanConnect asynchronization.</returns>
         public static IAsyncResult BeginTryConnect(IDbConnection connection)
         {
             Func<IDbConnection, bool> _delegate = new Func<IDbConnection, bool>(CanConnect);
@@ -124,7 +124,7 @@ namespace Development.Materia.Database
         /// Returns whether a database connection can be established using the specified database connection string
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
-        /// <returns></returns>
+        /// <returns>True if a database connection can be established otherwise false.</returns>
         public static bool CanConnect(string connectionstring)
         {
             IDbConnection connection = CreateConnection(connectionstring);
@@ -139,7 +139,7 @@ namespace Development.Materia.Database
         /// Returns whether a database connection can be established using the specified database connection object.
         /// </summary>
         /// <param name="connection">Database connection object.</param>
-        /// <returns></returns>
+        /// <returns>True if a database connection can be established otherwise false.</returns>
         public static bool CanConnect(IDbConnection connection)
         {
             return connection.CanConnect();
@@ -151,7 +151,7 @@ namespace Development.Materia.Database
         /// Creates a generic database connection using the specified database connection string
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
-        /// <returns></returns>
+        /// <returns>System.Data.IDbConnection created from the specified database connection string.</returns>
         public static IDbConnection CreateConnection(string connectionstring)
         {
             string _server = connectionstring.ConnectionStringValue(ConnectionStringSection.Server);
@@ -178,7 +178,7 @@ namespace Development.Materia.Database
         /// Returns whether a database connection can be established using the specified database connection string thru the specified synchronization result.
         /// </summary>
         /// <param name="result">Synchronization result from invoked BeginTryConnect method</param>
-        /// <returns></returns>
+        /// <returns>True if a database connection can be established otherwise false.</returns>
         public static bool EndTryConnect(IAsyncResult result)
         {
             bool _connected = false;
