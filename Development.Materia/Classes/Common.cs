@@ -755,7 +755,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static object GetMethodValue(object owner, string methodname)
         { return GetMethodValue<object>(owner, methodname); }
 
@@ -765,7 +765,7 @@ namespace Development.Materia
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
         /// <param name="parameter">Method / function parameters</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static object GetMethodValue(object owner, string methodname, object parameter)
         { return GetMethodValue<object>(owner, methodname, parameter); }
 
@@ -775,7 +775,7 @@ namespace Development.Materia
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
         /// <param name="parameters">Method / function parameters</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static object GetMethodValue(object owner, string methodname, object[] parameters)
         { return GetMethodValue<object>(owner, methodname, parameters); }
 
