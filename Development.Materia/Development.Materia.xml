@@ -1721,7 +1721,7 @@
             </summary>
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue(System.Object,System.String,System.Object)">
             <summary>
@@ -1730,7 +1730,7 @@
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
             <param name="parameter">Method / function parameters</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue(System.Object,System.String,System.Object[])">
             <summary>
@@ -1739,7 +1739,7 @@
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
             <param name="parameters">Method / function parameters</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue``1(System.Object,System.String)">
             <summary>
@@ -3132,6 +3132,10 @@
             Converts the initialized numeric value into its english-word representation.
             </summary>
             <returns>Returns the english-word representation of the initialized numeric value.</returns>
+            <example>
+            <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 03" language="cs" />
+            <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 03" language="vbnet" />
+            </example>
         </member>
         <member name="M:Development.Materia.AmountToWordsConverter.AmountToWords(System.Double)">
             <summary>
@@ -3139,6 +3143,10 @@
             </summary>
             <param name="amountvalue">Numeric / amount value to convert</param>
             <returns>Returns the english-words representation of the specified numeric value.</returns>
+            <example>
+            <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 01" language="cs" />
+            <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 01" language="vbnet" />
+            </example>
         </member>
         <member name="M:Development.Materia.AmountToWordsConverter.AmountToWords(System.Double,System.String)">
             <summary>
@@ -3147,6 +3155,10 @@
             <param name="amountvalue">Numeric / amount value to convert</param>
             <param name="amountcurrency">Suffixing curreny</param>
             <returns>Returns the english-words representation of the specified numeric value suffixed with the specified currency.</returns>
+            <example>
+            <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 02" language="cs" />
+            <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 02" language="vbnet" />
+            </example>
         </member>
         <member name="P:Development.Materia.AmountToWordsConverter.Amount">
             <summary>
