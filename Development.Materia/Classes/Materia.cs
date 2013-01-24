@@ -2289,7 +2289,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="value">Numeric value to convert.</param>
         /// <param name="decimalplaces">Number of decimal places.</param>
-        /// <returns></returns>
+        /// <returns>SQL-qualified string representation of the specified value.</returns>
         public static string ToSqlValidString(this decimal value, int decimalplaces)
         { return double.Parse(value.ToString()).ToSqlValidString(decimalplaces); }
 

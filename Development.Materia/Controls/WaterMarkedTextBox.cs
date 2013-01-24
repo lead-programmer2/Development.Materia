@@ -86,7 +86,7 @@ namespace Development.Materia.Controls
         /// <summary>
         /// Raises the Paint method.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Argument that provides the control's painting information.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
             Font _drawfont = new Font(Font.FontFamily, Font.Size, Font.Style, Font.Unit);

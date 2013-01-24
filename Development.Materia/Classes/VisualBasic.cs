@@ -111,16 +111,16 @@ namespace Development.Materia
         /// <summary>
         /// Works like Visual Basic Asc method.
         /// </summary>
-        /// <param name="character"></param>
-        /// <returns></returns>
+        /// <param name="character">Character to interpret</param>
+        /// <returns>ASCII representation of the specified character.</returns>
         public static int Asc(char character)
         { return Asc(character.ToString()); }
 
         /// <summary>
         /// Works like Visual Basic Asc method.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">String to interpret</param>
+        /// <returns>ASCII representation of the specified string.</returns>
         public static int Asc(string value)
         {
             int _asc = 0;

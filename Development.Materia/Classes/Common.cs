@@ -782,10 +782,10 @@ namespace Development.Materia
         /// <summary>
         /// Returns the returning value of the specified object's function / method based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Method's expected return type.</typeparam>
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static T GetMethodValue<T>(object owner, string methodname)
         {
             return GetMethodValue<T>(owner, methodname, null);
@@ -794,11 +794,11 @@ namespace Development.Materia
         /// <summary>
         /// Returns the returning value of the specified object's function / method based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Method's expected return type.</typeparam>
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
         /// <param name="parameter">Method / function parameters</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static T GetMethodValue<T>(object owner, string methodname, object parameter)
         {
             return GetMethodValue<T>(owner, methodname, new object[] { parameter });
@@ -807,11 +807,11 @@ namespace Development.Materia
         /// <summary>
         /// Returns the returning value of the specified object's function / method based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Method's expected return type.</typeparam>
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
         /// <param name="parameters">Method / function parameters</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static T GetMethodValue<T>(object owner, string methodname, object[] parameters)
         {
             T _defaultvalue = GetDefaultValueByType<T>();
@@ -821,12 +821,12 @@ namespace Development.Materia
         /// <summary>
         /// Returns the returning value of the specified object's function / method based on the given name.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Method's expected return type.</typeparam>
         /// <param name="owner">Method owner</param>
         /// <param name="methodname">Method / function name</param>
         /// <param name="parameters">Method / function parameters</param>
         /// <param name="defaultvalue">Default value in case it returns a DBNull or Nothing.</param>
-        /// <returns></returns>
+        /// <returns>Method's returning value.</returns>
         public static T GetMethodValue<T>(object owner, string methodname, object[] parameters, T defaultvalue)
         {
             T _value = defaultvalue;

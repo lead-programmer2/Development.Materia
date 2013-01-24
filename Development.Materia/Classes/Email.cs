@@ -228,7 +228,7 @@ namespace Development.Materia.Net
         private string _subject = "";
 
         /// <summary>
-        /// 
+        /// Gets or sets the email's title. 
         /// </summary>
         public string Subject
         {

@@ -78,7 +78,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the AfterBindingDataLoad event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's loading event information.</param>
         protected virtual void OnAfterBindingDataLoad(DataBinderLoadingEventArgs e)
         {
             if (AfterBindingDataLoad != null) AfterBindingDataLoad(this, e);
@@ -93,7 +93,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the AfterControlValidation event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's binded field validation event information.</param>
         protected virtual void OnAfterControlValidation(DataBinderValidationEventArgs e)
         {
             if (AfterControlValidation != null) AfterControlValidation(this, e);
@@ -108,7 +108,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the AfterDataLoad event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnAfterDataLoad(EventArgs e)
         {
             if (AfterDataLoad != null) AfterDataLoad(this, e);
@@ -123,7 +123,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the AfterDataSave event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's saving event information.</param>
         protected virtual void OnAfterDataSave(DataBinderSavingEventArgs e)
         {
             if (AfterDataSave != null) AfterDataSave(this, e);
@@ -138,7 +138,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the AfterValidation event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's validation event information.</param>
         protected virtual void OnAfterValidation(DataBinderValidationEventArgs e)
         {
             if (AfterValidation != null) AfterValidation(this, e);
@@ -153,7 +153,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the BeforeBindingDataLoad event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's loading event information.</param>
         protected virtual void OnBeforeBindingDataLoad(DataBinderLoadingEventArgs e)
         {
             if (BeforeBindingDataLoad != null) BeforeBindingDataLoad(this, e);
@@ -168,7 +168,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the BeforeControlValidation event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's validation event information.</param>
         protected virtual void OnBeforeControlValidation(DataBinderValidationEventArgs e)
         {
             if (BeforeControlValidation != null) BeforeControlValidation(this, e);
@@ -183,7 +183,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the BeforeDataLoad event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnBeforeDataLoad(EventArgs e)
         {
             if (BeforeDataLoad != null) BeforeDataLoad(this, e);
@@ -198,7 +198,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the BeforeDataSave event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's saving event information.</param>
         protected virtual void OnBeforeDataSave(DataBinderSavingEventArgs e)
         {
             if (BeforeDataSave != null) BeforeDataSave(this, e);
@@ -213,7 +213,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the BeforeValidation event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's validation event information.</param>
         protected virtual void OnBeforeValidation(DataBinderValidationEventArgs e)
         {
             if (BeforeValidation != null) BeforeValidation(this, e);
@@ -228,7 +228,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the DataGathering event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnDataGathering(EventArgs e)
         {
             if (DataGathering != null) DataGathering(this, e);
@@ -243,7 +243,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the DataLoading event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnDataLoading(EventArgs e)
         {
             if (DataLoading != null) DataLoading(this, e);
@@ -258,7 +258,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the DataSaveExecuting event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Data that contains the binder's saving event information.</param>
         protected virtual void OnDataSaveExecuting(DataBinderSavingEventArgs e)
         {
             if (DataSaveExecuting != null) DataSaveExecuting(this, e);
@@ -273,7 +273,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the DataSaving event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnDataSaving(EventArgs e)
         {
             if (DataSaving != null) DataSaving(this, e);
@@ -288,7 +288,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the DataValidating event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnDataValidating(EventArgs e)
         {
             if (DataValidating != null) DataValidating(this, e);
@@ -303,7 +303,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the ParentFormLoad event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnParentFormLoad(EventArgs e)
         {
             if (ParentFormLoad != null) ParentFormLoad(this, e);
@@ -318,7 +318,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Raises the ParentFormShown event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnParentFormShown(EventArgs e)
         {
             if (ParentFormShown != null) ParentFormShown(this, e);
@@ -5775,7 +5775,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of RequiredFieldCollection.
         /// </summary>
-        /// <param name="binding"></param>
+        /// <param name="binding">Development.Materia.Database.DataBinding object that owns the current class.</param>
         public RequiredFieldCollection(DataBinding binding)
         { _binding = binding; }
 

@@ -23,7 +23,7 @@ namespace Development.Materia
         /// <summary>
         /// Creates a new instance of IniReader.
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="filename">INI path</param>
         public IniFile(string filename)
         { _filename = filename; }
 
@@ -48,7 +48,7 @@ namespace Development.Materia
         /// </summary>
         /// <param name="section">Ini file section.</param>
         /// <param name="key">Ini file section key</param>
-        /// <returns></returns>
+        /// <returns>Assigned value in the specified Ini file's section key.</returns>
         public string Sections(string section, string key)
         { return ReadSection(section, key); }
 

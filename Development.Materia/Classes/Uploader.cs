@@ -157,7 +157,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the CalculationFileSizesStarted event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnCalculationFileSizesStarted(EventArgs e)
         {
             if (CalculationFileSizesStarted != null) CalculationFileSizesStarted(this, e);
@@ -171,7 +171,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Cancelled event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnCancelled(EventArgs e)
         {
             if (Cancelled != null) Cancelled(this, e);
@@ -185,7 +185,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the CancelRequested event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnCancelRequested(EventArgs e)
         {
             if (CancelRequested != null) CancelRequested(this, e);
@@ -199,7 +199,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Completed event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnCompleted(EventArgs e)
         {
             if (Completed != null) Completed(this, e);
@@ -213,7 +213,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the CalculatingFileSize event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Uploading file size.</param>
         protected virtual void OnCalculatingFileSize(Int32 e)
         {
             if (CalculatingFileSize != null) CalculatingFileSize(this, e);
@@ -227,7 +227,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileUploadAttempting event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnFileUploadAttempting(EventArgs e)
         {
             if (FileUploadAttempting != null) FileUploadAttempting(this, e);
@@ -241,7 +241,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileUploadFailed event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Exception encountered</param>
         protected virtual void OnFileUploadFailed(Exception e)
         {
             if (FileUploadFailed != null) FileUploadFailed(this, e);
@@ -255,7 +255,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileUploadStarted event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnFileUploadStarted(EventArgs e)
         {
             if (FileUploadStarted != null) FileUploadStarted(this, e);
@@ -269,7 +269,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileUploadStopped  event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnFileUploadStopped(EventArgs e)
         {
             if (FileUploadStopped != null) FileUploadStopped(this, e);
@@ -283,7 +283,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileUploadSucceeded event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnFileUploadSucceeded(EventArgs e)
         {
             if (FileUploadSucceeded != null) FileUploadSucceeded(this, e);
@@ -297,7 +297,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the FileSizesCalculationComplete event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnFileSizesCalculationComplete(EventArgs e)
         {
             if (FileSizesCalculationComplete != null) FileSizesCalculationComplete(this, e);
@@ -311,7 +311,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the IsBusyChanged event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnIsBusyChanged(EventArgs e)
         {
             if (IsBusyChanged != null) IsBusyChanged(this, e);
@@ -325,7 +325,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the IsPausedChanged event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnIsPausedChanged(EventArgs e)
         {
             if (IsPausedChanged != null) IsPausedChanged(this, e);
@@ -339,7 +339,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Paused event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnPaused(EventArgs e)
         {
             if (Paused != null) Paused(this, e);
@@ -353,7 +353,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the ProgressChanged event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnProgressChanged(EventArgs e)
         {
             if (ProgressChanged != null) ProgressChanged(this, e);
@@ -367,7 +367,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Resumed event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnResumed(EventArgs e)
         {
             if (Resumed != null) Resumed(this, e);
@@ -381,7 +381,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Started event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnStarted(EventArgs e)
         {
             if (Started != null) Started(this, e);
@@ -395,7 +395,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the StateChanged event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnStateChanged(EventArgs e)
         {
             if (StateChanged != null) StateChanged(this, e);
@@ -409,7 +409,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Calls the Stopped event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Base data that contains the event's information.</param>
         protected virtual void OnStopped(EventArgs e)
         {
             if (Stopped != null) Stopped(this, e);
@@ -1100,7 +1100,7 @@ namespace Development.Materia.Net
         /// <summary>
         /// Creates a new instance of UploadFileInfoCollection.
         /// </summary>
-        /// <param name="uploader"></param>
+        /// <param name="uploader">Development.Materia.Net.Uploader object that owns the current collection.</param>
         public UploadFileInfoCollection(Uploader uploader)
         { _uploader = uploader; }
 

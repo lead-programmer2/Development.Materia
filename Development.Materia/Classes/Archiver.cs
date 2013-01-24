@@ -324,7 +324,7 @@ namespace Development.Materia
         ///  Performs file compression using selected archiving tool, file(s) will be inserted directly to the archive file.
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
-        /// <returns></returns>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         public static FileInfo CompressInsert(string path)
         { return CompressInsert(path, ArchivingToolEnum.SevenZip); }
 

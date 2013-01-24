@@ -23,7 +23,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of CommandParser.
         /// </summary>
-        /// <param name="que"></param>
+        /// <param name="que">Development.Materia.Database.Que that holds the Sqlcommand statement.</param>
         public CommandParser(Que que)
         { _que = que; Parse(); }
 
@@ -437,7 +437,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of CommandStatementCollection.
         /// </summary>
-        /// <param name="parser"></param>
+        /// <param name="parser">Development.Materia.Database.CommandParser that owns the current collection.</param>
         public CommandStatementCollection(CommandParser parser)
         { _parser = parser; }
 
