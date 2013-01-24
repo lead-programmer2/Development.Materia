@@ -306,6 +306,10 @@ namespace Development.Materia
         /// Converts the initialized numeric value into its english-word representation.
         /// </summary>
         /// <returns>Returns the english-word representation of the initialized numeric value.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 03" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 03" language="vbnet" />
+        /// </example>
         public override string ToString()
         {
             string _words = "";
@@ -332,6 +336,10 @@ namespace Development.Materia
         /// </summary>
         /// <param name="amountvalue">Numeric / amount value to convert</param>
         /// <returns>Returns the english-words representation of the specified numeric value.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 01" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 01" language="vbnet" />
+        /// </example>
         public static string AmountToWords(double amountvalue)
         { return AmountToWords(amountvalue, ""); }
 
@@ -341,6 +349,10 @@ namespace Development.Materia
         /// <param name="amountvalue">Numeric / amount value to convert</param>
         /// <param name="amountcurrency">Suffixing curreny</param>
         /// <returns>Returns the english-words representation of the specified numeric value suffixed with the specified currency.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="AmountToWordsConverter 02" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="AmountToWordsConverter 02" language="vbnet" />
+        /// </example>
         public static string AmountToWords(double amountvalue, string amountcurrency)
         {
             string _words = "";
