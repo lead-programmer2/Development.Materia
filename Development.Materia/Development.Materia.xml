@@ -1296,7 +1296,7 @@
             </summary>
             <param name="value">Numeric value to convert.</param>
             <param name="decimalplaces">Number of decimal places.</param>
-            <returns></returns>
+            <returns>SQL-qualified string representation of the specified value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.ToSqlValidString(System.Double)">
             <summary>
@@ -1745,41 +1745,41 @@
             <summary>
             Returns the returning value of the specified object's function / method based on the given name.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Method's expected return type.</typeparam>
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue``1(System.Object,System.String,System.Object)">
             <summary>
             Returns the returning value of the specified object's function / method based on the given name.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Method's expected return type.</typeparam>
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
             <param name="parameter">Method / function parameters</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue``1(System.Object,System.String,System.Object[])">
             <summary>
             Returns the returning value of the specified object's function / method based on the given name.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Method's expected return type.</typeparam>
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
             <param name="parameters">Method / function parameters</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetMethodValue``1(System.Object,System.String,System.Object[],``0)">
             <summary>
             Returns the returning value of the specified object's function / method based on the given name.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Method's expected return type.</typeparam>
             <param name="owner">Method owner</param>
             <param name="methodname">Method / function name</param>
             <param name="parameters">Method / function parameters</param>
             <param name="defaultvalue">Default value in case it returns a DBNull or Nothing.</param>
-            <returns></returns>
+            <returns>Method's returning value.</returns>
         </member>
         <member name="M:Development.Materia.Materia.GetPropertyValue(System.Object,System.String)">
             <summary>
@@ -2228,103 +2228,103 @@
             <summary>
             Raises the AfterBindingDataLoad event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's loading event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnAfterControlValidation(Development.Materia.Database.DataBinderValidationEventArgs)">
             <summary>
             Raises the AfterControlValidation event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's binded field validation event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnAfterDataLoad(System.EventArgs)">
             <summary>
             Raises the AfterDataLoad event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnAfterDataSave(Development.Materia.Database.DataBinderSavingEventArgs)">
             <summary>
             Raises the AfterDataSave event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's saving event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnAfterValidation(Development.Materia.Database.DataBinderValidationEventArgs)">
             <summary>
             Raises the AfterValidation event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's validation event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnBeforeBindingDataLoad(Development.Materia.Database.DataBinderLoadingEventArgs)">
             <summary>
             Raises the BeforeBindingDataLoad event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's loading event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnBeforeControlValidation(Development.Materia.Database.DataBinderValidationEventArgs)">
             <summary>
             Raises the BeforeControlValidation event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's validation event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnBeforeDataLoad(System.EventArgs)">
             <summary>
             Raises the BeforeDataLoad event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnBeforeDataSave(Development.Materia.Database.DataBinderSavingEventArgs)">
             <summary>
             Raises the BeforeDataSave event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's saving event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnBeforeValidation(Development.Materia.Database.DataBinderValidationEventArgs)">
             <summary>
             Raises the BeforeValidation event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's validation event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataGathering(System.EventArgs)">
             <summary>
             Raises the DataGathering event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataLoading(System.EventArgs)">
             <summary>
             Raises the DataLoading event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataSaveExecuting(Development.Materia.Database.DataBinderSavingEventArgs)">
             <summary>
             Raises the DataSaveExecuting event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Data that contains the binder's saving event information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataSaving(System.EventArgs)">
             <summary>
             Raises the DataSaving event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnDataValidating(System.EventArgs)">
             <summary>
             Raises the DataValidating event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnParentFormLoad(System.EventArgs)">
             <summary>
             Raises the ParentFormLoad event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.OnParentFormShown(System.EventArgs)">
             <summary>
             Raises the ParentFormShown event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Database.DataBinder.CanExtend(System.Object)">
             <summary>
@@ -3063,7 +3063,7 @@
             <summary>
             Creates a new instance of RequiredFieldCollection.
             </summary>
-            <param name="binding"></param>
+            <param name="binding">Development.Materia.Database.DataBinding object that owns the current class.</param>
         </member>
         <member name="M:Development.Materia.Database.RequiredFieldCollection.Add(System.String)">
             <summary>
@@ -3693,7 +3693,7 @@
             <summary>
             Raises the Paint method.
             </summary>
-            <param name="e"></param>
+            <param name="e">Argument that provides the control's painting information.</param>
         </member>
         <member name="P:Development.Materia.Controls.WaterMarkedTextBox.WaterMarkForeColor">
             <summary>
@@ -3849,127 +3849,127 @@
             <summary>
             Calls the CalculationFileSizesStarted event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnCancelled(System.EventArgs)">
             <summary>
             Calls the Cancelled event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnCancelRequested(System.EventArgs)">
             <summary>
             Calls the CancelRequested event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnCompleted(System.EventArgs)">
             <summary>
             Calls the Completed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnDeleteFilesAfterCancel(System.EventArgs)">
             <summary>
             Calls the DeleteFilesAfterCancel event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnDeletingFileAfterDownload(System.EventArgs)">
             <summary>
             Calls the DeletingFileAfterDownload event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnCalculatingFileSize(System.Int32)">
             <summary>
             Calls the CalculatingFileSize event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Current downloading file size</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileDownloadAttempting(System.EventArgs)">
             <summary>
             Calls the FileDownloadAttempting event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileDownloadFailed(System.Exception)">
             <summary>
             Calls the FileDownloadFailed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Encountered exception</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileDownloadStarted(System.EventArgs)">
             <summary>
             Calls the FileDownloadStarted event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileDownloadStopped(System.EventArgs)">
             <summary>
             Calls the FileDownloadStopped  event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileDownloadSucceeded(System.EventArgs)">
             <summary>
             Calls the FileDownloadSucceeded event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnFileSizesCalculationComplete(System.EventArgs)">
             <summary>
             Calls the FileSizesCalculationComplete event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnIsBusyChanged(System.EventArgs)">
             <summary>
             Calls the IsBusyChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnIsPausedChanged(System.EventArgs)">
             <summary>
             Calls the IsPausedChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnPaused(System.EventArgs)">
             <summary>
             Calls the Paused event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnProgressChanged(System.EventArgs)">
             <summary>
             Calls the ProgressChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnResumed(System.EventArgs)">
             <summary>
             Calls the Resumed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnStarted(System.EventArgs)">
             <summary>
             Calls the Started event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnStateChanged(System.EventArgs)">
             <summary>
             Calls the StateChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.OnStopped(System.EventArgs)">
             <summary>
             Calls the Stopped event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Downloader.FormatSizeBinary(System.Int64)">
             <summary>
@@ -4356,7 +4356,7 @@
             <summary>
             Creates a new instance of DownloadFileInfoCollection
             </summary>
-            <param name="downloader"></param>
+            <param name="downloader">Development.Materia.Net.Downloader object that owns the collection.</param>
         </member>
         <member name="M:Development.Materia.Net.DownloadFileInfoCollection.Add(System.String)">
             <summary>
@@ -4838,15 +4838,15 @@
             <summary>
             Works like Visual Basic Asc method.
             </summary>
-            <param name="character"></param>
-            <returns></returns>
+            <param name="character">Character to interpret</param>
+            <returns>ASCII representation of the specified character.</returns>
         </member>
         <member name="M:Development.Materia.VisualBasic.Asc(System.String)">
             <summary>
             Works like Visual Basic Asc method.
             </summary>
-            <param name="value"></param>
-            <returns></returns>
+            <param name="value">String to interpret</param>
+            <returns>ASCII representation of the specified string.</returns>
         </member>
         <member name="M:Development.Materia.VisualBasic.CBool(System.Object)">
             <summary>
@@ -5396,7 +5396,7 @@
         </member>
         <member name="P:Development.Materia.Net.Email.Subject">
             <summary>
-            
+            Gets or sets the email's title. 
             </summary>
         </member>
         <member name="P:Development.Materia.Net.Email.To">
@@ -5603,7 +5603,7 @@
              Performs file compression using selected archiving tool, file(s) will be inserted directly to the archive file.
             </summary>
             <param name="path">File / directory path to archive</param>
-            <returns></returns>
+            <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         </member>
         <member name="M:Development.Materia.Archiver.CompressInsert(System.String,Development.Materia.ArchivingToolEnum)">
             <summary>
@@ -6049,7 +6049,7 @@
             <summary>
             Creates a new instance of CommandParser.
             </summary>
-            <param name="que"></param>
+            <param name="que">Development.Materia.Database.Que that holds the Sqlcommand statement.</param>
         </member>
         <member name="P:Development.Materia.Database.CommandParser.CommandStatements">
             <summary>
@@ -6070,7 +6070,7 @@
             <summary>
             Creates a new instance of CommandStatementCollection.
             </summary>
-            <param name="parser"></param>
+            <param name="parser">Development.Materia.Database.CommandParser that owns the current collection.</param>
         </member>
         <member name="M:Development.Materia.Database.CommandStatementCollection.Add(System.String)">
             <summary>
@@ -6119,7 +6119,7 @@
             <summary>
             Creates a new instance of IniReader.
             </summary>
-            <param name="filename"></param>
+            <param name="filename">INI path</param>
         </member>
         <member name="M:Development.Materia.IniFile.Sections(System.String,System.String)">
             <summary>
@@ -6127,7 +6127,7 @@
             </summary>
             <param name="section">Ini file section.</param>
             <param name="key">Ini file section key</param>
-            <returns></returns>
+            <returns>Assigned value in the specified Ini file's section key.</returns>
         </member>
         <member name="M:Development.Materia.IniFile.GetKeyValue(System.String,System.String,System.String)">
             <summary>
@@ -6361,115 +6361,115 @@
             <summary>
             Calls the CalculationFileSizesStarted event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnCancelled(System.EventArgs)">
             <summary>
             Calls the Cancelled event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnCancelRequested(System.EventArgs)">
             <summary>
             Calls the CancelRequested event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnCompleted(System.EventArgs)">
             <summary>
             Calls the Completed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnCalculatingFileSize(System.Int32)">
             <summary>
             Calls the CalculatingFileSize event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Uploading file size.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileUploadAttempting(System.EventArgs)">
             <summary>
             Calls the FileUploadAttempting event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileUploadFailed(System.Exception)">
             <summary>
             Calls the FileUploadFailed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Exception encountered</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileUploadStarted(System.EventArgs)">
             <summary>
             Calls the FileUploadStarted event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileUploadStopped(System.EventArgs)">
             <summary>
             Calls the FileUploadStopped  event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileUploadSucceeded(System.EventArgs)">
             <summary>
             Calls the FileUploadSucceeded event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnFileSizesCalculationComplete(System.EventArgs)">
             <summary>
             Calls the FileSizesCalculationComplete event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnIsBusyChanged(System.EventArgs)">
             <summary>
             Calls the IsBusyChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnIsPausedChanged(System.EventArgs)">
             <summary>
             Calls the IsPausedChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnPaused(System.EventArgs)">
             <summary>
             Calls the Paused event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnProgressChanged(System.EventArgs)">
             <summary>
             Calls the ProgressChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnResumed(System.EventArgs)">
             <summary>
             Calls the Resumed event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnStarted(System.EventArgs)">
             <summary>
             Calls the Started event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnStateChanged(System.EventArgs)">
             <summary>
             Calls the StateChanged event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.OnStopped(System.EventArgs)">
             <summary>
             Calls the Stopped event.
             </summary>
-            <param name="e"></param>
+            <param name="e">Base data that contains the event's information.</param>
         </member>
         <member name="M:Development.Materia.Net.Uploader.FormatSizeBinary(System.Int64)">
             <summary>
@@ -6804,7 +6804,7 @@
             <summary>
             Creates a new instance of UploadFileInfoCollection.
             </summary>
-            <param name="uploader"></param>
+            <param name="uploader">Development.Materia.Net.Uploader object that owns the current collection.</param>
         </member>
         <member name="M:Development.Materia.Net.UploadFileInfoCollection.Add(System.String)">
             <summary>
