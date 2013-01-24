@@ -29,8 +29,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates the Dsn with the specified database driver and database connection attributes.
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="attributes"></param>
+        /// <param name="driver">Database driver</param>
+        /// <param name="attributes">DSN attributes</param>
         /// <returns>True if DSN has been added, otherwise false.</returns>
         public static bool Create(string driver, string attributes)
         {

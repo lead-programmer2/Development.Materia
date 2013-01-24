@@ -131,7 +131,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new row into the DataObjectMap's table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Newly added System.Data.DataRow.</returns>
         public DataRow AddRow()
         {
             if (_table != null) return _table.Rows.Add();
@@ -141,8 +141,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new row into the DataObjectMap's table
         /// </summary>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="values">Row values to be added.</param>
+        /// <returns>Newly added System.Data.DataRow.</returns>
         public DataRow AddRow(object[] values)
         {
             if (_table != null) return _table.Rows.Add(values);
@@ -152,7 +152,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Applies table updates from the specified DataTable object into the current DataObjectMap's table.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="table">System.Data.DataTable to based the updates from.</param>
         public void ApplyUpdatesFromTable(DataTable table)
         {
             if (_table != null &&
@@ -289,7 +289,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Asynchronously saves the current DataObjectMap's table updates into the connected database. Call the EndSave method after the synchornization is finish to get the actual sql execution result.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from a Save asynchornization method call.</returns>
         public IAsyncResult BeginSave()
         {
             Func<QueResult> _delegate = new Func<QueResult>(Save);
@@ -325,7 +325,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Deletes the table row at the specified index of the DataObjectMap's table.
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">Row index</param>
         public void DeleteRow(int index)
         {
             if (_table != null)
@@ -343,7 +343,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Deletes table rows that pass the specified condition from the DataObjectMap.
         /// </summary>
-        /// <param name="condition"></param>
+        /// <param name="condition">Row filtering condition</param>
         public void DeleteRow(string condition)
         {
             if (_table != null && !String.IsNullOrEmpty(condition.RLTrim()))
@@ -368,7 +368,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Deletes specific number of rows to the current table of the DataObjectMap.
         /// </summary>
-        /// <param name="rows"></param>
+        /// <param name="rows">Number of rows to delete</param>
         public void DeleteRows(int rows)
         {
             if (_table != null)
@@ -391,8 +391,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Gets the actual sql execution result from an initialized BeginSave method call.
         /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
+        /// <param name="result">System.IAsyncResult generated from a BeginSave method call</param>
+        /// <returns>Development.Materia.Database.QueResult object that contains the database update information.</returns>
         public QueResult EndSave(IAsyncResult result)
         {
             QueResult _result = null;
@@ -413,7 +413,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Generates sql statement based on the current DataObjectMap's table value updates.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SQL statement based on the current Development.Materia.Database.DataObjectMap's updates.</returns>
         public string GenerateSqlStatement()
         { return GenerateSqlStatement(new string[]{ "" }); }
 
@@ -421,7 +421,7 @@ namespace Development.Materia.Database
         /// Generates sql statement based on the current DataObjectMap's table value updates.
         /// </summary>
         /// <param name="excludedfields">List of table fields to be excluded from the sql statement generation.</param>
-        /// <returns></returns>
+        /// <returns>SQL statement based on the current Development.Materia.Database.DataObjectMap's updates.</returns>
         public string GenerateSqlStatement(string[] excludedfields)
         {
             string _sql = "";
@@ -474,7 +474,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Asynchronously retrieves data from the current connected database based on the current specified database table and filter condition.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>System.IAsyncResult generated from the asynchronized Refresh method call.</returns>
         public IAsyncResult RefreshAsync()
         {
             Action _delegate = new Action(Refresh);
@@ -484,7 +484,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Saves the current DataObjectMap's table updates into the connected database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.QueResult that contains the database updates applied by the method.</returns>
         public QueResult Save()
         {
             QueResult _result = null;
@@ -502,8 +502,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Gets the row at the specified index of the DataObjectMap's table
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">Row index</param>
+        /// <returns>System.Data.DataRow in the specified index of the Development.Materia.Database.DataObjectMap</returns>
         public DataRow Select(int index)
         {
             if (_table != null) return _table.Rows[index];
@@ -513,8 +513,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Gets rows that pass the specified filter condition from the DataObjectMap's table.
         /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
+        /// <param name="condition">Row filtering condition</param>
+        /// <returns>Set of System.Data.DataRow which passed the specified row filtering conditions</returns>
         public DataRow[] Select(string condition)
         {
             if (_table != null)
@@ -534,7 +534,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Gets the current DataObjectMap's database table name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.DataObjectMap hosted database table name.</returns>
         public override string ToString()
         {
             return _databasetable;

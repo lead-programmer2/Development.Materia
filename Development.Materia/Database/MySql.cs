@@ -54,7 +54,7 @@ namespace Development.Materia.Database
         /// Creates a DSN connection using the specified database information.
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
-        /// <returns></returns>
+        /// <returns>DSN System.Data.IDbConnection created from the specified database connection string.</returns>
         public static IDbConnection CreateDSN(string connectionstring)
         {
             string _server = connectionstring.ConnectionStringValue(ConnectionStringSection.Server);
@@ -74,7 +74,7 @@ namespace Development.Materia.Database
         /// <param name="database">Database catalog name</param>
         /// <param name="uid">User Id</param>
         /// <param name="pwd">Password</param>
-        /// <returns></returns>
+        /// <returns>DSN System.Data.IDbConnection created from the specified database connection parameters.</returns>
         public static IDbConnection CreateDSN(string server, string database, string uid, string pwd)
         { return CreateDSN(server, database, uid, pwd, 3306);  }
 
@@ -86,7 +86,7 @@ namespace Development.Materia.Database
         /// <param name="uid">User Id</param>
         /// <param name="pwd">Password</param>
         /// <param name="port">Port</param>
-        /// <returns></returns>
+        /// <returns>DSN System.Data.IDbConnection created from the specified database connection parameters.</returns>
         public static IDbConnection CreateDSN(string server, string database, string uid, string pwd, int port)
         {
             IDbConnection _connection = null;
@@ -132,7 +132,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="connectionstring">MySql connection string</param>
         /// <param name="filename">Backup file path</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the MySql dump operations information.</returns>
         public static MySqlResult Dump(string connectionstring, string filename)
         { return Dump(connectionstring, filename, null); }
 
@@ -142,7 +142,7 @@ namespace Development.Materia.Database
         /// <param name="connectionstring">MySql connection string</param>
         /// <param name="filename">Backup file path</param>
         /// <param name="parameters">MySql dump parameter</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the MySql dump operations information.</returns>
         public static MySqlResult Dump(string connectionstring, string filename, MySqlDumpParameterCollection parameters)
         {
             MySqlResult _result = null; ExtractResourceApplications();
@@ -214,7 +214,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="connectionstring">MySql database connection string</param>
         /// <param name="file">MySql dump file to where the sql statements resides</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the direct MySql application SQL execution information.</returns>
         public static MySqlResult Execute(string connectionstring, FileInfo file)
         { return Execute(connectionstring, file, null); }
 
@@ -224,7 +224,7 @@ namespace Development.Materia.Database
         /// <param name="connectionstring">MySql database connection string</param>
         /// <param name="file">MySql dump file to where the sql statements resides</param>
         /// <param name="parameters">Additional MySql parameters</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the direct MySql application SQL execution information.</returns>
         public static MySqlResult Execute(string connectionstring, FileInfo file, MySqlParameterCollection parameters)
         {
             MySqlResult _result = null;
@@ -246,7 +246,7 @@ namespace Development.Materia.Database
         /// </summary>
         /// <param name="connectionstring">MySql database connection string</param>
         /// <param name="sql">Sql command statements</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the direct MySql application SQL execution information.</returns>
         public static MySqlResult Execute(string connectionstring, string sql)
         { return Execute(connectionstring, sql, null); }
 
@@ -256,7 +256,7 @@ namespace Development.Materia.Database
         /// <param name="connectionstring">MySql database connection string</param>
         /// <param name="sql">Sql command statements</param>
         /// <param name="parameters">Additional MySql parameters</param>
-        /// <returns></returns>
+        /// <returns>Development.Materia.Database.MySqlResult that contains the direct MySql application SQL execution information.</returns>
         public static MySqlResult Execute(string connectionstring, string sql, MySqlParameterCollection parameters)
         {
             MySqlResult _result = null; ExtractResourceApplications();
@@ -395,8 +395,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns a DataSet composed of the specified database's table schema and contents using the supplied connection string.
         /// </summary>
-        /// <param name="connectionstring"></param>
-        /// <returns></returns>
+        /// <param name="connectionstring">Database connection string.</param>
+        /// <returns>System.Data.DataSet which contains the current connected database table schemas and contents. Returns nothing if error has been encountered during data-retrieval operations.</returns>
         public static DataSet GetDataSet(string connectionstring)
         {
             IDbConnection _connection = Database.CreateConnection(connectionstring);
@@ -422,8 +422,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns a DataSet composed of the specified database's table schema and contents.
         /// </summary>
-        /// <param name="connection"></param>
-        /// <returns></returns>
+        /// <param name="connection">Database connection object.</param>
+        /// <returns>System.Data.DataSet which contains the current connected database table schemas and contents. Returns nothing if error has been encountered during data-retrieval operations.</returns>
         public static DataSet GetDataSet(IDbConnection connection)
         {
             DataSet _dataset = null;
@@ -469,8 +469,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns the MySql dump parameter representation of the specified MySqlDumpParameters enumeration.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySqlDumpParamater to evaluate</param>
+        /// <returns>MySql dump parameter representation of the specified enumeration.</returns>
         public static string GetParameterValue(MySqlDumpParameters parameter)
         {
             string _value = "";
@@ -494,8 +494,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns the MySql dump parameter representation of the specified MySqlParameters enumeration.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySqlParamater to evaluate</param>
+        /// <returns>MySql application parameter representation of the specified enumeration.</returns>
         public static string GetParameterValue(MySqlParameters parameter)
         {
             string _value = "";
@@ -523,7 +523,7 @@ namespace Development.Materia.Database
         /// <param name="database">Database catalog name</param>
         /// <param name="uid">Database account user id.</param>
         /// <param name="pwd">Database account password</param>
-        /// <returns></returns>
+        /// <returns>Server's data and time.</returns>
         public static DateTime GetServerDateAndTime(string server, string database, string uid, string pwd)
         {
             string _connectionstring = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + uid + ";PWD=" + pwd + ";";
@@ -534,7 +534,7 @@ namespace Development.Materia.Database
         /// Gets the current server's date and time using the specified database connection string.
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
-        /// <returns></returns>
+        /// <returns>Server's data and time.</returns>
         public static DateTime GetServerDateAndTime(string connectionstring)
         {
             IDbConnection _connection = Database.CreateConnection(connectionstring);
@@ -558,7 +558,7 @@ namespace Development.Materia.Database
         /// Gets the current server's date and time using the specified database connection.
         /// </summary>
         /// <param name="connection">Database connection</param>
-        /// <returns></returns>
+        /// <returns>Server's data and time.</returns>
         public static DateTime GetServerDateAndTime(IDbConnection connection)
         {
             DateTime _datetime = DateTime.Now;
@@ -582,7 +582,7 @@ namespace Development.Materia.Database
         /// Gets the list of tables in a certain database using the specified database connection string.
         /// </summary>
         /// <param name="connectionstring">Database connection string</param>
-        /// <returns></returns>
+        /// <returns>List of database table names.</returns>
         public static List<string> GetTables(string connectionstring)
         {
             IDbConnection _connection = Database.CreateConnection(connectionstring);
@@ -603,7 +603,7 @@ namespace Development.Materia.Database
         /// Gets the list of tables in a certain database using the specified database connection.
         /// </summary>
         /// <param name="connection">Database connection</param>
-        /// <returns></returns>
+        /// <returns>List of database table names.</returns>
         public static List<string> GetTables(IDbConnection connection)
         {
             List<string> _tables = new List<string>();
@@ -687,23 +687,23 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new parameter in the collection.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql dump parameter.</param>
+        /// <returns>Index of the newly added parameter within the collection.</returns>
         public int Add(MySqlDumpParameters parameter)
         { return base.Add(MySql.GetParameterValue(parameter)); }
 
         /// <summary>
         /// Returns whether the specified parameter already exists in the collection or not.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql dump parameter to eveluate.</param>
+        /// <returns>True if the parameter already exists within the collection owtherwise false.</returns>
         public bool Contains(MySqlDumpParameters parameter)
         { return base.Contains(MySql.GetParameterValue(parameter)); }
 
         /// <summary>
         /// Removes the specified parameter from the collection.
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter">MySql dump parameter to remove</param>
         public void Remove(MySqlDumpParameters parameter)
         { base.Remove(MySql.GetParameterValue(parameter)); }
 
@@ -722,23 +722,23 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new parameter in the collection.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql application parameter</param>
+        /// <returns>Index of the newly added MySql application parameter within the collection.</returns>
         public int Add(MySqlParameters parameter)
         { return base.Add(MySql.GetParameterValue(parameter)); }
 
         /// <summary>
         /// Returns whether the specified parameter already exists in the collection or not.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql application parameter to evaluate.</param>
+        /// <returns>True if parameter already exists within the application otherwise false.</returns>
         public bool Contains(MySqlParameters parameter)
         { return base.Contains(MySql.GetParameterValue(parameter)); }
 
         /// <summary>
         /// Removes the specified parameter from the collection.
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter">MySql application parameter to remove.</param>
         public void Remove(MySqlParameters parameter)
         { base.Remove(MySql.GetParameterValue(parameter)); }
 
@@ -869,8 +869,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a new parameter in the collection.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql application or dump parameter.</param>
+        /// <returns>Index of the parameter within the collection.</returns>
         public int Add(string parameter)
         {
             if (List.Contains(parameter)) return GetParameterIndex(parameter);
@@ -880,8 +880,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns whether the specified parameter string already exists in the collection or not.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <param name="parameter">MySql application or dump parameter to evaluate.</param>
+        /// <returns>True if the parameter already exists within the collection otherwise false.</returns>
         public bool Contains(string parameter)
         { return List.Contains(parameter); }
 
@@ -904,7 +904,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Removes the specified parameter string from the collection.
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter">MySql application or dump parameter to remove.</param>
         public void Remove(string parameter)
         {
             if (Contains(parameter)) List.Remove(parameter);

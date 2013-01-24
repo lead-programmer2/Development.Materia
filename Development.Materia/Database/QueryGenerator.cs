@@ -24,7 +24,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of QueryGenerator.
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="table">System.Data.DataTable to eveluate</param>
         public QueryGenerator(DataTable table)
         {
             _excludedfields = new ExcludedDataSourceFieldCollection(this);
@@ -395,7 +395,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns the generated sql statement based on the current hosted DataTable object's row values and states.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Sql statement generated from th specified table's modifications.</returns>
         public override string ToString()
         {
             string _sql = ""; string _query = Generate();
@@ -440,7 +440,7 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of ExcludedDataSourceFieldCollection.
         /// </summary>
-        /// <param name="generator"></param>
+        /// <param name="generator">Development.Materia.Database.QueryGenerator that owne the class.</param>
         public ExcludedDataSourceFieldCollection(QueryGenerator generator)
         { _generator = generator; }
 
@@ -476,8 +476,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a execluded data source field name into the collection.
         /// </summary>
-        /// <param name="field"></param>
-        /// <returns></returns>
+        /// <param name="field">Table's field name</param>
+        /// <returns>Index of the newly added field within the collection.</returns>
         public int Add(string field)
         {
             Remove(field); return List.Add(field);
@@ -486,8 +486,8 @@ namespace Development.Materia.Database
         /// <summary>
         /// Adds a range of excluded data source field names into the collection.
         /// </summary>
-        /// <param name="fields"></param>
-        /// <returns></returns>
+        /// <param name="fields">Table's field names.</param>
+        /// <returns>List of the indexes of each newly added field within the collection.</returns>
         public List<int> Add(params string[] fields)
         {
             List<int> _list = new List<int>();
@@ -500,15 +500,15 @@ namespace Development.Materia.Database
         /// <summary>
         /// Returns whether the specified field name already exists in the collection.
         /// </summary>
-        /// <param name="field"></param>
-        /// <returns></returns>
+        /// <param name="field">Table field name to evaluate.</param>
+        /// <returns>True if the field name already exists within the collection otherwise false.</returns>
         public bool Contains(string field)
         { return List.Contains(field); }
 
         /// <summary>
         /// Removes the specified field name from the collection.
         /// </summary>
-        /// <param name="field"></param>
+        /// <param name="field">Table field name to remove.</param>
         public void Remove(string field)
         {
             if (List.Contains(field)) List.Remove(field);
@@ -529,16 +529,16 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of ForeignKeyInfo.
         /// </summary>
-        /// <param name="generator"></param>
+        /// <param name="generator">Development.Materia.Database.QueryGenerator that owns the current class.</param>
         public ForeignKeyInfo(QueryGenerator generator)  : base(generator)
         { }
 
         /// <summary>
         /// Creates a new instance of ForeignKeyInfo.
         /// </summary>
-        /// <param name="generator"></param>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
+        /// <param name="generator">Development.Materia.Database.QueryGenerator that owns the current class.</param>
+        /// <param name="field">Table's field name.</param>
+        /// <param name="value">Field's assigned value.</param>
         public ForeignKeyInfo(QueryGenerator generator, string field, string value) : base(generator, field, value)
         { }
 
@@ -585,16 +585,16 @@ namespace Development.Materia.Database
         /// <summary>
         /// Creates a new instance of PrimaryKeyInfo.
         /// </summary>
-        /// <param name="generator"></param>
+        /// <param name="generator">Development.Materia.Database.QueryGenerator that owns the current class.</param>
         public PrimaryKeyInfo(QueryGenerator generator) : this(generator, "", "")
         { }
 
         /// <summary>
         /// Creates a new instance of PrimaryKeyInfo.
         /// </summary>
-        /// <param name="generator"></param>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
+        /// <param name="generator">Development.Materia.Database.QueryGenerator that owns the current class.</param>
+        /// <param name="field">Table's field name.</param>
+        /// <param name="value">Field's assigned value.</param>
         public PrimaryKeyInfo(QueryGenerator generator, string field, string value)
         { _generator = generator; _field = field; _value = value; }
 
