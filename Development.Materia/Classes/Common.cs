@@ -36,6 +36,10 @@ namespace Development.Materia
         /// <param name="owner">Object to attach the handler into</param>
         /// <param name="eventname">Object's event name</param>
         /// <param name="handler">Handler to attach</param>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Materia 01" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Materia 01" language="vbnet" />
+        /// </example>
         public static void AttachHandler(object owner, string eventname, Delegate handler)
         {
             if (owner != null)

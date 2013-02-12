@@ -135,6 +135,10 @@ namespace Development.Materia
         /// Perform file / directory compression.
         /// </summary>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 01" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 01" language="vbnet" />
+        /// </example> 
         public FileInfo Archive()
         {
             FileInfo _file = null; bool _pathexists = false; _archivedpath = "";
@@ -300,6 +304,10 @@ namespace Development.Materia
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 02" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 01" language="vbnet" />
+        /// </example> 
         public static FileInfo CompressAdd(string path)
         { return CompressAdd(path, ArchivingToolEnum.SevenZip); }
 
@@ -309,6 +317,10 @@ namespace Development.Materia
         /// <param name="path">File / directory path to archive</param>
         /// <param name="archivingtool">Archiving tool to use</param>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 03" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 03" language="vbnet" />
+        /// </example> 
         public static FileInfo CompressAdd(string path, ArchivingToolEnum archivingtool)
         {
             FileInfo _file = null;
@@ -325,6 +337,10 @@ namespace Development.Materia
         /// </summary>
         /// <param name="path">File / directory path to archive</param>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 04" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 04" language="vbnet" />
+        /// </example> 
         public static FileInfo CompressInsert(string path)
         { return CompressInsert(path, ArchivingToolEnum.SevenZip); }
 
@@ -334,6 +350,15 @@ namespace Development.Materia
         /// <param name="path">File / directory path to archive</param>
         /// <param name="archivingtool">Archiving tool to use</param>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <summary>
+        ///  Performs file compression using selected archiving tool, file(s) will be inserted directly to the archive file.
+        /// </summary>
+        /// <param name="path">File / directory path to archive</param>
+        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
+        /// <example>
+        /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 05" language="cs" />
+        /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 05" language="vbnet" />
+        /// </example> 
         public static FileInfo CompressInsert(string path, ArchivingToolEnum archivingtool)
         {
             FileInfo _file = null;

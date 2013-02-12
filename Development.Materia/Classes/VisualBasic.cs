@@ -152,7 +152,15 @@ namespace Development.Materia
                 if (CLng(value) == 0) return false;
                 else return true;
             }
-            else return bool.Parse(value.ToString());
+            else
+            {
+                bool _result = false;
+
+                try { _result = (bool)value; }
+                catch { _result = bool.Parse(value.ToString()); }
+
+                return _result;
+            }
         }
 
         /// <summary>
@@ -161,7 +169,14 @@ namespace Development.Materia
         /// <param name="value">Expression to convert.</param>
         /// <returns>System.Date representation of the specified expression.</returns>
         public static DateTime CDate(object value)
-        { return DateTime.Parse(value.ToString()); }
+        {
+            DateTime _result = DateTime.Parse("1/1/1900");
+
+            try { _result = (DateTime)value; }
+            catch { _result = DateTime.Parse(value.ToString()); }
+
+            return _result; 
+        }
 
         /// <summary>
         /// Works like Visual Basic CDec method.
@@ -169,7 +184,14 @@ namespace Development.Materia
         /// <param name="value">Expression to convert.</param>
         /// <returns>System.Decimal representation of the specified expression.</returns>
         public static decimal CDec(object value)
-        { return decimal.Parse(value.ToString()); }
+        {
+            decimal _result = 0;
+
+            try { _result = (decimal)value; }
+            catch { _result = decimal.Parse(value.ToString()); }
+
+            return _result; 
+        }
 
         /// <summary>
         /// Works like Visual Basic CDbl method.
@@ -177,7 +199,14 @@ namespace Development.Materia
         /// <param name="value">Expression to convert.</param>
         /// <returns>System.Double representation of the specified expression.</returns>
         public static double CDbl(object value)
-        { return double.Parse(value.ToString()); }
+        {
+            double _result = 0;
+
+            try { _result = (double)value; }
+            catch { _result = double.Parse(value.ToString()); }
+
+            return _result; 
+        }
 
         /// <summary>
         /// Works like Visual Basic CInt method.
@@ -185,7 +214,14 @@ namespace Development.Materia
         /// <param name="value">Expression to convert</param>
         /// <returns>System.Integer representation of the specified expression.</returns>
         public static int CInt(object value)
-        { return int.Parse(value.ToString()); }
+        {
+            int _result = 0;
+
+            try { _result = (int)value; }
+            catch { _result = int.Parse(value.ToString()); }
+
+            return _result; 
+        }
 
         /// <summary>
         /// Works like Visual Basic Chr method.
@@ -201,7 +237,14 @@ namespace Development.Materia
         /// <param name="value">Expression to convert.</param>
         /// <returns>System.Long representation of the specified expression.</returns>
         public static long CLng(object value)
-        { return long.Parse(value.ToString()); }
+        {
+            long _result = 0;
+
+            try { _result = (long) value; }
+            catch { _result = long.Parse(value.ToString()); }
+
+            return _result; 
+        }
 
         /// <summary>
         /// Works like Visual Basic DateDiff method.
