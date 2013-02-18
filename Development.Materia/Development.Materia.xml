@@ -1691,6 +1691,12 @@
             <param name="value">Value to be searched</param>
             <param name="excludedfields">Excluded fields to apply to search into</param>
         </member>
+        <member name="M:Development.Materia.Materia.GetCurrentMacAddress">
+            <summary>
+            Gets the current workstation's MAC address.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Development.Materia.Materia.GetCurrentIPAddress">
             <summary>
             Gets the current workstation's IP address.
