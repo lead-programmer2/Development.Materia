@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -632,6 +633,35 @@ namespace Development.Materia
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets the current workstation's MAC address.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCurrentMacAddress()
+        {
+            string _computername = SystemInformation.ComputerName;
+
+            try
+            {
+                ManagementScope _scope = new ManagementScope("\\\\" + Environment.MachineName + "\\root\\cimv2");
+                ObjectQuery _query = new ObjectQuery("SELECT * FROM Win32_NetworkAdapter");
+                ManagementObjectSearcher _searcher = new ManagementObjectSearcher(_scope, _query);
+                ManagementObjectCollection _collection = _searcher.Get();
+
+                foreach (ManagementObject _current in _collection)
+                {
+                    if (!IsNullOrNothing(_current["MACAddress"]))
+                    {
+                        string _mac = _current["MACAddress"].ToString();
+                        return _mac.Replace(':', '-');
+                    }
+                }
+            }
+            catch  { }
+
+            return "";
+        }
 
         /// <summary>
         /// Gets the current workstation's IP address.
