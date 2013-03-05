@@ -392,8 +392,8 @@ namespace Development.Materia
 
                         for (int i = 0; i < (_decimals - 1); i++) _decimalplaces += "#";
 
-                        if (Regex.IsMatch(format, "^(N|n)")) _formatted = String.Format("{0:###,###,###,###." + _decimalplaces + "0}", value);
-                        else _formatted = String.Format("{0:############." + _decimalplaces + "0}", value);
+                        if (Regex.IsMatch(format, "^(N|n)")) _formatted = String.Format("{0:###,###,###,##0." + _decimalplaces + "0}", value);
+                        else _formatted = String.Format("{0:###########0." + _decimalplaces + "0}", value);
                     }
                     else _formatted = String.Format("{0:" + format + "}", value);
                 }
