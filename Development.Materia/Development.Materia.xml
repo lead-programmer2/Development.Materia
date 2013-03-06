@@ -4877,6 +4877,13 @@
             <param name="value">Expression to convert.</param>
             <returns>System.Boolean representation of the specified expression.</returns>
         </member>
+        <member name="M:Development.Materia.VisualBasic.CByte(System.Object)">
+            <summary>
+            Works like Visual Basic CByte method
+            </summary>
+            <param name="value">Expression to convert</param>
+            <returns>System.Byte representation of the specified expression.</returns>
+        </member>
         <member name="M:Development.Materia.VisualBasic.CDate(System.Object)">
             <summary>
             Works like Visual Basic CDate method.
@@ -4904,6 +4911,27 @@
             </summary>
             <param name="value">Expression to convert</param>
             <returns>System.Integer representation of the specified expression.</returns>
+        </member>
+        <member name="M:Development.Materia.VisualBasic.CSByte(System.Object)">
+            <summary>
+            Works like Visual Basic CSByte method.
+            </summary>
+            <param name="value">Expression to convert</param>
+            <returns>System.SByte repsentation of the specified expression.</returns>
+        </member>
+        <member name="M:Development.Materia.VisualBasic.CShort(System.Object)">
+            <summary>
+            Works like Visual basic CShort method.
+            </summary>
+            <param name="value">Expression to convert</param>
+            <returns>System.Short representation of the specified expression.</returns>
+        </member>
+        <member name="M:Development.Materia.VisualBasic.CSng(System.Object)">
+            <summary>
+            Works like Visual Basic CSng method.
+            </summary>
+            <param name="value">Expression to convert</param>
+            <returns>System.Single representation of the specified expression.</returns>
         </member>
         <member name="M:Development.Materia.VisualBasic.Chr(System.Int32)">
             <summary>

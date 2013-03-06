@@ -164,6 +164,21 @@ namespace Development.Materia
         }
 
         /// <summary>
+        /// Works like Visual Basic CByte method
+        /// </summary>
+        /// <param name="value">Expression to convert</param>
+        /// <returns>System.Byte representation of the specified expression.</returns>
+        public static byte CByte(object value)
+        {
+            byte _result = 0;
+
+            try { _result = (byte)value; }
+            catch { _result = byte.Parse(value.ToString()); }
+
+            return _result;
+        }
+
+        /// <summary>
         /// Works like Visual Basic CDate method.
         /// </summary>
         /// <param name="value">Expression to convert.</param>
@@ -221,6 +236,51 @@ namespace Development.Materia
             catch { _result = int.Parse(value.ToString()); }
 
             return _result; 
+        }
+
+        /// <summary>
+        /// Works like Visual Basic CSByte method.
+        /// </summary>
+        /// <param name="value">Expression to convert</param>
+        /// <returns>System.SByte repsentation of the specified expression.</returns>
+        public static sbyte CSByte(object value)
+        {
+            sbyte _result = 0;
+
+            try { _result = (sbyte)value; }
+            catch { _result = sbyte.Parse(value.ToString()); }
+
+            return _result;
+        }
+
+        /// <summary>
+        /// Works like Visual basic CShort method.
+        /// </summary>
+        /// <param name="value">Expression to convert</param>
+        /// <returns>System.Short representation of the specified expression.</returns>
+        public static short CShort(object value)
+        {
+            short _result = 0;
+
+            try { _result = (short)value; }
+            catch { _result = short.Parse(value.ToString()); }
+
+            return _result;
+        }
+
+        /// <summary>
+        /// Works like Visual Basic CSng method.
+        /// </summary>
+        /// <param name="value">Expression to convert</param>
+        /// <returns>System.Single representation of the specified expression.</returns>
+        public static float CSng(object value)
+        {
+            float _result = 0;
+
+            try { _result = (float)value; }
+            catch { _result = float.Parse(value.ToString()); }
+
+            return _result;
         }
 
         /// <summary>

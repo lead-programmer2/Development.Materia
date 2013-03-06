@@ -996,17 +996,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this byte value, params byte[] values)
-        {
-            bool _exists = false;
-
-            foreach (byte i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current character value is existing within the list of reference character values or not.
@@ -1015,17 +1005,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this char value, params char[] values)
-        {
-            bool _exists = false;
-
-            foreach (char i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1034,17 +1014,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this decimal value, params decimal[] values)
-        {
-            bool _exists = false;
-
-            foreach (decimal i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1053,17 +1023,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this double value, params double[] values)
-        {
-            bool _exists = false;
-
-            foreach (double i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1072,17 +1032,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this float value, params float[] values)
-        {
-            bool _exists = false;
-
-            foreach (float i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1091,17 +1041,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this int value, params int[] values)
-        {
-            bool _exists = false;
-
-            foreach (int i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1110,17 +1050,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this long value, params long[] values)
-        {
-            bool _exists = false;
-
-            foreach (long i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1129,17 +1059,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this short value, params short[] values)
-        {
-            bool _exists = false;
-
-            foreach (short i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         /// <summary>
         /// Returns whether the current text value is existing within the list of reference text values or not.
@@ -1148,17 +1068,7 @@ namespace Development.Materia
         /// <param name="values">List of searched values</param>
         /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         public static bool In(this string value, params string[] values)
-        {
-            bool _exists = false;
-
-            foreach (string i in values)
-            {
-                _exists = _exists || VisualBasic.CBool(value == i);
-                if (_exists) break;
-            }
-
-            return _exists;
-        }
+        { return values.Contains(value); }
 
         #endregion
 
