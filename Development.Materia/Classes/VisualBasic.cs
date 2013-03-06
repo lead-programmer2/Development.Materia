@@ -561,7 +561,8 @@ namespace Development.Materia
             {
                 try
                 {
-                    DateTime _date = CDate(value); _isdate = true;
+                    DateTime _date = DateTime.Now;
+                    _isdate = DateTime.TryParse(value.ToString(), out _date);
                 }
                 catch { _isdate = false; }
             }
@@ -578,12 +579,13 @@ namespace Development.Materia
         {
             bool _isarray = false;
 
-            try
+            if (!Materia.IsNullOrNothing(value))
             {
-                object[] _value = (object[]) value; _isarray = true;
+                try
+                {  _isarray = value.GetType().IsArray; }
+                catch { _isarray = false; }
             }
-            catch { _isarray = false; }
-
+            
             return _isarray;
         }
 
@@ -611,7 +613,8 @@ namespace Development.Materia
             {
                 try
                 {
-                    double _number = CDbl(value); _isnumeric = true;
+                    double _number = 0;
+                    _isnumeric = double.TryParse(value.ToString(), out _number);
                 }
                 catch { _isnumeric = false; }
             }
