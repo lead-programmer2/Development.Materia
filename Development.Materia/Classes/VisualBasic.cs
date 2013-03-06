@@ -172,9 +172,17 @@ namespace Development.Materia
         {
             byte _result = 0;
 
-            try { _result = (byte)value; }
-            catch { _result = byte.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (byte)value; }
+                catch { _result = byte.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = byte.TryParse(value.ToString(), out _result); }
+                catch { _result = byte.Parse(value.ToString()); }
+            }
+           
             return _result;
         }
 
@@ -187,7 +195,8 @@ namespace Development.Materia
         {
             DateTime _result = DateTime.Parse("1/1/1900");
 
-            try { _result = (DateTime)value; }
+            try 
+            { bool _isdate = DateTime.TryParse(value.ToString(), out _result); }
             catch { _result = DateTime.Parse(value.ToString()); }
 
             return _result; 
@@ -202,9 +211,17 @@ namespace Development.Materia
         {
             decimal _result = 0;
 
-            try { _result = (decimal)value; }
-            catch { _result = decimal.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (decimal)value; }
+                catch { _result = decimal.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = decimal.TryParse(value.ToString(), out _result); }
+                catch { _result = decimal.Parse(value.ToString()); }
+            }
+           
             return _result; 
         }
 
@@ -217,9 +234,17 @@ namespace Development.Materia
         {
             double _result = 0;
 
-            try { _result = (double)value; }
-            catch { _result = double.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (double)value; }
+                catch { _result = double.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = double.TryParse(value.ToString(), out _result); }
+                catch { _result = double.Parse(value.ToString()); }
+            }
+           
             return _result; 
         }
 
@@ -232,9 +257,17 @@ namespace Development.Materia
         {
             int _result = 0;
 
-            try { _result = (int)value; }
-            catch { _result = int.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (int)value; }
+                catch { _result = int.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = int.TryParse(value.ToString(), out _result); }
+                catch { _result = int.Parse(value.ToString()); }
+            }
+           
             return _result; 
         }
 
@@ -247,9 +280,17 @@ namespace Development.Materia
         {
             sbyte _result = 0;
 
-            try { _result = (sbyte)value; }
-            catch { _result = sbyte.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (sbyte)value; }
+                catch { _result = sbyte.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = sbyte.TryParse(value.ToString(), out _result); }
+                catch { _result = sbyte.Parse(value.ToString()); }
+            }
+           
             return _result;
         }
 
@@ -262,9 +303,17 @@ namespace Development.Materia
         {
             short _result = 0;
 
-            try { _result = (short)value; }
-            catch { _result = short.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (short)value; }
+                catch { _result = short.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = short.TryParse(value.ToString(), out _result); }
+                catch { _result = short.Parse(value.ToString()); }
+            }
+           
             return _result;
         }
 
@@ -277,9 +326,17 @@ namespace Development.Materia
         {
             float _result = 0;
 
-            try { _result = (float)value; }
-            catch { _result = float.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (float)value; }
+                catch { _result = float.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = float.TryParse(value.ToString(), out _result); }
+                catch { _result = float.Parse(value.ToString()); }
+            }
+            
             return _result;
         }
 
@@ -300,9 +357,17 @@ namespace Development.Materia
         {
             long _result = 0;
 
-            try { _result = (long) value; }
-            catch { _result = long.Parse(value.ToString()); }
-
+            if (value.GetType().IsEnum)
+            {
+                try { _result = (long)value; }
+                catch { _result = long.Parse(value.ToString()); }
+            }
+            else
+            {
+                try { bool _isnumeric = long.TryParse(value.ToString(), out _result); }
+                catch { _result = long.Parse(value.ToString()); }
+            }
+           
             return _result; 
         }
 
