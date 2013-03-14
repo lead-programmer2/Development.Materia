@@ -515,12 +515,18 @@ namespace Development.Materia
 
                 foreach (CultureInfo _culture in _cultures)
                 {
-                    try
+                    if (_culture != null)
                     {
-                        RegionInfo _region = new RegionInfo(_culture.Name);
-                        if (_table.Select("[Country] LIKE '" + _region.EnglishName.ToSqlValidString(true) + "'").Length <= 0) _table.Rows.Add(_region.EnglishName);
+                        if (!string.IsNullOrEmpty(_culture.Name.RLTrim()))
+                        {
+                            try
+                            {
+                                RegionInfo _region = new RegionInfo(_culture.Name);
+                                if (_table.Select("[Country] LIKE '" + _region.EnglishName.ToSqlValidString(true) + "'").Length <= 0) _table.Rows.Add(_region.EnglishName);
+                            }
+                            catch { }
+                        }
                     }
-                    catch { }
                 }
 
                 if (_table.Select("[Country] LIKE 'Afghanistan'").Length <= 0) _table.Rows.Add("Afghanistan");
