@@ -625,8 +625,11 @@ namespace Development.Materia.Database
             {
                 foreach (DataRow rw in _table.Rows)
                 {
-                    if (rw.RowState!= DataRowState.Deleted &&
-                        rw.RowState != DataRowState.Detached) _tables.Add(rw["Table"].ToString());
+                    if (rw.RowState != DataRowState.Deleted &&
+                        rw.RowState != DataRowState.Detached)
+                    {
+                        if (!rw["Table"].ToString().Trim().Contains(" ")) _tables.Add(rw["Table"].ToString());
+                    }
                 }
 
                 _table.Dispose(); Materia.RefreshAndManageCurrentProcess();

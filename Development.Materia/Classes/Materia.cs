@@ -529,9 +529,13 @@ namespace Development.Materia
                     }
                 }
 
-                if (_table.Select("[Country] LIKE 'Afghanistan'").Length <= 0) _table.Rows.Add("Afghanistan");
-                _table.DefaultView.Sort = "[Country]";
+                string[] _defaultcountries = new string[] { "Afghanistan", "Pakistan" };
 
+                foreach (string _defaultcountry in _defaultcountries) {
+                    if (_table.Select("[Country] LIKE '" + _defaultcountry.ToSqlValidString(true) + "'").Length <= 0) _table.Rows.Add(_defaultcountry);
+                    _table.DefaultView.Sort = "[Country]";
+                }
+                
                 return _table;
             }
         }
