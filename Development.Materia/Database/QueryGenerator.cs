@@ -97,8 +97,9 @@ namespace Development.Materia.Database
 
                     if (String.IsNullOrEmpty(_pk.RLTrim()))
                     {
-                        foreach (DataColumn _col in _table.Columns)
+                        for (int i = 0; i <= (_table.Columns.Count - 1); i++)
                         {
+                            DataColumn _col = _table.Columns[i];
                             if (_col.Unique)
                             {
                                 _pk = _col.ColumnName; break;
@@ -118,8 +119,10 @@ namespace Development.Materia.Database
 
                         string _insertfields = ""; string _insertparameters = ""; string _updatefield = "";
 
-                        foreach (DataColumn _column in _table.Columns)
+                        for (int i = 0; i <= (_table.Columns.Count - 1); i++)
                         {
+                            DataColumn _column = _table.Columns[i];
+
                             if (!_column.AutoIncrement &&
                                 !_excludedfields.Contains(_column.ColumnName))
                             {
@@ -127,7 +130,7 @@ namespace Development.Materia.Database
 
                                 if (_column.ColumnName != _foreignkey.Field)
                                 {
-                                    _insertparameters += (String.IsNullOrEmpty(_insertparameters.RLTrim()) ? "" : ", ") +  "{" + _column.Ordinal.ToString() + "}";
+                                    _insertparameters += (String.IsNullOrEmpty(_insertparameters.RLTrim()) ? "" : ", ") + "{" + _column.Ordinal.ToString() + "}";
                                     _updatefield += (String.IsNullOrEmpty(_updatefield.RLTrim()) ? "" : ", ") + "`" + _column.ColumnName + "` = {" + _column.Ordinal.ToString() + "}";
                                 }
                                 else
@@ -152,13 +155,13 @@ namespace Development.Materia.Database
                                                         {
                                                             DataRow rw = null;
 
-                                                            foreach (DataRow row in _foreignkey.HeaderTable.Rows)
+                                                            for (int r = 0; r <= (_foreignkey.HeaderTable.Rows.Count - 1); r++)
                                                             {
+                                                                DataRow row = _foreignkey.HeaderTable.Rows[r];
+
                                                                 if (row.RowState != DataRowState.Deleted &&
                                                                     row.RowState != DataRowState.Detached)
-                                                                {
-                                                                    rw = row; break;
-                                                                }
+                                                                { rw = row; break; }
                                                             }
 
                                                             if (rw != null)
@@ -224,16 +227,20 @@ namespace Development.Materia.Database
 
                         string _query = "";
 
-                        foreach (DataRow row in _table.Rows)
+                        for (int i = 0; i <= (_table.Rows.Count - 1); i++)
                         {
+                            DataRow row = _table.Rows[i];
+
                             if (row.RowState != DataRowState.Unchanged)
                             {
                                 _query = ""; _update = "UPDATE `" + _tablename + "` SET " + _updatefield + " WHERE (`" + _pk + "` = " + _pkvalue + ");";
 
                                 string[] _values = new string[_table.Columns.Count];
 
-                                foreach (DataColumn _column in _table.Columns)
+                                for (int c = 0; c <= (_table.Columns.Count - 1); c++)
                                 {
+                                    DataColumn _column = _table.Columns[c];
+
                                     string _value = "NULL";
                                     object _currentvalue = null;
 
@@ -358,13 +365,13 @@ namespace Development.Materia.Database
                                                 _column.DataType.Name.ToLower().Contains("bytes()"))
                                             {
                                                 try
-                                                { _value = "x'" + ((byte[]) _currentvalue).ToHexadecimalString().ToSqlValidString() +"'"; }
+                                                { _value = "x'" + ((byte[])_currentvalue).ToHexadecimalString().ToSqlValidString() + "'"; }
                                                 catch { _value = "NULL"; }
                                             }
                                         }
                                     }
 
-                                    _values[_column.Ordinal] = _value;  
+                                    _values[_column.Ordinal] = _value;
                                 }
 
                                 switch (row.RowState)
@@ -406,8 +413,10 @@ namespace Development.Materia.Database
 
                 if (_table != null)
                 {
-                    foreach (DataColumn _column in _table.Columns)
+                    for (int i = 0; i <= (_table.Columns.Count - 1); i++)
                     {
+                        DataColumn _column = _table.Columns[i];
+
                         if (_column.DataType.Name.ToLower().Contains("byte[]") ||
                             _column.DataType.Name.ToLower().Contains("byte()") ||
                             _column.DataType.Name.ToLower().Contains("bytes[]") ||
