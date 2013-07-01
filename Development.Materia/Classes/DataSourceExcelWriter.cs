@@ -397,8 +397,9 @@ namespace Development.Materia
                                     }
                                     WriteEndRow();
 
-                                    foreach (DataRow rw in _table.Rows)
+                                    for (int r = 0; r <= (_table.Rows.Count - 1); r++)
                                     {
+                                        DataRow rw = _table.Rows[r];
                                         if (rw.RowState != DataRowState.Deleted &&
                                             rw.RowState != DataRowState.Detached)
                                         {

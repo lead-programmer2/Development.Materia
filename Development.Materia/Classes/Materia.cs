@@ -513,8 +513,10 @@ namespace Development.Materia
 
                 CultureInfo[] _cultures = CultureInfo.GetCultures(CultureTypes.AllCultures & ~CultureTypes.NeutralCultures);
 
-                foreach (CultureInfo _culture in _cultures)
+                for (int i = 0; i <= (_cultures.Length - 1); i++)
                 {
+                    CultureInfo _culture = _cultures[i];
+
                     if (_culture != null)
                     {
                         if (!string.IsNullOrEmpty(_culture.Name.RLTrim()))
@@ -1868,8 +1870,10 @@ namespace Development.Materia
             {
                 _newtable = new DataTable(); _newtable.TableName = table.TableName;
 
-                foreach (DataColumn col in table.Columns)
+                for (int i = 0; i <= (table.Columns.Count - 1); i++)
                 {
+                    DataColumn col = table.Columns[i];
+
                     if (col.DataType.Name.Trim().ToLower().Contains("byte[]") ||
                         col.DataType.Name.Trim().ToLower().Contains("byte()") ||
                         col.DataType.Name.Trim().ToLower().Contains("bytes[]") ||
@@ -1879,14 +1883,18 @@ namespace Development.Materia
                     else _newtable.Columns.Add(col.ColumnName, col.DataType);
                 }
 
-                foreach (DataRow rw in table.Rows)
+                for (int i = 0; i <= (table.Rows.Count - 1); i++)
                 {
+                    DataRow rw = table.Rows[i];
+
                     if (rw.RowState != DataRowState.Deleted &&
                         rw.RowState != DataRowState.Detached)
                     {
                         object[] _values = new object[_newtable.Columns.Count];
-                        foreach (DataColumn col in table.Columns)
+                        for (int c = 0; c <= (table.Columns.Count - 1); c++)
                         {
+                            DataColumn col = table.Columns[c];
+
                             if (col.DataType.Name.Trim().ToLower().Contains("byte[]") ||
                                 col.DataType.Name.Trim().ToLower().Contains("byte()") ||
                                 col.DataType.Name.Trim().ToLower().Contains("bytes[]") ||
@@ -2059,14 +2067,14 @@ namespace Development.Materia
                 string _primarykey = ""; bool _autoincrement = false;
                 long _autoincrementseed = 0;
 
-                foreach (DataColumn _column in table.Columns)
+                for (int i = 0; i <= (table.Columns.Count - 1); i++)
                 {
                     string _datatype = "";
-                    int _datalen = 0;
+                    int _datalen = 0; DataColumn _column = table.Columns[i];
 
                     if (_column.Unique)
                     {
-                        _primarykey = _column.ColumnName; 
+                        _primarykey = _column.ColumnName;
                         _autoincrement = _column.AutoIncrement;
                         if (_column.AutoIncrement) _autoincrementseed = _column.AutoIncrementSeed;
                     }
@@ -2085,7 +2093,7 @@ namespace Development.Materia
                              _column.DataType.Name == typeof(sbyte).Name ||
                              _column.DataType.Name == typeof(SByte).Name ||
                              _column.DataType.Name == typeof(byte).Name ||
-                             _column.DataType.Name == typeof(Byte).Name) 
+                             _column.DataType.Name == typeof(Byte).Name)
                     {
                         _datatype = "tinyint(5)";
                         if (_autoincrement) _datatype += "auto_increment";
@@ -2096,14 +2104,14 @@ namespace Development.Materia
                              _column.DataType.Name == typeof(int).Name ||
                              _column.DataType.Name == typeof(Int16).Name ||
                              _column.DataType.Name == typeof(Int32).Name ||
-                             _column.DataType.Name == typeof(short).Name) 
+                             _column.DataType.Name == typeof(short).Name)
                     {
                         _datatype = "int(10)";
                         if (_autoincrement) _datatype += "auto_increment";
                     }
                     else if (_column.DataType.Name == typeof(UInt64).Name ||
                              _column.DataType.Name == typeof(long).Name ||
-                             _column.DataType.Name == typeof(Int64).Name) 
+                             _column.DataType.Name == typeof(Int64).Name)
                     {
                         _datatype = "bigint(10)";
                         if (_autoincrement) _datatype += "auto_increment";
@@ -2116,7 +2124,7 @@ namespace Development.Materia
                              _column.DataType.Name == typeof(float).Name) _datatype = "double(20, 4)";
                     else _datatype = "longblob";
 
-                    _datatypes += (!String.IsNullOrEmpty(_datatypes.RLTrim()) ? ",\n" : "") + "`" + _column.ColumnName + "` " + _datatype;                   
+                    _datatypes += (!String.IsNullOrEmpty(_datatypes.RLTrim()) ? ",\n" : "") + "`" + _column.ColumnName + "` " + _datatype;
                 }
 
                 if (!String.IsNullOrEmpty(_primarykey.RLTrim())) _datatypes += ",\nPRIMARY KEY(`" + _primarykey + "`)";
@@ -2141,8 +2149,9 @@ namespace Development.Materia
             {
                 if (dataset.Tables.Count > 0)
                 {
-                    foreach (DataTable table in dataset.Tables)
+                    for (int i = 0; i <= (dataset.Tables.Count - 1); i++)
                     {
+                        DataTable table = dataset.Tables[i];
                         string _tableddl = table.ToSqlDDL();
                         if (!String.IsNullOrEmpty(_tableddl.RLTrim()) &&
                             !String.IsNullOrEmpty(_ddl.RLTrim())) _ddl += "\n";

@@ -421,9 +421,7 @@ namespace Development.Materia.Database
                             _column.DataType.Name.ToLower().Contains("byte()") ||
                             _column.DataType.Name.ToLower().Contains("bytes[]") ||
                             _column.DataType.Name.ToLower().Contains("bytes()"))
-                        {
-                            _blobexists = true; break;
-                        }
+                        { _blobexists = true; break;  }
                     }
                 }
 
