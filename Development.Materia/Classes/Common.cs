@@ -679,7 +679,10 @@ namespace Development.Materia
                 {
                     if (ip.ToString().IsIPAddress())
                     {
-                        _ipaddress = ip.ToString(); break;
+                        if (ip.ToString() != "127.0.0.1")
+                        {
+                            _ipaddress = ip.ToString(); break;
+                        } 
                     }
                 }
             }
