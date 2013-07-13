@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 #endregion
 
 namespace Development.Materia
@@ -670,19 +671,28 @@ namespace Development.Materia
         public static string GetCurrentIPAddress()
         {
             string _ipaddress = "";
-            string _host = Dns.GetHostName();
-            IPAddress[] _ips = Dns.GetHostEntry(_host).AddressList;
+            
+            NetworkInterface[] _networkinterfaces = NetworkInterface.GetAllNetworkInterfaces();
 
-            if (_ips.Length > 0)
+            foreach (NetworkInterface network in _networkinterfaces)
             {
-                foreach (IPAddress ip in _ips)
+                if (network.OperationalStatus == OperationalStatus.Up)
                 {
-                    if (ip.ToString().IsIPAddress())
+                    IPInterfaceProperties properties = network.GetIPProperties();
+
+                    foreach (IPAddressInformation address in properties.UnicastAddresses)
                     {
-                        _ipaddress = ip.ToString(); break;
+                        string _ip = address.Address.ToString();
+                        if (_ip.IsIPAddress())
+                        {
+                            if (!IPAddress.IsLoopback(address.Address))
+                            {
+                                _ipaddress = _ip; break;
+                            }
+                        }
                     }
                 }
-            }
+            } 
 
             return _ipaddress;
         }

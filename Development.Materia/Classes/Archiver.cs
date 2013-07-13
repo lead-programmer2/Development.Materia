@@ -350,11 +350,6 @@ namespace Development.Materia
         /// <param name="path">File / directory path to archive</param>
         /// <param name="archivingtool">Archiving tool to use</param>
         /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
-        /// <summary>
-        ///  Performs file compression using selected archiving tool, file(s) will be inserted directly to the archive file.
-        /// </summary>
-        /// <param name="path">File / directory path to archive</param>
-        /// <returns>A System.IO.FileInfo object that contains the archived output file information. Returns nothing if error has been encountered during archive routines.</returns>
         /// <example>
         /// <code source="..\Development.Materia\Examples\Example.cs" region="Archiver 05" language="cs" />
         /// <code source="..\Development.Materia\Development.Materia.VBExamples\Development.Materia.VBExamples\Example.vb" region="Archiver 05" language="vbnet" />
