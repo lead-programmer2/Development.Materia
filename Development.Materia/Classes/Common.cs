@@ -686,9 +686,7 @@ namespace Development.Materia
                         if (_ip.IsIPAddress())
                         {
                             if (!IPAddress.IsLoopback(address.Address))
-                            {
-                                _ipaddress = _ip; break;
-                            }
+                            {  _ipaddress = _ip; break; }
                         }
                     }
                 }
