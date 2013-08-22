@@ -1001,6 +1001,34 @@ namespace Development.Materia
         public static void EndProgress(this Control progressbar)
         { Synchronization.EndProgress(progressbar); }
 
+        /// <summary>
+        /// Determines whether the byte array is equivalent to the supplied byte array. 
+        /// </summary>
+        /// <param name="byte1"></param>
+        /// <param name="byte2"></param>
+        /// <returns>True if it is equivalent, otherwise false.</returns>
+        public static bool EqualsTo(this byte[] byte1, byte[] byte2)
+        {
+            bool _equals = false;
+
+            if (IsNullOrNothing(byte1) && IsNullOrNothing(byte2)) return true;
+            else
+            {
+                if (byte1.Length == byte2.Length)
+                {
+                    for (int i = 0; i < byte1.Length; i++)
+                    {
+                        if (byte1[i] != byte2[i])
+                        { _equals = false; break; }
+                    }
+
+                    _equals = true;
+                }
+            }
+
+            return _equals;
+        }
+
         #region "In"
 
         /// <summary>

@@ -1175,6 +1175,14 @@
             </summary>
             <param name="progressbar">Progress bar control to synchronize</param>
         </member>
+        <member name="M:Development.Materia.Materia.EqualsTo(System.Byte[],System.Byte[])">
+            <summary>
+            Determines whether the byte array is equivalent to the supplied byte array. 
+            </summary>
+            <param name="byte1"></param>
+            <param name="byte2"></param>
+            <returns>True if it is equivalent, otherwise false.</returns>
+        </member>
         <member name="M:Development.Materia.Materia.In(System.Byte,System.Byte[])">
             <summary>
             Determines whether the current numeric value is existing within the list of reference numeric values or not.

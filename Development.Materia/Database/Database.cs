@@ -60,7 +60,7 @@ namespace Development.Materia.Database
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static string _lastinsertidcall = "CASE WHEN @lastid IS NULL THEN @lastid:=LAST_INSERT_ID() ELSE @lastid END";
+        private static string _lastinsertidcall = "CAST(CASE WHEN @lastid IS NULL THEN @lastid:=CAST(LAST_INSERT_ID() AS signed) ELSE CAST(@lastid AS signed) END AS signed)";
 
         /// <summary>
         /// Gets or sets how the auto-incremented header primary key value is called using the current database.

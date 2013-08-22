@@ -263,7 +263,19 @@ namespace Development.Materia.Database
                                                 { _originalValue = _row[_cols[c].ColumnName, DataRowVersion.Original]; }
                                                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
-                                                if (!_currentValue.Equals(_originalValue)) _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                if (_col.DataType == typeof(byte[]) ||
+                                                    _col.DataType == typeof(Byte[]))
+                                                {
+                                                    if (!(Materia.IsNullOrNothing(_originalValue) &&
+                                                          Materia.IsNullOrNothing(_currentValue)))
+                                                    {
+                                                        if (!((byte[])_originalValue).EqualsTo((byte[])_currentValue)) _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (!_currentValue.Equals(_originalValue)) _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                }
                                             }
                                         }
 
