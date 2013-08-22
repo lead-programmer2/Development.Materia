@@ -391,13 +391,14 @@ namespace Development.Materia.Controls
 
         private void RemoveControlFrom(Control.ControlCollection controls, string controlname)
         {
-            foreach (Control control in controls)
-            {
-                if (control.Name.ToLower() == controlname.ToLower())
-                {
-                    controls.Remove(control); controls.Owner.Update();
-                }
-            }
+            if (controls.ContainsKey(controlname)) controls.RemoveByKey(controlname);
+            //foreach (Control control in controls)
+            //{
+            //    if (control.Name.ToLower() == controlname.ToLower())
+            //    {
+            //        controls.Remove(control); controls.Owner.Update();
+            //    }
+            //}
         }
 
         #region "SetAsRequired"

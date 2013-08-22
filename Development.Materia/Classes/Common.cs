@@ -47,7 +47,11 @@ namespace Development.Materia
             if (owner != null)
             {
                 EventInfo _event = GetEvent(owner, eventname);
-                if (_event != null) _event.AddEventHandler(owner, handler);
+                if (_event != null)
+                {
+                    _event.RemoveEventHandler(owner, handler);
+                    _event.AddEventHandler(owner, handler);
+                }
             }
         }
 
@@ -61,13 +65,18 @@ namespace Development.Materia
             StringBuilder _hex = new StringBuilder();   
             string _result = "";
 
-            for (int i = 0; i <=bytes.Length - 1; i++)
+            for (int i = 0; i <= bytes.Length - 1; i++)
             { _hex.Append(bytes[i].ToString("X2")); }
-            
-            try
-            { _result = BitConverter.ToString(BitConverter.GetBytes(VisualBasic.CLng(_hex.ToString()))).Replace("-", "");}
-            catch { _result = _hex.ToString();}
 
+            if (VisualBasic.IsNumeric(_hex))
+            {
+                try
+                { _result = BitConverter.ToString(BitConverter.GetBytes(Convert.ToInt64(_hex.ToString()))).Replace("-", ""); }
+                catch { _result = _hex.ToString(); }
+            }
+            else _result = _hex.ToString();
+
+            
             return _result;
         }
 
@@ -1602,78 +1611,78 @@ namespace Development.Materia
                             else if (_property.PropertyType.Name == typeof(Int16).Name)
                             {
                                 try
-                                { _curvalue = (Int16)value; }
+                                { _curvalue = Convert.ToInt16(value); }
                                 catch  { }
                             }
                             else if (_property.PropertyType.Name == typeof(byte).Name ||
                                      _property.PropertyType.Name == typeof(Byte).Name)
                             {
                                 try
-                                { _curvalue = (byte)value; }
+                                { _curvalue =  Convert.ToByte(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(bool).Name ||
                                      _property.PropertyType.Name == typeof(Boolean).Name)
                             {
                                 try
-                                { _curvalue = (bool)value; }
+                                { _curvalue = Convert.ToBoolean(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(DateTime).Name)
                             {
                                 try
-                                { _curvalue = (DateTime)value; }
+                                { _curvalue = Convert.ToDateTime(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(decimal).Name ||
                                      _property.PropertyType.Name == typeof(Decimal).Name)
                             {
                                 try
-                                { _curvalue = (decimal)value; }
+                                { _curvalue =  Convert.ToDecimal(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(double).Name ||
                                      _property.PropertyType.Name == typeof(Double).Name)
                             {
                                 try
-                                { _curvalue = (double)value; }
+                                { _curvalue = Convert.ToDouble(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(float).Name ||
                                      _property.PropertyType.Name == typeof(Single).Name)
                             {
                                 try
-                                { _curvalue = (float)value; }
+                                { _curvalue = Convert.ToSingle(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(Int32).Name)
                             {
                                 try
-                                { _curvalue = (Int32)value; }
+                                { _curvalue = Convert.ToInt32(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(int).Name)
                             {
                                 try
-                                { _curvalue = (int)value; }
+                                { _curvalue = Convert.ToInt32(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(Int64).Name)
                             {
                                 try
-                                { _curvalue = (Int64)value; }
+                                { _curvalue = Convert.ToInt64(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(long).Name)
                             {
                                 try
-                                { _curvalue = (long)value; }
+                                { _curvalue = Convert.ToInt64(value); }
                                 catch { }
                             }
                             else if (_property.PropertyType.Name == typeof(short).Name)
                             {
                                 try
-                                { _curvalue = (short)value; }
+                                { _curvalue = Convert.ToInt16(value); }
                                 catch { }
                             }
                         }

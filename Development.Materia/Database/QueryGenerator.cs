@@ -85,6 +85,226 @@ namespace Development.Materia.Database
 
         #region "methods"
 
+        private string DerivedColumnValue(DataColumn column, object value)
+        {
+            string _value = "";
+
+            if (!Materia.IsNullOrNothing(value))
+            {
+                if (column.DataType == typeof(string) ||
+                    column.DataType == typeof(String)) _value = "'" + value.ToString().ToSqlValidString() + "'";
+                else if (column.DataType == typeof(DateTime))
+                {
+                    if (VisualBasic.IsDate(value)) _value = "'" + VisualBasic.CDate(value).ToSqlValidString(true) + "'";
+                }
+                else if (column.DataType == typeof(TimeSpan))
+                {
+                    try
+                    { _value = "'" + VisualBasic.Format(value, "HH:mm:ss") + "'"; }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                }
+                else if (column.DataType == typeof(bool) ||
+                         column.DataType == typeof(Boolean))
+                {
+                    if (VisualBasic.CBool(value)) _value = "1";
+                    else _value = "0";
+                }
+                else if (column.DataType == typeof(int) ||
+                         column.DataType == typeof(Int16) ||
+                         column.DataType == typeof(Int32) ||
+                         column.DataType == typeof(Int64) ||
+                         column.DataType == typeof(long) ||
+                         column.DataType == typeof(byte) ||
+                         column.DataType == typeof(Byte) ||
+                         column.DataType == typeof(sbyte) ||
+                         column.DataType == typeof(SByte) ||
+                         column.DataType == typeof(short))
+                {
+                    if (VisualBasic.IsNumeric(value)) _value = value.ToString();
+                }
+                else if (column.DataType == typeof(decimal) ||
+                         column.DataType == typeof(Decimal) ||
+                         column.DataType == typeof(double) ||
+                         column.DataType == typeof(Double) ||
+                         column.DataType == typeof(Single) ||
+                         column.DataType == typeof(float))
+                {
+                    if (VisualBasic.IsNumeric(value)) _value = VisualBasic.CDbl(value).ToSqlValidString(4);
+                }
+                else if (column.DataType == typeof(byte[]) ||
+                         column.DataType == typeof(Byte[]))
+                {
+                    try
+                    { _value = "x'" + ((byte[])value).ToHexadecimalString().ToSqlValidString() + "'"; }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                }
+
+                if (_value.Trim() == "") _value = value.ToString();
+            }
+            else _value = "NULL";
+
+            return _value;
+        }
+        
+        /// <summary>
+        /// Derives an array of sql statement from the updates applied in the instantiated DataTable object.
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetSqlStatements()
+        {
+            List<string> _queries = new List<string>();
+
+            if (_table != null)
+            {
+                DataTable _updatesTable = _table.GetChanges();
+                if (_updatesTable != null)
+                {
+                    if (_updatesTable.Rows.Count > 0)
+                    {
+                        string _pk = _primarykey.Field;
+                        DataColumnCollection _cols = _table.Columns;
+
+                        if (_pk.Trim() == "")
+                        {
+                            for (int i = 0; i < _cols.Count; i++)
+                            {
+                                if (_cols[i].Unique)
+                                { _pk = _cols[i].ColumnName; break; }
+                            }
+                        }
+
+                        if (_pk.Trim() != "" &&
+                            _cols.Contains(_pk))
+                        {
+                            DataRowCollection _rows = _updatesTable.Rows;
+                            string _tablename = _table.TableName;
+                            if (_tablename.Trim() == "") _tablename = "table";
+
+                            bool _autoIncrementPK = _cols[_pk].AutoIncrement;
+                            
+                            for (int i = 0; i < _rows.Count; i++)
+                            {
+                                DataRow _row = _rows[i];
+                                string _sql = "";
+                                object _pkValue = null;
+
+                                if (_row.RowState == DataRowState.Added)
+                                {
+                                    _sql = "INSERT INTO `" + _tablename + "`\n";
+                                    string _insertFields = "";
+                                    string _inserValues = "";
+
+                                    for (int c = 0; c < _cols.Count; c++)
+                                    {
+                                        if (_cols[c].ColumnName == _pk)
+                                        {
+                                            if (!_autoIncrementPK)
+                                            {
+
+                                                _insertFields += (_insertFields.Trim() != "" ? ", " : "") + "`" + _cols[c].ColumnName + "`";
+                                                if (_primarykey.Value.Trim() != "") _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _primarykey.Value);
+                                                else _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!ExcludedFields.Contains(_cols[c].ColumnName))
+                                            {
+                                                _insertFields += (_insertFields.Trim() != "" ? ", " : "") + "`" + _cols[c].ColumnName + "`";
+                                                if (_cols[c].ColumnName == _foreignkey.Field)
+                                                {
+                                                    if (_foreignkey.Value.Trim() != "") _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _foreignkey.Value);
+                                                    else
+                                                    {
+                                                        if (_foreignkey.HeaderTable == null) _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                                        else
+                                                        {
+                                                            if (!_foreignkey.HeaderTable.Columns.Contains(_foreignkey.HeaderPrimaryKey)) _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                                            else
+                                                            {
+                                                                if (_foreignkey.HeaderTable.Rows.Count <= 0) _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                                                else _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _foreignkey.HeaderTable.Rows[0][_foreignkey.HeaderPrimaryKey]);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                            }
+                                        }
+                                    }
+
+                                    if (_insertFields.Trim() != "")
+                                    {
+                                        _sql += "(" + _insertFields + ")\n" +
+                                                "VALUES\n" +
+                                                "(" + _inserValues + ");";
+                                        _queries.Add(_sql);
+                                    }
+                                }
+                                else if (_row.RowState == DataRowState.Modified)
+                                {
+                                    if (_row.HasVersion(DataRowVersion.Original))
+                                    {
+                                        try { _pkValue = _row[_pk, DataRowVersion.Original]; }
+                                        catch (Exception ex) 
+                                        { _pkValue = _row[_pk]; Debug.WriteLine(ex.Message); }
+
+                                        string _updateFields = "";
+
+                                        for (int c = 0; c < _cols.Count; c++)
+                                        {
+                                            DataColumn _col = _cols[c];
+                                            if (!ExcludedFields.Contains(_cols[c].ColumnName))
+                                            {
+                                                object _originalValue = _row[_cols[c].ColumnName];
+                                                object _currentValue = _row[_cols[c].ColumnName];
+
+                                                try
+                                                { _originalValue = _row[_cols[c].ColumnName, DataRowVersion.Original]; }
+                                                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+                                                if (!_currentValue.Equals(_originalValue)) _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                            }
+                                        }
+
+                                        if (_updateFields.Trim() != "")
+                                        {
+                                            _sql = "UPDATE `" + _tablename + "` SET\n" +
+                                                   _updateFields + "\n" +
+                                                   "WHERE\n" +
+                                                   "(`" + _pk + "` = " + DerivedColumnValue(_cols[_pk], _pkValue) + ");";
+                                            _queries.Add(_sql);
+                                        }
+                                    }
+                                }
+                                else if (_row.RowState == DataRowState.Deleted ||
+                                         _row.RowState == DataRowState.Detached)
+                                {
+                                    if (_row.HasVersion(DataRowVersion.Original))
+                                    {
+                                        try { _pkValue = _row[_pk, DataRowVersion.Original]; }
+                                        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+                                        if (!Materia.IsNullOrNothing(_pkValue))
+                                        {
+                                            _sql = "DELETE FROM `" + _tablename + "` WHERE (`" + _pk + "` = " + DerivedColumnValue(_cols[_pk], _pkValue) + ");";
+                                            _queries.Add(_sql);
+                                        }
+                                    }
+                                }
+                                else { }
+                            }
+                        }
+                    }
+
+                    _updatesTable.Dispose(); _updatesTable = null;
+                    Materia.RefreshAndManageCurrentProcess();
+                }
+            }
+
+            return _queries.ToArray();
+        }
+
         private string Generate()
         {
             StringBuilder _sql = new StringBuilder();
@@ -405,7 +625,15 @@ namespace Development.Materia.Database
         /// <returns>Sql statement generated from th specified table's modifications.</returns>
         public override string ToString()
         {
-            string _sql = ""; string _query = Generate();
+            string _sql = "";
+
+            string[] _queries = GetSqlStatements();
+            string _query = "";
+
+            if (_queries.Length > 0)
+            {
+                for (int i = 0; i < _queries.Length; i++) _query += (_query.Trim() != "" ? "\n" : "") + _queries[i];
+            }
 
             if (!String.IsNullOrEmpty(_query.RLTrim()))
             {
@@ -417,11 +645,9 @@ namespace Development.Materia.Database
                     {
                         DataColumn _column = _table.Columns[i];
 
-                        if (_column.DataType.Name.ToLower().Contains("byte[]") ||
-                            _column.DataType.Name.ToLower().Contains("byte()") ||
-                            _column.DataType.Name.ToLower().Contains("bytes[]") ||
-                            _column.DataType.Name.ToLower().Contains("bytes()"))
-                        { _blobexists = true; break;  }
+                        if (_column.DataType == typeof(byte[]) ||
+                            _column.DataType == typeof(Byte[]))
+                        { _blobexists = true; break; }
                     }
                 }
 
@@ -429,7 +655,7 @@ namespace Development.Materia.Database
                 _sql += (String.IsNullOrEmpty(_sql.RLTrim()) ? "" : "\n") + _query;
             }
 
-            return  _query;
+            return  _sql;
         }
 
         #endregion

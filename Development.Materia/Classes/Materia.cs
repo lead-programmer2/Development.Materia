@@ -2,9 +2,11 @@
 
 using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -1246,8 +1248,6 @@ namespace Development.Materia
 
                     if (PropertyExists(control, "DisplayMember")) SetPropertyValue(control, "DisplayMember", "Country");
                     if (PropertyExists(control, "ValueMember")) SetPropertyValue(control, "ValueMember", "Country");
-                    if (PropertyExists(control, "AutoCompleteMode")) SetPropertyValue(control, "AutoCompleteMode", AutoCompleteMode.SuggestAppend);
-                    if (PropertyExists(control, "AutoCompleteSource")) SetPropertyValue(control, "AutoCompleteSource", AutoCompleteSource.ListItems);
                     if (PropertyExists(control, "SelectedIndex")) SetPropertyValue(control, "SelectedIndex", -1);
 
                     if (PropertyExists(control, "Enabled")) SetPropertyValue(control, "Enabled", _enabled);
@@ -1271,7 +1271,9 @@ namespace Development.Materia
                 {
                     int _rows = rows;
                     if (table.Rows.Count < (starting + rows)) _rows = table.Rows.Count - (table.Rows.Count.WholePartDivision(rows) * rows);
-                    _table = table.AsEnumerable().Skip(starting).Take(_rows).CopyToDataTable(); 
+                    _table = table.DefaultView.ToTable().AsEnumerable().Skip(starting).Take(_rows).CopyToDataTable();
+                    if (_table.TableName.Trim() == "" &&
+                        table.TableName.Trim() != "") _table.TableName = table.TableName;
                 }
                 catch { _table = table.Clone(); }
             }
@@ -1819,7 +1821,109 @@ namespace Development.Materia
         /// <param name="control">Control to be marked / unmarked</param>
         /// <param name="required">Determines whether control will marked or unmarked as required field</param>
         public static void SetAsRequired(this Control control, bool required)
-        { Controls.RequiredFieldMarker.SetAsRequired(control, required); }
+        { SetRequiredField(control, required); }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static Hashtable _markerTable = new Hashtable();
+
+        private static void control_Disposed(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                if (sender.GetType() == typeof(Control))
+                {
+                    Control _control = (Control)sender;
+                    if (_markerTable.Contains(_control)) _markerTable.Remove(_control);
+                }
+            }
+        }
+
+        private static void control_LocationChanged(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                if (sender.GetType() == typeof(Control))
+                {
+                    Control _control = (Control)sender;
+                    if (_markerTable.Contains(_control))
+                    {
+                        object _value = _markerTable[_control];
+                        if (_value != null)
+                        {
+                            if (_value.GetType() == typeof(Label))
+                            {
+                                Label _label = (Label)_value;
+                                _label.Location = new Point(_control.Location.X, _control.Location.Y);
+                                _label.BringToFront();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void RemoveRequiredIndicator(Control control)
+        {
+            if (control != null)
+            {
+                String _name = "requiredFieldLabel_" + control.Name;
+                if (_markerTable.Contains(control)) _markerTable.Remove(control);
+
+                if (control.Parent != null)
+                {
+                    if (control.Parent.Controls.ContainsKey(_name))
+                    {
+                        Control _existing = control.Parent.Controls[_name];
+                        control.Parent.Controls.Remove(_existing);
+                        _existing.Dispose(); _existing = null;
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+
+                Form _form = control.FindForm();
+                if (_form != null)
+                {
+                    if (_form.Controls.ContainsKey(_name))
+                    {
+                        Control _existing = _form.Controls[_name];
+                        _form.Controls.Remove(_existing);
+                        _existing.Dispose(); _existing = null;
+                        Materia.RefreshAndManageCurrentProcess();
+                    }
+                }
+            }
+        }
+
+        private static void SetRequiredField(Control control, bool required)
+        {
+            if (control != null)
+            {
+                RemoveRequiredIndicator(control);
+
+                if (required)
+                {
+                    if (control.Parent != null)
+                    {
+                        String _name = "requiredFieldLabel_" + control.Name;
+                        Label _label = new Label();
+                        _label.Name = _name; _label.AutoSize = false;
+                        _label.Size = new Size(5, 5);
+                        _label.BackColor = Color.OrangeRed;
+                        _label.Visible = true;
+                        _label.Anchor = control.Anchor;
+                        control.Parent.Controls.Add(_label);
+                        _label.Location = new Point(control.Location.X, control.Location.Y);
+                        _label.BringToFront();
+
+                        control.Disposed -= new EventHandler(control_Disposed);
+                        control.Disposed += new EventHandler(control_Disposed);
+
+                        control.LocationChanged -= new EventHandler(control_LocationChanged);
+                        control.LocationChanged += new EventHandler(control_LocationChanged);
+                    }
+                }
+            }
+        }
 
         #endregion
 

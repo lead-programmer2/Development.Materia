@@ -179,7 +179,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = byte.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToByte(value); }
                 catch { _result = byte.Parse(value.ToString()); }
             }
            
@@ -196,7 +196,7 @@ namespace Development.Materia
             DateTime _result = DateTime.Parse("1/1/1900");
 
             try 
-            { bool _isdate = DateTime.TryParse(value.ToString(), out _result); }
+            { _result = Convert.ToDateTime(value); }
             catch { _result = DateTime.Parse(value.ToString()); }
 
             return _result; 
@@ -218,7 +218,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = decimal.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToDecimal(value); }
                 catch { _result = decimal.Parse(value.ToString()); }
             }
            
@@ -241,7 +241,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = double.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToDouble(value); }
                 catch { _result = double.Parse(value.ToString()); }
             }
            
@@ -264,7 +264,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = int.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToInt32(value); }
                 catch { _result = int.Parse(value.ToString()); }
             }
            
@@ -287,7 +287,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = sbyte.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToSByte(value); }
                 catch { _result = sbyte.Parse(value.ToString()); }
             }
            
@@ -310,7 +310,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = short.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToInt16(value); }
                 catch { _result = short.Parse(value.ToString()); }
             }
            
@@ -333,7 +333,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = float.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToSingle(value); }
                 catch { _result = float.Parse(value.ToString()); }
             }
             
@@ -364,7 +364,7 @@ namespace Development.Materia
             }
             else
             {
-                try { bool _isnumeric = long.TryParse(value.ToString(), out _result); }
+                try { _result = Convert.ToInt64(value); }
                 catch { _result = long.Parse(value.ToString()); }
             }
            
@@ -378,37 +378,31 @@ namespace Development.Materia
         /// <param name="date1">1st Date value</param>
         /// <param name="date2">2nd Date value</param>
         /// <returns>Duration of the two dates from each other in the specified date interval.</returns>
-        public static long DateDiff(DateInterval interval, DateTime date1, DateTime date2)
+        public static double DateDiff(DateInterval interval, DateTime date1, DateTime date2)
         {
-            long _value = 0;
+            double _value = 0;
             TimeSpan _span = date2 - date1;
 
             switch (interval)
             {
                 case DateInterval.Day:
                 case DateInterval.DayOfYear:
-                    _value = _span.Days; break;
+                    _value = _span.TotalDays; break;
                 case DateInterval.Hour:
-                    if (_span.Hours > 0) _value = _span.Hours;
-                    else _value = (_span.Days * 24);
-                    break;
+                    _value = _span.TotalHours; break;
                 case DateInterval.Minute:
-                    if (_span.Minutes > 0) _value = _span.Minutes;
-                    else _value = (_span.Days * 24) * 60;
-                    break;
+                     _value = _span.TotalMinutes; break;
                 case DateInterval.Month:
-                    _value = CLng(_span.Days / 30); break;
+                    _value = _span.TotalDays / 30; break;
                 case DateInterval.Quarter:
-                    _value = (CLng(_span.Days / 30) / 3); break;
+                    _value = ((_span.TotalDays / 30) / 4); break;
                 case DateInterval.Second:
-                    if (_span.Seconds > 0)  _value = _span.Seconds;
-                    else _value = ((_span.Days * 24) * 60) * 60;
-                    break;
+                    _value = _span.TotalSeconds;  break;
                 case DateInterval.Week:
                 case DateInterval.WeekOfYear:
-                    _value = CLng(_span.Days / 7); break;
+                    _value = _span.TotalDays / 7; break;
                 case DateInterval.Year:
-                    _value = CLng(_span.Days / 365); break;
+                    _value = _span.TotalDays / 365; break;
                 default: break;
             }
 
@@ -736,12 +730,37 @@ namespace Development.Materia
 
             if (!Materia.IsNullOrNothing(value))
             {
-                try
+                string[] _numerictypes = new string[] { typeof(byte).Name, typeof(Byte).Name,
+                                                        typeof(int).Name, typeof(long).Name,
+                                                        typeof(Int16).Name, typeof(Int32).Name, typeof(Int64).Name,
+                                                        typeof(sbyte).Name, typeof(SByte).Name,
+                                                        typeof(decimal).Name, typeof(Decimal).Name,
+                                                        typeof(double).Name, typeof(Double).Name,
+                                                        typeof(float).Name, typeof(Single).Name };
+                
+                if (_numerictypes.Contains(value.GetType().Name)) _isnumeric = true;
+                else
                 {
-                    double _number = 0;
-                    _isnumeric = double.TryParse(value.ToString(), out _number);
+                    if (value.GetType() == typeof(string) ||
+                        value.GetType() == typeof(String))
+                    {
+                        String _pattern = "^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$";
+                        Match _match = Regex.Match(value.ToString(), _pattern, RegexOptions.IgnoreCase);
+                        if (_match != null)
+                        {
+                            if (_match.Value.Trim() == value.ToString().Trim()) _isnumeric = true;
+                            else
+                            {
+                                try
+                                {
+                                    double _number = 0;
+                                    _isnumeric = double.TryParse(value.ToString(), out _number);
+                                }
+                                catch { _isnumeric = false; }
+                            }
+                        }
+                    }
                 }
-                catch { _isnumeric = false; }
             }
             
             return _isnumeric;

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
+         assemblies to include from solution and project documentation
+         sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{65b19a76-5d6c-414b-a127-cf17e6dc06cd}</ProjectGuid>
+    <SHFBSchemaVersion>1.9.5.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+         Studio adds them anyway -->
+    <AssemblyName>Documentation</AssemblyName>
+    <RootNamespace>Documentation</RootNamespace>
+    <Name>Documentation</Name>
+    <!-- SHFB properties -->
+    <OutputPath>.\Help\</OutputPath>
+    <HtmlHelpName>Documentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <IndentHtml>True</IndentHtml>
+    <FrameworkVersion>.NET Framework 3.5</FrameworkVersion>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CppCommentsFixup>True</CppCommentsFixup>
+    <CleanIntermediates>True</CleanIntermediates>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\Development.Materia\bin\Release\Development.Materia.dll" xmlns="" />
+<DocumentationSource sourceFile="..\Development.Materia\bin\Release\Development.Materia.xml" xmlns="" /></DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="Development.Materia" isDocumented="True" xmlns="">Main namespace for customized and various programming methods.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Development.Materia.Controls" isDocumented="True" xmlns="">Main namespace for customized controls (ea. RequirefFieldMarker, SizeableTextBox and etc.)</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Development.Materia.Cryptography" isDocumented="True" xmlns="">Main namespace for customized cryptographer. Basically uses Triple DES and MD5.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Development.Materia.Database" isDocumented="True" xmlns="">Main namespace for database-related classes and methods.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Development.Materia.Net" isDocumented="True" xmlns="">Main namespace for network/internet-releated classes and methods.</NamespaceSummaryItem></NamespaceSummaries>
+    <SyntaxFilters>CSharp, VisualBasic</SyntaxFilters>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <RootNamespaceTitle>Development.Materia</RootNamespaceTitle>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <PresentationStyle>VS2010</PresentationStyle>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>Guid</NamingMethod>
+    <HelpTitle>Development.Materia Class Library</HelpTitle>
+    <FeedbackEMailLinkText>Joseph Lambert Reyes</FeedbackEMailLinkText>
+    <FeedbackEMailAddress>jreyes%40f-m-s.ae</FeedbackEMailAddress>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+  </PropertyGroup>
+  <!-- There are no properties for these groups.  AnyCPU needs to appear in
+       order for Visual Studio to perform the build.  The others are optional
+       common platform types that may appear. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Development.Materia">
+      <HintPath>..\Development.Materia\bin\Release\Development.Materia.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+</Project>
