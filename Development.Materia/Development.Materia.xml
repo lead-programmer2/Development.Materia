@@ -1894,6 +1894,74 @@
             <param name="currency">Suffixing currency.</param>
             <returns>English-word representation of the specified numeric value.</returns>
         </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlStatement(System.Data.DataTable)">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlStatement(System.Data.DataTable,System.String[])">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="excludedfields">Excluded columns</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlStatement(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="fk">Foreign key column name</param>
+            <param name="fkvalue">Foreign key value</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlStatement(System.Data.DataTable,System.String,System.String,System.String[])">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="fk">Foreign key column name</param>
+            <param name="fkvalue">Foreign key value</param>
+            <param name="excludedfields">Excluded columns</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlArray(System.Data.DataTable)">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlArray(System.Data.DataTable,System.String[])">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="excludedfields">Excluded columns</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlArray(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="fk">Foreign key column name</param>
+            <param name="fkvalue">Foreign key value</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.UpdatesToSqlArray(System.Data.DataTable,System.String,System.String,System.String[])">
+            <summary>
+            Converts the updates applied into the DataTable into SQL statements.
+            </summary>
+            <param name="table">DataTable object to evaluate</param>
+            <param name="fk">Foreign key column name</param>
+            <param name="fkvalue">Foreign key value</param>
+            <param name="excludedfields">Excluded columns</param>
+            <returns>Array of sql statements generated from the specified table's changes.</returns>
+        </member>
         <member name="M:Development.Materia.Materia.WaitToFinish(System.IAsyncResult)">
             <summary>
             Synchronizes the specified IAsyncResult object and suspends all preceeding events until it is already finished.

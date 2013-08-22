@@ -2553,6 +2553,120 @@ namespace Development.Materia
 
         #endregion
 
+        #region  UpdatesToSqlStatement
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string UpdatesToSqlStatement(this DataTable table)
+        { return table.UpdatesToSqlStatement(new string[] { }); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="excludedfields">Excluded columns</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string UpdatesToSqlStatement(this DataTable table, string[] excludedfields)
+        { return table.UpdatesToSqlStatement("", "", excludedfields); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="fk">Foreign key column name</param>
+        /// <param name="fkvalue">Foreign key value</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string UpdatesToSqlStatement(this DataTable table, string fk, string fkvalue)
+        { return table.UpdatesToSqlStatement(fk, fkvalue, new string[] { }); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="fk">Foreign key column name</param>
+        /// <param name="fkvalue">Foreign key value</param>
+        /// <param name="excludedfields">Excluded columns</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string UpdatesToSqlStatement(this DataTable table, string fk, string fkvalue, string[] excludedfields)
+        {
+            if (table != null)
+            {
+                Database.QueryGenerator _generator = new Database.QueryGenerator(table);
+                foreach (string _excluded in excludedfields)
+                {
+                    if (_excluded.Trim() != "") _generator.ExcludedFields.Add(_excluded);
+                }
+                _generator.ForeignKey.Field = fk; _generator.ForeignKey.Value = fkvalue;
+                string _sql = _generator.ToString();
+                _generator = null; Materia.RefreshAndManageCurrentProcess();
+
+                return _sql;
+            }
+            else return "";
+        }
+
+        #endregion
+
+        #region UpdatesToSqlArray
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string[] UpdatesToSqlArray(this DataTable table)
+        { return table.UpdatesToSqlArray(new string[] { }); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="excludedfields">Excluded columns</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string[] UpdatesToSqlArray(this DataTable table, string[] excludedfields)
+        { return table.UpdatesToSqlArray("", "", excludedfields); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="fk">Foreign key column name</param>
+        /// <param name="fkvalue">Foreign key value</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string[] UpdatesToSqlArray(this DataTable table, string fk, string fkvalue)
+        { return table.UpdatesToSqlArray(fk, fkvalue, new string[] { }); }
+
+        /// <summary>
+        /// Converts the updates applied into the DataTable into SQL statements.
+        /// </summary>
+        /// <param name="table">DataTable object to evaluate</param>
+        /// <param name="fk">Foreign key column name</param>
+        /// <param name="fkvalue">Foreign key value</param>
+        /// <param name="excludedfields">Excluded columns</param>
+        /// <returns>Array of sql statements generated from the specified table's changes.</returns>
+        public static string[] UpdatesToSqlArray(this DataTable table, string fk, string fkvalue, string[] excludedfields)
+        {
+            if (table != null)
+            {
+                Database.QueryGenerator _generator = new Database.QueryGenerator(table);
+                foreach (string _excluded in excludedfields)
+                {
+                    if (_excluded.Trim() != "") _generator.ExcludedFields.Add(_excluded);
+                }
+                _generator.ForeignKey.Field = fk; _generator.ForeignKey.Value = fkvalue;
+                string[] _sql = _generator.GetSqlStatements();
+                _generator = null; Materia.RefreshAndManageCurrentProcess();
+
+                return _sql;
+            }
+            else return new string[]{ };
+        }
+
+        #endregion
+
         #region "WaitToFinish"
 
         /// <summary>
