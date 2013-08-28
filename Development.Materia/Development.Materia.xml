@@ -2168,6 +2168,18 @@
             <param name="result">Synchronization result from invoked BeginTryConnect method</param>
             <returns>True if a database connection can be established otherwise false.</returns>
         </member>
+        <member name="P:Development.Materia.Database.Database.CommandTimeout">
+            <summary>
+            Gets or sets the sql execution timeout time (in seconds) when using Que class query executions.
+            Default value is set to 0 (infinite).
+            </summary>
+        </member>
+        <member name="P:Development.Materia.Database.Database.ConnectionTimeout">
+            <summary>
+            Gets or sets the database connection time out (in seconds) before terminating any attempts of establishing connections.
+            Default value is set to 0 (infinite).
+            </summary>
+        </member>
         <member name="P:Development.Materia.Database.Database.DatabaseDriver">
             <summary>
             Gets or sets the globally used database driver for the Database class.

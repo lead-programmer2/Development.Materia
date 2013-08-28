@@ -1251,7 +1251,7 @@ namespace Development.Materia
                         {
                             _method.Invoke(owner, null);
                         }
-                        catch  { }
+                        catch (Exception ex) { throw ex; }
                     }
                     else
                     {
@@ -1259,7 +1259,7 @@ namespace Development.Materia
                         {
                             _method.Invoke(owner, parameters);
                         }
-                        catch  { }
+                        catch (Exception ex) { throw ex; }
                     }
                 }
             }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -153,7 +154,8 @@ namespace Development.Materia.Database
         public string[] GetSqlStatements()
         {
             List<string> _queries = new List<string>();
-
+            bool _withBlob = false;
+                
             if (_table != null)
             {
                 DataTable _updatesTable = _table.GetChanges();
@@ -181,13 +183,13 @@ namespace Development.Materia.Database
                             if (_tablename.Trim() == "") _tablename = "table";
 
                             bool _autoIncrementPK = _cols[_pk].AutoIncrement;
-                            
+                
                             for (int i = 0; i < _rows.Count; i++)
                             {
                                 DataRow _row = _rows[i];
                                 string _sql = "";
                                 object _pkValue = null;
-
+                             
                                 if (_row.RowState == DataRowState.Added)
                                 {
                                     _sql = "INSERT INTO `" + _tablename + "`\n";
@@ -229,6 +231,7 @@ namespace Development.Materia.Database
                                                     }
                                                 }
                                                 else _inserValues += (_inserValues.Trim() != "" ? ", " : "") + DerivedColumnValue(_cols[c], _row[_cols[c].ColumnName]);
+                                                _withBlob = _withBlob || (_cols[c].DataType == typeof(byte[]) || _cols[c].DataType == typeof(Byte[]));
                                             }
                                         }
                                     }
@@ -269,7 +272,11 @@ namespace Development.Materia.Database
                                                     if (!(Materia.IsNullOrNothing(_originalValue) &&
                                                           Materia.IsNullOrNothing(_currentValue)))
                                                     {
-                                                        if (!((byte[])_originalValue).EqualsTo((byte[])_currentValue)) _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                        if (!((byte[])_originalValue).EqualsTo((byte[])_currentValue))
+                                                        {
+                                                            _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                            _withBlob = true;
+                                                        }
                                                     }
                                                 }
                                                 else
@@ -312,6 +319,20 @@ namespace Development.Materia.Database
                     _updatesTable.Dispose(); _updatesTable = null;
                     Materia.RefreshAndManageCurrentProcess();
                 }
+            }
+
+            if (_queries.Count > 0)
+            {
+                bool _withSessionId = false;
+
+                for (int i = 0; i < _queries.Count; i++)
+                {
+                    if (_queries[i].Contains("@lastid"))
+                    { _withSessionId = true; break; }
+                }
+
+                if (_withSessionId) _queries.Insert(0, "SET @lastid = NULL;");
+                if (_withBlob) _queries.Insert(0, "SET GLOBAL max_allowed_packet = (1024 * 1024) * " + MySql.MaxAllowedPacket.ToString() + ";");
             }
 
             return _queries.ToArray();
@@ -637,8 +658,6 @@ namespace Development.Materia.Database
         /// <returns>Sql statement generated from th specified table's modifications.</returns>
         public override string ToString()
         {
-            string _sql = "";
-
             string[] _queries = GetSqlStatements();
             string _query = "";
 
@@ -647,27 +666,7 @@ namespace Development.Materia.Database
                 for (int i = 0; i < _queries.Length; i++) _query += (_query.Trim() != "" ? "\n" : "") + _queries[i];
             }
 
-            if (!String.IsNullOrEmpty(_query.RLTrim()))
-            {
-                bool _blobexists = false;
-
-                if (_table != null)
-                {
-                    for (int i = 0; i <= (_table.Columns.Count - 1); i++)
-                    {
-                        DataColumn _column = _table.Columns[i];
-
-                        if (_column.DataType == typeof(byte[]) ||
-                            _column.DataType == typeof(Byte[]))
-                        { _blobexists = true; break; }
-                    }
-                }
-
-                if (_blobexists) _sql = "SET GLOBAL max_allowed_packet = (1024 * 1024) * " + MySql.MaxAllowedPacket.ToString() + ";";
-                _sql += (String.IsNullOrEmpty(_sql.RLTrim()) ? "" : "\n") + _query;
-            }
-
-            return  _sql;
+            return  _query;
         }
 
         #endregion

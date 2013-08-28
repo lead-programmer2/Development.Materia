@@ -1938,7 +1938,26 @@ namespace Development.Materia
                         _label.Size = new Size(5, 5);
                         _label.BackColor = Color.OrangeRed;
                         _label.Visible = true;
-                        _label.Anchor = control.Anchor;
+                        
+                        AnchorStyles _fullAnchor = ((AnchorStyles)AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
+                        AnchorStyles _ltrAnchor = ((AnchorStyles)AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                        AnchorStyles _lrAnchor = ((AnchorStyles)AnchorStyles.Left | AnchorStyles.Right);
+                        AnchorStyles _tlbAnchor = ((AnchorStyles)AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left);
+                        AnchorStyles _trbAnchor = ((AnchorStyles)AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right);
+                        AnchorStyles _tbAnchor = ((AnchorStyles)AnchorStyles.Top | AnchorStyles.Bottom);
+
+                        if (control.Anchor == _fullAnchor ||
+                            control.Anchor == _ltrAnchor ||
+                            control.Anchor == _lrAnchor ||
+                            control.Anchor == _tlbAnchor ||
+                            control.Anchor == _trbAnchor ||
+                            control.Anchor == _tbAnchor)
+                        {
+                            if (control.Anchor == _trbAnchor) _label.Anchor = ((AnchorStyles)AnchorStyles.Right | AnchorStyles.Top);
+                            else _label.Anchor = ((AnchorStyles)AnchorStyles.Left | AnchorStyles.Top);
+                        }
+                        else _label.Anchor = control.Anchor;
+
                         control.Parent.Controls.Add(_label);
                         _label.Location = new Point(control.Location.X, control.Location.Y);
                         _label.BringToFront();

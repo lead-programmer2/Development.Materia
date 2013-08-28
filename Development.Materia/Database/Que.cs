@@ -457,7 +457,7 @@ namespace Development.Materia.Database
             object _value = defaultvalue;
 
             IDbCommand _command = connection.CreateCommand();
-            _command.CommandTimeout = 0; _command.CommandText = sql;
+            _command.CommandTimeout = Database.CommandTimeout; _command.CommandText = sql;
             _command.CommandType = CommandType.Text;
 
             if (connection.State == ConnectionState.Closed) connection.Open();
@@ -737,7 +737,7 @@ namespace Development.Materia.Database
                                 try
                                 {
                                     IDbCommand _command = _connection.CreateCommand();
-                                    _command.CommandText = _sql; _command.CommandTimeout = 0;
+                                    _command.CommandText = _sql; _command.CommandTimeout = Database.CommandTimeout;
                                     _command.CommandType = CommandType.Text; _command.Transaction = _transaction;
 
                                     if (IsSelectStatement(_sql))

@@ -45,7 +45,10 @@ namespace Development.Materia.UnitTest
             string[] _queries = _generator.GetSqlStatements();
 
             if (_queries.Length <= 0) Assert.Fail();
-            else Console.WriteLine(_queries[0]);
+            else
+            {
+                for (int i = 0; i < _queries.Length; i++) Console.WriteLine(_queries[i]);
+            }
 
             _table.AcceptChanges(); _generator = null;
 

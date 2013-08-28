@@ -24,6 +24,36 @@ namespace Development.Materia.Database
         #region "properties"
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static int _commandtimeout = 0;
+
+        /// <summary>
+        /// Gets or sets the sql execution timeout time (in seconds) when using Que class query executions.
+        /// Default value is set to 0 (infinite).
+        /// </summary>
+        public static int CommandTimeout
+        {
+            get 
+            {
+                if (_commandtimeout <= 0) return 0;
+                else return _commandtimeout; 
+            }
+            set { _commandtimeout = value; }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static int _connectiontimeout = 15;
+
+        /// <summary>
+        /// Gets or sets the database connection time out (in seconds) before terminating any attempts of establishing connections.
+        /// Default value is set to 0 (infinite).
+        /// </summary>
+        public static int ConnectionTimeout
+        {
+            get { return _connectiontimeout; }
+            set { _connectiontimeout = value; }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static string _databasedriver = "{MySQL ODBC 3.51 Driver}";
 
         /// <summary>
@@ -168,6 +198,90 @@ namespace Development.Materia.Database
             {
                 if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
                 _connectionstring += "ALLOW USER VARIABLE=TRUE;";
+            }
+
+            string _connectiontimeoutpattern = "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(I|i)(O|o)(N|n)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+[0-9]+";
+            string _connecttimeoutpattern = "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+[0-9]+";
+            string _connecttimeoutpattern2 = "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+[0-9]+";
+
+            if (ConnectionTimeout != 15)
+            {
+                if (!Regex.IsMatch(connectionstring, _connectiontimeoutpattern) &&
+                    !Regex.IsMatch(connectionstring, _connecttimeoutpattern) &&
+                    !Regex.IsMatch(connectionstring, _connecttimeoutpattern2))
+                {
+                    if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                    _connectionstring += "CONNECT TIMEOUT=" + ConnectionTimeout.ToString() + ";";
+                }
+                else
+                {
+                    long _timeout = VisualBasic.CLng(ConnectionTimeout);
+
+                    if (Regex.IsMatch(connectionstring, _connectiontimeoutpattern))
+                    {
+                        string _settimeout = Regex.Match(connectionstring, _connectiontimeoutpattern).Value;
+                        string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(I|i)(O|o)(N|n)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                        if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                        if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                        _connectionstring += "CONNECTION TIMEOUT=" + _timeout.ToString() + ";";
+                    }
+                    else
+                    {
+                        if (Regex.IsMatch(connectionstring, _connecttimeoutpattern))
+                        {
+                            string _settimeout = Regex.Match(connectionstring, _connecttimeoutpattern).Value;
+                            string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                            if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                            if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                            _connectionstring += "CONNECTTIMEOUT=" + _timeout.ToString() + ";";
+                        }
+                        else
+                        {
+                            string _settimeout = Regex.Match(connectionstring, _connecttimeoutpattern2).Value;
+                            string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                            if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                            if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                            _connectionstring += "CONNECT TIMEOUT=" + _timeout.ToString() + ";";
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (Regex.IsMatch(connectionstring, _connectiontimeoutpattern))
+                {
+                    long _timeout = VisualBasic.CLng(ConnectionTimeout);
+                    string _settimeout = Regex.Match(connectionstring, _connectiontimeoutpattern).Value;
+                    string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(I|i)(O|o)(N|n)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                    if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                    if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                    _connectionstring += "CONNECTION TIMEOUT=" + _timeout.ToString() + ";";
+                }
+                else
+                {
+                    if (Regex.IsMatch(connectionstring, _connecttimeoutpattern))
+                    {
+                        long _timeout = VisualBasic.CLng(ConnectionTimeout);
+                        string _settimeout = Regex.Match(connectionstring, _connecttimeoutpattern).Value;
+                        string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                        if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                        if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                        _connectionstring += "CONNECTTIMEOUT=" + _timeout.ToString() + ";";
+                    }
+                    else
+                    {
+                        if (Regex.IsMatch(connectionstring, _connecttimeoutpattern2))
+                        {
+                            long _timeout = VisualBasic.CLng(ConnectionTimeout);
+                            string _settimeout = Regex.Match(connectionstring, _connecttimeoutpattern2).Value;
+                            string _value = Regex.Replace(_settimeout, "(C|c)(O|o)(N|n)(N|n)(E|e)(C|c)(T|t)[\\n\\r\\t ]+(T|t)(I|i)(M|m)(E|e)(O|o)(U|u)(T|t)[\\n\\t\\r =]+", "");
+                            if (VisualBasic.IsNumeric(_value)) _timeout = VisualBasic.CLng(_value);
+                            if (!_connectionstring.RLTrim().EndsWith(";")) _connectionstring += ";";
+                            _connectionstring += "CONNECT TIMEOUT=" + _timeout.ToString() + ";";
+                        }
+                    }
+                }
             }
 
             if (!Materia.Is64BitApplication()) return new OleDbConnection(_connectionstring);

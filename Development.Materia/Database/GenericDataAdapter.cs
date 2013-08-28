@@ -38,7 +38,7 @@ namespace Development.Materia.Database
             OleDbConnection connection = (OleDbConnection) Database.CreateConnection(connectionstring);
             IDbCommand command = connection.CreateCommand();
             command.CommandText = sql;
-            command.CommandTimeout = 0;
+            command.CommandTimeout = Database.CommandTimeout;
             command.CommandType = CommandType.Text;
             SelectCommand = (DbCommand) command;
         }
@@ -52,7 +52,7 @@ namespace Development.Materia.Database
         {
             IDbCommand command = connection.CreateCommand();
             command.CommandText = sql;
-            command.CommandTimeout = 0;
+            command.CommandTimeout = Database.CommandTimeout;
             command.CommandType = CommandType.Text;
             SelectCommand = (DbCommand) command;
         }
