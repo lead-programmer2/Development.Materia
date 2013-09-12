@@ -533,7 +533,8 @@ namespace Development.Materia
                     }
                 }
 
-                string[] _defaultcountries = new string[] { "Afghanistan", "Pakistan" };
+                string[] _defaultcountries = new string[] { "Afghanistan", "Pakistan", 
+                                                            "Liberia", "Somalia" };
 
                 foreach (string _defaultcountry in _defaultcountries) {
                     if (_table.Select("[Country] LIKE '" + _defaultcountry.ToSqlValidString(true) + "'").Length <= 0) _table.Rows.Add(_defaultcountry);
@@ -1014,105 +1015,28 @@ namespace Development.Materia
             if (IsNullOrNothing(byte1) && IsNullOrNothing(byte2)) return true;
             else
             {
-                if (byte1.Length == byte2.Length)
+                if (IsNullOrNothing(byte1) && !IsNullOrNothing(byte2)) return false;
+                else
                 {
-                    for (int i = 0; i < byte1.Length; i++)
+                    if (!IsNullOrNothing(byte1) && IsNullOrNothing(byte2)) return false;
+                    else
                     {
-                        if (byte1[i] != byte2[i])
-                        { _equals = false; break; }
-                    }
+                        if (byte1.Length == byte2.Length)
+                        {
+                            for (int i = 0; i < byte1.Length; i++)
+                            {
+                                if (byte1[i] != byte2[i])
+                                { _equals = false; break; }
+                            }
 
-                    _equals = true;
+                            _equals = true;
+                        }
+                    }
                 }
             }
 
             return _equals;
         }
-
-        #region "In"
-
-        /// <summary>
-        /// Determines whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this byte value, params byte[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current character value is existing within the list of reference character values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this char value, params char[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this decimal value, params decimal[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this double value, params double[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this float value, params float[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this int value, params int[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this long value, params long[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this short value, params short[] values)
-        { return values.Contains(value); }
-
-        /// <summary>
-        /// Returns whether the current text value is existing within the list of reference text values or not.
-        /// </summary>
-        /// <param name="value">Value to be evaluated</param>
-        /// <param name="values">List of searched values</param>
-        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
-        public static bool In(this string value, params string[] values)
-        { return values.Contains(value); }
-
-        #endregion
 
         #region "GetValue"
 
@@ -1205,6 +1129,118 @@ namespace Development.Materia
         #endregion
 
         /// <summary>
+        /// Copies every matching row column values from one DataRow to another.
+        /// </summary>
+        /// <param name="row">Destination row</param>
+        /// <param name="copiedrow">Copied row</param>
+        public static void ImportData(this DataRow row, DataRow copiedrow)
+        {
+            if (row != null &&
+                copiedrow != null)
+            {
+                DataTable _table = row.Table;
+                DataTable _copiedTable = copiedrow.Table;
+
+                DataColumnCollection _cols = _table.Columns;
+                DataColumnCollection _copiedCols = _copiedTable.Columns;
+
+                for (int i = 0; i < _cols.Count; i++)
+                {
+                    DataColumn _col = _cols[i];
+                    if (!_col.AutoIncrement)
+                    {
+                        if (_copiedCols.Contains(_col.ColumnName)) row[_col.ColumnName] = copiedrow[_col.ColumnName];
+                    }
+                }
+            }
+        }
+
+        #region "In"
+
+        /// <summary>
+        /// Determines whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this byte value, params byte[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current character value is existing within the list of reference character values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this char value, params char[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this decimal value, params decimal[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this double value, params double[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this float value, params float[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this int value, params int[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this long value, params long[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current numeric value is existing within the list of reference numeric values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this short value, params short[] values)
+        { return values.Contains(value); }
+
+        /// <summary>
+        /// Returns whether the current text value is existing within the list of reference text values or not.
+        /// </summary>
+        /// <param name="value">Value to be evaluated</param>
+        /// <param name="values">List of searched values</param>
+        /// <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
+        public static bool In(this string value, params string[] values)
+        { return values.Contains(value); }
+
+        #endregion
+
+        /// <summary>
         /// Validates whether the specified string is an email or not.
         /// </summary>
         /// <param name="value">String value to be evaluated</param>
@@ -1216,6 +1252,45 @@ namespace Development.Materia
                             "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
 
             return Regex.IsMatch(value, _pattern);
+        }
+
+        /// <summary>
+        /// Determines whether the specified DataColumn's type is a floating point numeric type.
+        /// </summary>
+        /// <param name="column">DataColumn object to evaluate.</param>
+        /// <returns>True if the column's data type is a floating point numeric type otherwise false.</returns>
+        public static bool IsFloatingType(this DataColumn column)
+        {
+            bool _isFloatingPointType = false;
+
+            if (column != null)
+            {
+                if (column.DataType != null)
+                {
+                    if (column.DataType == typeof(decimal) ||
+                        column.DataType == typeof(Decimal) ||
+                        column.DataType == typeof(double) ||
+                        column.DataType == typeof(Double) ||
+                        column.DataType == typeof(Single) ||
+                        column.DataType == typeof(float)) _isFloatingPointType = true;
+                }
+            }
+
+            return _isFloatingPointType;
+        }
+
+        /// <summary>
+        /// Determines whether the specified DataColumn's type is a numeric data type or not.
+        /// </summary>
+        /// <param name="column">DataColumn object to evaluate</param>
+        /// <returns>True if the column's data type is a numeric type otherwise false.</returns>
+        public static bool IsNumericType(this DataColumn column)
+        {
+            bool _isNumericType = false;
+
+            _isNumericType = column.IsFloatingType() || column.IsWholeNumberType();
+
+            return _isNumericType;
         }
 
         /// <summary>
@@ -1238,6 +1313,40 @@ namespace Development.Materia
         {
             string _pattern = "((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[.\\!\\/\\\\w]*))?)";
             return Regex.IsMatch(value, _pattern);
+        }
+
+        /// <summary>
+        /// Determines whether the specified DataColumn's data type is a whole number type.
+        /// </summary>
+        /// <param name="column">DataColumn to evaluate.</param>
+        /// <returns>True if column's data type is a whole number type otherwise false.</returns>
+        public static bool IsWholeNumberType(this DataColumn column)
+        {
+            bool _isWholeNumberType = false;
+
+            if (column != null)
+            {
+                if (column.DataType != null)
+                {
+                    if (column.DataType == typeof(int) ||
+                        column.DataType == typeof(Int16) ||
+                        column.DataType == typeof(Int32) ||
+                        column.DataType == typeof(Int64) ||
+                        column.DataType == typeof(sbyte) ||
+                        column.DataType == typeof(SByte) ||
+                        column.DataType == typeof(byte) ||
+                        column.DataType == typeof(Byte) ||
+                        column.DataType == typeof(long) ||
+                        column.DataType == typeof(uint) ||
+                        column.DataType == typeof(UInt16) ||
+                        column.DataType == typeof(UInt32) ||
+                        column.DataType == typeof(UInt64) ||
+                        column.DataType == typeof(IntPtr) ||
+                        column.DataType == typeof(UIntPtr)) _isWholeNumberType = true;
+                }
+            }
+
+            return _isWholeNumberType;
         }
 
         /// <summary>

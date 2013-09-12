@@ -711,6 +711,14 @@ namespace Development.Materia.Database
                 if (_que.Connection != null)
                 {
                     IDbConnection _connection = _que.Connection;
+                    
+                    if (_que.CommandText.ToLower().Contains("@lastid"))
+                    {
+                        string _commandText = _que.CommandText;
+                        _commandText = "SET @lastid = NULL;\n" + _que.CommandText;
+                        _que.CommandText = _commandText;
+                    }
+                    
                     CommandParser _parser = new CommandParser(_que);
 
                     if (_parser.CommandStatements.Count > 0)

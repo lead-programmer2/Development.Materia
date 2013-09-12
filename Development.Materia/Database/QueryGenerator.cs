@@ -272,10 +272,28 @@ namespace Development.Materia.Database
                                                     if (!(Materia.IsNullOrNothing(_originalValue) &&
                                                           Materia.IsNullOrNothing(_currentValue)))
                                                     {
-                                                        if (!((byte[])_originalValue).EqualsTo((byte[])_currentValue))
+                                                        if (Materia.IsNullOrNothing(_originalValue) &&
+                                                            !Materia.IsNullOrNothing(_currentValue))
                                                         {
                                                             _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
                                                             _withBlob = true;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (!Materia.IsNullOrNothing(_originalValue) &&
+                                                                Materia.IsNullOrNothing(_currentValue))
+                                                            {
+                                                                _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                                _withBlob = true;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (!((byte[])_originalValue).EqualsTo((byte[])_currentValue))
+                                                                {
+                                                                    _updateFields += (_updateFields.Trim() != "" ? ", " : "") + "`" + _col.ColumnName + "` = " + DerivedColumnValue(_col, _currentValue);
+                                                                    _withBlob = true;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -323,15 +341,6 @@ namespace Development.Materia.Database
 
             if (_queries.Count > 0)
             {
-                bool _withSessionId = false;
-
-                for (int i = 0; i < _queries.Count; i++)
-                {
-                    if (_queries[i].Contains("@lastid"))
-                    { _withSessionId = true; break; }
-                }
-
-                if (_withSessionId) _queries.Insert(0, "SET @lastid = NULL;");
                 if (_withBlob) _queries.Insert(0, "SET GLOBAL max_allowed_packet = (1024 * 1024) * " + MySql.MaxAllowedPacket.ToString() + ";");
             }
 

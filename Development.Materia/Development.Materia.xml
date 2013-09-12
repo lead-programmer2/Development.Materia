@@ -1183,6 +1183,76 @@
             <param name="byte2"></param>
             <returns>True if it is equivalent, otherwise false.</returns>
         </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
+            </summary>
+            <typeparam name="T">Expected data type to return</typeparam>
+            <param name="table">DataTable object to get the value from</param>
+            <param name="filter">DataTable filter expression</param>
+            <param name="field">Field name from the DataTable's columns</param>
+            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,``0)">
+            <summary>
+            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
+            </summary>
+            <typeparam name="T">Expected data type to return</typeparam>
+            <param name="table">DataTable object to get the value from</param>
+            <param name="filter">DataTable filter expression</param>
+            <param name="field">Field name from the DataTable's columns</param>
+            <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
+            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,System.String)">
+            <summary>
+            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
+            </summary>
+            <typeparam name="T">Expected data type to return</typeparam>
+            <param name="table">DataTable object to get the value from</param>
+            <param name="filter">DataTable filter expression</param>
+            <param name="sort">DataTable sort expression</param>
+            <param name="field">Field name from the DataTable's columns</param>
+            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,System.String,``0)">
+            <summary>
+            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
+            </summary>
+            <typeparam name="T">Expected data type to return</typeparam>
+            <param name="table">DataTable object to get the value from</param>
+            <param name="filter">DataTable filter expression</param>
+            <param name="sort">DataTable sort expression</param>
+            <param name="field">Field name from the DataTable's columns</param>
+            <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
+            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.IDbConnection,System.String)">
+            <summary>
+            Gets the value at the first row of the first column of the result set ignoring other values.
+            </summary>
+            <typeparam name="T">Expected return type</typeparam>
+            <param name="connection">Database connection</param>
+            <param name="sql">Sql command statement</param>
+            <returns>Value based on the supplied command statement.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.IDbConnection,System.String,``0)">
+            <summary>
+            Gets the value at the first row of the first column of the result set ignoring other values.
+            </summary>
+            <typeparam name="T">Expected return type</typeparam>
+            <param name="connection">Database connection</param>
+            <param name="sql">Sql command statement</param>
+            <param name="defaultvalue">Default value in case record retrieval fails or no record has been found</param>
+            <returns>Value based on the supplied command statement.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.ImportData(System.Data.DataRow,System.Data.DataRow)">
+            <summary>
+            Copies every matching row column values from one DataRow to another.
+            </summary>
+            <param name="row">Destination row</param>
+            <param name="copiedrow">Copied row</param>
+        </member>
         <member name="M:Development.Materia.Materia.In(System.Byte,System.Byte[])">
             <summary>
             Determines whether the current numeric value is existing within the list of reference numeric values or not.
@@ -1255,75 +1325,26 @@
             <param name="values">List of searched values</param>
             <returns>True if the specified value is within the supplied group of values otherwise false.</returns>
         </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String)">
-            <summary>
-            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
-            </summary>
-            <typeparam name="T">Expected data type to return</typeparam>
-            <param name="table">DataTable object to get the value from</param>
-            <param name="filter">DataTable filter expression</param>
-            <param name="field">Field name from the DataTable's columns</param>
-            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
-        </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,``0)">
-            <summary>
-            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
-            </summary>
-            <typeparam name="T">Expected data type to return</typeparam>
-            <param name="table">DataTable object to get the value from</param>
-            <param name="filter">DataTable filter expression</param>
-            <param name="field">Field name from the DataTable's columns</param>
-            <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
-            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
-        </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,System.String)">
-            <summary>
-            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
-            </summary>
-            <typeparam name="T">Expected data type to return</typeparam>
-            <param name="table">DataTable object to get the value from</param>
-            <param name="filter">DataTable filter expression</param>
-            <param name="sort">DataTable sort expression</param>
-            <param name="field">Field name from the DataTable's columns</param>
-            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
-        </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.DataTable,System.String,System.String,System.String,``0)">
-            <summary>
-            Returns the first row of a certain DataTable object's specified field using the supplied DataTable row filter and sorting expressions.
-            </summary>
-            <typeparam name="T">Expected data type to return</typeparam>
-            <param name="table">DataTable object to get the value from</param>
-            <param name="filter">DataTable filter expression</param>
-            <param name="sort">DataTable sort expression</param>
-            <param name="field">Field name from the DataTable's columns</param>
-            <param name="defaultvalue">Default value to return in case of failure or the returning value is DBNull or Nothing.</param>
-            <returns>Value of the specified table field in the first row of the table's resulset. Returns nothing if no rows were available.</returns>
-        </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.IDbConnection,System.String)">
-            <summary>
-            Gets the value at the first row of the first column of the result set ignoring other values.
-            </summary>
-            <typeparam name="T">Expected return type</typeparam>
-            <param name="connection">Database connection</param>
-            <param name="sql">Sql command statement</param>
-            <returns>Value based on the supplied command statement.</returns>
-        </member>
-        <member name="M:Development.Materia.Materia.GetValue``1(System.Data.IDbConnection,System.String,``0)">
-            <summary>
-            Gets the value at the first row of the first column of the result set ignoring other values.
-            </summary>
-            <typeparam name="T">Expected return type</typeparam>
-            <param name="connection">Database connection</param>
-            <param name="sql">Sql command statement</param>
-            <param name="defaultvalue">Default value in case record retrieval fails or no record has been found</param>
-            <returns>Value based on the supplied command statement.</returns>
-        </member>
         <member name="M:Development.Materia.Materia.IsEmail(System.String)">
             <summary>
             Validates whether the specified string is an email or not.
             </summary>
             <param name="value">String value to be evaluated</param>
             <returns>True if specified value is a valid email address otherwise false.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.IsFloatingType(System.Data.DataColumn)">
+            <summary>
+            Determines whether the specified DataColumn's type is a floating point numeric type.
+            </summary>
+            <param name="column">DataColumn object to evaluate.</param>
+            <returns>True if the column's data type is a floating point numeric type otherwise false.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.IsNumericType(System.Data.DataColumn)">
+            <summary>
+            Determines whether the specified DataColumn's type is a numeric data type or not.
+            </summary>
+            <param name="column">DataColumn object to evaluate</param>
+            <returns>True if the column's data type is a numeric type otherwise false.</returns>
         </member>
         <member name="M:Development.Materia.Materia.IsIPAddress(System.String)">
             <summary>
@@ -1338,6 +1359,13 @@
             </summary>
             <param name="value">String value to be evaluated</param>
             <returns>True if the specified string value is a valid URL otherwise false.</returns>
+        </member>
+        <member name="M:Development.Materia.Materia.IsWholeNumberType(System.Data.DataColumn)">
+            <summary>
+            Determines whether the specified DataColumn's data type is a whole number type.
+            </summary>
+            <param name="column">DataColumn to evaluate.</param>
+            <returns>True if column's data type is a whole number type otherwise false.</returns>
         </member>
         <member name="M:Development.Materia.Materia.LoadCountries(System.Windows.Forms.Control)">
             <summary>
